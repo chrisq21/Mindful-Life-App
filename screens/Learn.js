@@ -22,7 +22,7 @@ export default class Learn extends React.Component {
         <ScrollView>
           <View style={styles.sectionContainer}>
             <Text style={styles.sectionHeader}>What is Mindfulness?</Text>
-            <Image style={styles.sectionImage} source={require('../assets/meditating.png')}></Image>
+            <Image resizeMode='contain' style={styles.sectionImage} source={require('../assets/meditating.png')}></Image>
             <Text style={styles.sectionBodyText}>
             Mindfulness is paying attention on purpose to the present moment without judgment. Through focused and specific awareness, mindfulness builds skills to navigate ALL experiences by strategically living in the here and now.
             </Text>
@@ -35,7 +35,7 @@ export default class Learn extends React.Component {
             <Text style={styles.sectionBodyText}>
             Mindfulness enables us to be present, moment to moment, in our increasingly distracted lives. Mindfulness improves social relationships with people and family and can even strengthen the immune system. It cultivates an openness to one's life experience and a leads to a happier and more compassionate life.
             </Text>
-            <Image style={styles.sectionImage} source={require('../assets/clouds.png')}></Image>
+            <Image resizeMode='contain' style={styles.sectionImage} source={require('../assets/clouds.png')}></Image>
           </View>
         </ScrollView>
       </View>

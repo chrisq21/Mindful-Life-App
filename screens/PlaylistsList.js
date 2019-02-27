@@ -1,28 +1,33 @@
 import React from 'react';
 import { ScrollView, View, Text, FlatList, Button, Image, TouchableHighlight, StyleSheet, ActivityIndicator } from 'react-native';
 import MLPFlatList from '../components/MLPFlatList'
-import { ScreenContainerStyles } from '../styles/baseStyles'
+import { getTitleByCategory, getUserSlugByCategory, getThemeColorByCategory, getLightThemeColorByCategory } from '../utils/categoryValues'
+import { ScreenContainerStyles, ListStyles } from '../styles/baseStyles'
 import { Colors } from '../constants/colors'
 import { CLIENT_ID } from '../constants/SoundCloud'
 
 export default class PlaylistsList extends React.Component {
 
-  static navigationOptions = {
-    title: 'Mindful sits',
-    headerStyle: {
-      backgroundColor: Colors.green,
-      borderBottomWidth: 0
-    },
-    headerTintColor: Colors.lightGreen,
-    headerTitleStyle: {
-      color: Colors.lightGreen
-    },
+  static navigationOptions = ({ navigation }) => {
+    const category = navigation.getParam('category', '');
+    return {
+      title: getTitleByCategory(category),
+      headerStyle: {
+        backgroundColor: getThemeColorByCategory(category),
+        borderBottomWidth: 0
+      },
+      headerTintColor: getLightThemeColorByCategory(category),
+      headerTitleStyle: {
+        color: getLightThemeColorByCategory(category)
+      },
+    };
   };
 
   constructor(props) {
     super(props);
     this.state = { playlistData: [] };
     this.fetchUserData = this.fetchUserData.bind(this);
+    this.getFetchUserEndpoint = this.getFetchUserEndpoint.bind(this);
   }
 
   componentDidMount() {
@@ -30,7 +35,11 @@ export default class PlaylistsList extends React.Component {
   }
 
   getFetchUserEndpoint() {
-    return `http://api.soundcloud.com/resolve?url=http://soundcloud.com/mindful-life-project&client_id=${CLIENT_ID}`;
+    const category = this.props.navigation.getParam('category', '');
+    const slug = getUserSlugByCategory(category);
+    console.log('Slug: ', slug)
+    console.log(`http://api.soundcloud.com/resolve?url=http://soundcloud.com/${slug}&client_id=${CLIENT_ID}`)
+    return `http://api.soundcloud.com/resolve?url=http://soundcloud.com/${slug}&client_id=${CLIENT_ID}`;
   }
 
   getFetchPlaylistsByUserEndpoint(userId) {
@@ -52,7 +61,6 @@ export default class PlaylistsList extends React.Component {
       const response = await fetch(this.getFetchPlaylistsByUserEndpoint(userId));
       const playlistData = await response.json();
       this.setState({ playlistData });
-      // console.log("Tracks Data: ", playlistData);
     } catch(error) {
       console.log("fetchPlaylistData ERROR_________: ", error);
     }
@@ -61,22 +69,25 @@ export default class PlaylistsList extends React.Component {
   onRowPressHandler(rowData, navigation) {
     // TODO make sure rowData.track.stream_url exists
     const playlistData = rowData.item;
-    navigation.navigate('TracksList', { tracks: playlistData.tracks, playlistTitle: playlistData.title });
+    const category = navigation.getParam('category', '');
+    navigation.navigate('TracksList', { tracks: playlistData.tracks, playlistTitle: playlistData.title, category });
   }
 
   render() {
     const { navigation } = this.props
+    const category = navigation.getParam('category', '');
     return (
-      <View style={[styles.screenContainer, ScreenContainerStyles]}>
+      <View style={[ListStyles.screenContainer, ScreenContainerStyles, { backgroundColor: getThemeColorByCategory(category) }]}>
         { this.state.playlistData.length <= 0 &&
           <ActivityIndicator size='large' color='white' style={{justifyContent: 'center', flexDirection: 'row', flexGrow: 1}}/>
         }
         {this.state.playlistData.length > 0 &&
           <View>
-            <Text style={styles.header}>Playlists</Text>
+            <Text style={[ListStyles.header, { color: getLightThemeColorByCategory(category) }]}>Playlists</Text>
             <MLPFlatList
               listData={this.state.playlistData}
               onRowPressHandler={(rowData) => this.onRowPressHandler(rowData, navigation)}
+              category={category}
             />
           </View>
         }
@@ -85,18 +96,3 @@ export default class PlaylistsList extends React.Component {
     );
   }
 }
-
-const styles = StyleSheet.create({
-  screenContainer: {
-    backgroundColor: Colors.green,
-    padding: 10
-  },
-  header: {
-    color: Colors.lightGreen,
-    fontSize: 30,
-    fontWeight: 'bold',
-    alignSelf: 'center',
-    paddingTop: 25,
-    paddingBottom: 25
-  }
-});

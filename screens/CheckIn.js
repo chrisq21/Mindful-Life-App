@@ -21,7 +21,7 @@ export default class CheckIn extends React.Component {
     return (
       <View style={[styles.screenContainer, ScreenContainerStyles]}>
         <ScrollView>
-          <Image style={styles.sectionImage} source={require('../assets/checkin.png')}></Image>
+          <Image resizeMode='contain' style={styles.sectionImage} source={require('../assets/checkin.png')}></Image>
           <View style={styles.sectionContainer}>
             <Text style={styles.sectionHeader}>1. Sitting in a chair or a comfortable place, take a moment to feel...</Text>
             <View style={styles.sectionBodyContainer}>

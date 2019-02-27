@@ -1,5 +1,6 @@
 import React from 'react';
-import { View, TouchableHighlight, Text, FlatList, StyleSheet } from 'react-native';
+import { View, TouchableOpacity, Text, FlatList, StyleSheet } from 'react-native';
+import { getLightThemeColorByCategory, getDarkThemeColorByCategory } from '../utils/categoryValues'
 import { Colors } from '../constants/colors'
 
 export default class MLPFlatList extends React.Component {
@@ -10,16 +11,15 @@ export default class MLPFlatList extends React.Component {
   }
 
   renderRow(rowData) {
-    /* expects rowData to have title property */
-    // TODO Change TouchableHighlight color
     const bottomBorderStyle = rowData.index == 0 ? styles.firstBorder : null;
+    const { category } = this.props;
     return (
       <View>
-        <TouchableHighlight underlayColor={Colors.lighterGreen} onPress={() => this.props.onRowPressHandler(rowData)}>
-          <View style={[styles.rowContainer, bottomBorderStyle]}>
-            <Text style={styles.rowTitle}>{rowData.item.title}</Text>
+        <TouchableOpacity onPress={() => this.props.onRowPressHandler(rowData)}>
+          <View style={[styles.rowContainer, bottomBorderStyle, { borderColor: getDarkThemeColorByCategory(category) }]}>
+            <Text style={[styles.rowTitle, { color: 'white' }]}>{rowData.item.title}</Text>
           </View>
-        </TouchableHighlight>
+        </TouchableOpacity>
       </View>
     )
   }
@@ -41,12 +41,10 @@ const styles = StyleSheet.create({
     paddingBottom: 30,
     justifyContent: 'center',
     borderBottomWidth: 1,
-    borderColor: Colors.darkGreen
   },
   rowTitle: {
     paddingLeft: 30,
     fontSize: 18,
-    color: Colors.lightGreen,
     fontWeight: 'bold'
   },
   firstBorder: {

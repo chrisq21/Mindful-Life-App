@@ -1,22 +1,26 @@
 import React from 'react';
 import { ScrollView, View, Text, FlatList, Button, Image, TouchableHighlight, StyleSheet } from 'react-native';
 import MLPFlatList from '../components/MLPFlatList'
-import { ScreenContainerStyles } from '../styles/baseStyles'
+import { getTitleByCategory, getThemeColorByCategory, getLightThemeColorByCategory } from '../utils/categoryValues'
+import { ScreenContainerStyles, ListStyles } from '../styles/baseStyles'
 import { Colors } from '../constants/colors'
 import { CLIENT_ID } from '../constants/SoundCloud'
 
 export default class TracksList extends React.Component {
 
-  static navigationOptions = {
-    title: 'Mindful sits',
-    headerStyle: {
-      backgroundColor: Colors.green,
-      borderBottomWidth: 0
-    },
-    headerTintColor: Colors.lightGreen,
-    headerTitleStyle: {
-      color: Colors.lightGreen
-    },
+  static navigationOptions = ({ navigation }) => {
+    const category = navigation.getParam('category', '');
+    return {
+      title: getTitleByCategory(category),
+      headerStyle: {
+        backgroundColor: getThemeColorByCategory(category),
+        borderBottomWidth: 0
+      },
+      headerTintColor: getLightThemeColorByCategory(category),
+      headerTitleStyle: {
+        color: getLightThemeColorByCategory(category)
+      },
+    };
   };
 
   onRowPressHandler(rowData, navigation) {
@@ -28,36 +32,23 @@ export default class TracksList extends React.Component {
       trackUrl: trackData.stream_url,
       playlistTitle
     }
-
-    navigation.navigate('AudioPlayer', { audioPlayerData });
+    const category = navigation.getParam('category', '');
+    navigation.navigate('AudioPlayer', { audioPlayerData, category });
   }
 
   render() {
     const { navigation } = this.props
+    const category = navigation.getParam('category', '');
     const tracksData = navigation.getParam('tracks', []);
     return (
-      <View style={[styles.screenContainer, ScreenContainerStyles]}>
-        <Text style={styles.header}>Tracks</Text>
+      <View style={[ListStyles.screenContainer, ScreenContainerStyles, { backgroundColor: getThemeColorByCategory(category) }]}>
+        <Text style={[ListStyles.header, { color: getLightThemeColorByCategory(category) }]}>Tracks</Text>
         <MLPFlatList
           listData={tracksData}
           onRowPressHandler={(rowData) => this.onRowPressHandler(rowData, navigation)}
+          category={category}
         />
       </View>
     );
   }
 }
-
-const styles = StyleSheet.create({
-  screenContainer: {
-    backgroundColor: Colors.green,
-    padding: 10
-  },
-  header: {
-    color: Colors.lightGreen,
-    fontSize: 30,
-    fontWeight: 'bold',
-    alignSelf: 'center',
-    paddingTop: 25,
-    paddingBottom: 25
-  }
-});

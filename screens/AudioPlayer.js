@@ -1,20 +1,25 @@
 import React from 'react';
 import { Alert, View, Text, Slider, Button, TouchableOpacity, Image, StyleSheet, ActivityIndicator } from 'react-native';
 import { ScreenContainerStyles } from '../styles/baseStyles'
+import { getThemeColorByCategory, getLightThemeColorByCategory, getDarkThemeColorByCategory } from '../utils/categoryValues'
 import { Colors } from '../constants/colors'
 import { CLIENT_ID } from '../constants/SoundCloud'
 
 export default class AudioPlayer extends React.Component {
-  static navigationOptions = {
-    title: '',
-    headerStyle: {
-      backgroundColor: Colors.green,
-      borderBottomWidth: 0
-    },
-    headerTintColor: Colors.lightGreen,
-    headerTitleStyle: {
-      color: Colors.lightGreen
-    },
+
+  static navigationOptions = ({ navigation }) => {
+    const category = navigation.getParam('category', '');
+    return {
+      title: '',
+      headerStyle: {
+        backgroundColor: getThemeColorByCategory(category),
+        borderBottomWidth: 0
+      },
+      headerTintColor: getLightThemeColorByCategory(category),
+      headerTitleStyle: {
+        color: getLightThemeColorByCategory(category)
+      },
+    };
   };
 
   constructor(props) {
@@ -135,7 +140,9 @@ export default class AudioPlayer extends React.Component {
   }
 
   render() {
-    const audioPlayerData = this.props.navigation.getParam('audioPlayerData', null);
+    const { navigation } = this.props
+    const audioPlayerData = navigation.getParam('audioPlayerData', null);
+    const category = navigation.getParam('category', '');
     const controlButtonImgSource = this.state.isAudioPlaying
       ? require('../assets/pause-btn.png')
       : require('../assets/play-btn.png')
@@ -144,13 +151,13 @@ export default class AudioPlayer extends React.Component {
       ? this.pauseAudioAsync
       : this.playAudioAsync
     return (
-      <View style={[styles.screenContainer, ScreenContainerStyles]}>
+      <View style={[styles.screenContainer, ScreenContainerStyles, { backgroundColor: getThemeColorByCategory(category) }]}>
         {!this.state.isAudioReady && (
           <ActivityIndicator size='large' color='white' style={{justifyContent: 'center'}}/>
         )}
         {this.state.isAudioReady && (
           <View style={styles.innerContainer}>
-            <Text style={styles.playlistTitle}>{audioPlayerData.playlistTitle}</Text>
+            <Text style={[styles.playlistTitle, { color: getDarkThemeColorByCategory(category) }]}>{audioPlayerData.playlistTitle}</Text>
             <Text style={styles.trackTitle}>{audioPlayerData.trackTitle}</Text>
             <View style={styles.controlsContainer}>
                 <TouchableOpacity onPress={controlButtonHandler} style={styles.controlButtonContainer}>
@@ -163,7 +170,7 @@ export default class AudioPlayer extends React.Component {
                 value={this.state.currentAudioTime}
                 onSlidingComplete={this.onSlidingComplete}
                 onValueChange={this.onSliderValueChange}
-                minimumTrackTintColor={Colors.darkGreen}
+                minimumTrackTintColor={getDarkThemeColorByCategory(category)}
                 maximumTrackTintColor='white'
                 />
               </View>
@@ -176,7 +183,6 @@ export default class AudioPlayer extends React.Component {
 
 const styles = StyleSheet.create({
   screenContainer: {
-    backgroundColor: Colors.green,
     flexDirection: 'row',
     justifyContent: 'center'
   },
@@ -198,7 +204,6 @@ const styles = StyleSheet.create({
     paddingBottom: 20
   },
   playlistTitle: {
-    color: Colors.darkGreen,
     fontSize: 22,
     textAlign: 'center',
     fontWeight: 'bold',
@@ -206,7 +211,7 @@ const styles = StyleSheet.create({
   },
   trackTitle: {
     color: 'white',
-    fontSize: 27,
+    fontSize: 35,
     textAlign: 'center',
     fontWeight: 'bold',
     paddingTop: 10,
