@@ -6,13 +6,12 @@ export default class Home extends React.Component {
   };
 
   render() {
-    const {navigate} = this.props.navigation;
+    const { navigate } = this.props.navigation;
     return (
       <View>
-        <Text>Welcome Home</Text>
         <Button
-          title='Sits'
-          onPress={() => navigate('Sits')}
+          title='PlaylistsList'
+          onPress={() => navigate('PlaylistsList')}
         />
         <Button
           title='Learn'

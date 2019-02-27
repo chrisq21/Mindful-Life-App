@@ -1,8 +1,20 @@
 import React from 'react';
-import { Alert, View, Text, Slider, Button } from 'react-native';
-export default class Sits extends React.Component {
+import { Alert, View, Text, Slider, Button, TouchableOpacity, Image, StyleSheet, ActivityIndicator } from 'react-native';
+import { ScreenContainerStyles } from '../styles/baseStyles'
+import { Colors } from '../constants/colors'
+import { CLIENT_ID } from '../constants/SoundCloud'
+
+export default class AudioPlayer extends React.Component {
   static navigationOptions = {
-    title: 'Sits',
+    title: '',
+    headerStyle: {
+      backgroundColor: Colors.green,
+      borderBottomWidth: 0
+    },
+    headerTintColor: Colors.lightGreen,
+    headerTitleStyle: {
+      color: Colors.lightGreen
+    },
   };
 
   constructor(props) {
@@ -31,7 +43,7 @@ export default class Sits extends React.Component {
 
   componentWillUnmount() {
     /*
-      Expo's Audio object has a bug that continues to poll for audioStatus after unloadAsync is called. 
+      Expo's Audio object has a bug that continues to poll for audioStatus after unloadAsync is called.
       This forces the onPlaybackStatusUpdate function to stop polling for audioObject status
     */
     this.pollAudioStatus = false;
@@ -56,9 +68,12 @@ export default class Sits extends React.Component {
     this.audioObject.setOnPlaybackStatusUpdate(this.onPlaybackStatusUpdate);
 
     try {
-      await this.audioObject.loadAsync({uri: "http://www.hochmuth.com/mp3/Haydn_Cello_Concerto_D-1.mp3"}, { shouldPlay: true });
+      const audioPlayerData = this.props.navigation.getParam('audioPlayerData', null);
+      // TODO throw alert error if trackUrl is null
+      await this.audioObject.loadAsync({uri: `${audioPlayerData.trackUrl}?client_id=${CLIENT_ID}`}, { shouldPlay: true });
       await this.playAudioAsync();
     } catch (error) {
+      console.log("Error loading: ", error);
       this.showAlert();
     }
   }
@@ -120,36 +135,84 @@ export default class Sits extends React.Component {
   }
 
   render() {
+    const audioPlayerData = this.props.navigation.getParam('audioPlayerData', null);
+    const controlButtonImgSource = this.state.isAudioPlaying
+      ? require('../assets/pause-btn.png')
+      : require('../assets/play-btn.png')
+
+    const controlButtonHandler = this.state.isAudioPlaying
+      ? this.pauseAudioAsync
+      : this.playAudioAsync
     return (
-      <View>
+      <View style={[styles.screenContainer, ScreenContainerStyles]}>
         {!this.state.isAudioReady && (
-          <Text>Loading...</Text>
+          <ActivityIndicator size='large' color='white' style={{justifyContent: 'center'}}/>
         )}
         {this.state.isAudioReady && (
-          <View>
-            <Text>Sits</Text>
-            { this.state.isAudioPlaying &&
-              <Button
-                title='Pause'
-                onPress={this.pauseAudioAsync}
-              />
-            }
-            { !this.state.isAudioPlaying &&
-              <Button
-                title='Play'
-                onPress={this.playAudioAsync}
-              />
-            }
-            <Slider
-              minimumValue={0}
-              maximumValue={this.state.maxAudioTime}
-              value={this.state.currentAudioTime}
-              onSlidingComplete={this.onSlidingComplete}
-              onValueChange={this.onSliderValueChange}
-              />
+          <View style={styles.innerContainer}>
+            <Text style={styles.playlistTitle}>{audioPlayerData.playlistTitle}</Text>
+            <Text style={styles.trackTitle}>{audioPlayerData.trackTitle}</Text>
+            <View style={styles.controlsContainer}>
+                <TouchableOpacity onPress={controlButtonHandler} style={styles.controlButtonContainer}>
+                  <Image resizeMode='contain' source={controlButtonImgSource}></Image>
+                </TouchableOpacity>
+              <Slider
+                style={styles.slider}
+                minimumValue={0}
+                maximumValue={this.state.maxAudioTime}
+                value={this.state.currentAudioTime}
+                onSlidingComplete={this.onSlidingComplete}
+                onValueChange={this.onSliderValueChange}
+                minimumTrackTintColor={Colors.darkGreen}
+                maximumTrackTintColor='white'
+                />
+              </View>
           </View>
         )}
       </View>
     );
   }
 }
+
+const styles = StyleSheet.create({
+  screenContainer: {
+    backgroundColor: Colors.green,
+    flexDirection: 'row',
+    justifyContent: 'center'
+  },
+  innerContainer: {
+    alignItems: 'center',
+    flexGrow: 1,
+    paddingTop: 30,
+    paddingLeft: 30,
+    paddingRight: 30,
+  },
+  controlsContainer: {
+    paddingTop: 30,
+    flexGrow: 1,
+    width: '95%'
+  },
+  controlButtonContainer: {
+    alignSelf: 'center',
+    paddingTop: 20,
+    paddingBottom: 20
+  },
+  playlistTitle: {
+    color: Colors.darkGreen,
+    fontSize: 22,
+    textAlign: 'center',
+    fontWeight: 'bold',
+    paddingTop: 10
+  },
+  trackTitle: {
+    color: 'white',
+    fontSize: 27,
+    textAlign: 'center',
+    fontWeight: 'bold',
+    paddingTop: 10,
+    paddingBottom: 10
+  },
+  slider: {
+    width: '100%'
+  }
+});

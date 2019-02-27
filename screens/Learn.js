@@ -7,12 +7,12 @@ export default class Learn extends React.Component {
   static navigationOptions = {
     title: 'Learn',
     headerStyle: {
-      backgroundColor: Colors.lightBlue,
+      backgroundColor: Colors.blue,
       borderBottomWidth: 0
     },
-    headerTintColor: 'white',
+    headerTintColor: Colors.lightBlue,
     headerTitleStyle: {
-      color: 'white'
+      color: Colors.lightBlue
     },
   };
 
@@ -22,20 +22,20 @@ export default class Learn extends React.Component {
         <ScrollView>
           <View style={styles.sectionContainer}>
             <Text style={styles.sectionHeader}>What is Mindfulness?</Text>
-            <Image></Image>
-            <Text style={styles.sectionBody}>
+            <Image style={styles.sectionImage} source={require('../assets/meditating.png')}></Image>
+            <Text style={styles.sectionBodyText}>
             Mindfulness is paying attention on purpose to the present moment without judgment. Through focused and specific awareness, mindfulness builds skills to navigate ALL experiences by strategically living in the here and now.
             </Text>
           </View>
           <View style={styles.sectionContainer}>
             <Text style={styles.sectionHeader}>Benefits</Text>
-            <Text style={styles.sectionBody}>
+            <Text style={styles.sectionBodyText}>
             Mindfulness is a secular, science-based approach that takes advantage of our brain's plasticity (ability to change throughout life). Mindfulness is proven to strengthen physiological responses to stress, negative emotions, anxiety and depression, and improve happiness, openness and self-awareness.
             </Text>
-            <Text style={styles.sectionBody}>
+            <Text style={styles.sectionBodyText}>
             Mindfulness enables us to be present, moment to moment, in our increasingly distracted lives. Mindfulness improves social relationships with people and family and can even strengthen the immune system. It cultivates an openness to one's life experience and a leads to a happier and more compassionate life.
             </Text>
-            <Image></Image>
+            <Image style={styles.sectionImage} source={require('../assets/clouds.png')}></Image>
           </View>
         </ScrollView>
       </View>
@@ -45,7 +45,7 @@ export default class Learn extends React.Component {
 
 const styles = StyleSheet.create({
   screenContainer: {
-    backgroundColor: Colors.lightBlue,
+    backgroundColor: Colors.blue,
     padding: 30
   },
   sectionContainer: {
@@ -53,11 +53,18 @@ const styles = StyleSheet.create({
     marginBottom: 30
   },
   sectionHeader: {
-    color: 'white',
+    color: Colors.lightBlue,
     fontWeight: 'bold',
     fontSize: 40
   },
-  sectionBody: {
+  sectionImage: {
+    flex: 1,
+    width: null,
+    resizeMode: 'contain',
+    marginTop: 10,
+    marginBottom: 10
+  },
+  sectionBodyText: {
     color: 'white',
     marginTop: 15,
     marginBottom: 15,
