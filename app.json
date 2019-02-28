@@ -14,7 +14,7 @@
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#359CD8"
     },
     "updates": {
       "fallbackToCacheTimeout": 0
@@ -22,9 +22,13 @@
     "assetBundlePatterns": [
       "**/*"
     ],
+    "description": "",
     "ios": {
+      "bundleIdentifier": "com.chrisqueen.mindfullifeprojectapp",
       "supportsTablet": true
     },
-    "description": ""
+    "android": {
+      "package": "com.chrisqueen.mindful_life_project_app"
+    }
   }
 }
