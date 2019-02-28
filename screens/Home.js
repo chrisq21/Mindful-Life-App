@@ -1,6 +1,7 @@
 import React from 'react';
 import { TouchableOpacity, View, Text, Button, StyleSheet, Image } from 'react-native';
 import { ScreenContainerStyles } from '../styles/baseStyles';
+import { spanishCopy, englishCopy } from '../constants/copy'
 import { Colors } from '../constants/colors'
 export default class Home extends React.Component {
   static navigationOptions = {
@@ -16,24 +17,27 @@ export default class Home extends React.Component {
   };
 
   render() {
-    const { navigate } = this.props.navigation;
+    const { navigation } = this.props;
+    const language = navigation.getParam('language', 'english');
+    const copyData = language === 'spanish' ? spanishCopy : englishCopy;
+
     return (
       <View style={ScreenContainerStyles}>
-        <TouchableOpacity style={[styles.sectionButton, { backgroundColor: Colors.blue }]} onPress={() => navigate('Learn')}>
-          <Image resizeMode='contain' style={styles.sectionImage} source={require('../assets/clouds-learn.png')}></Image>
-          <Text style={[styles.sectionText, {color: Colors.lightBlue}]}>What Is {"\n"} Mindfulness?</Text>
+        <TouchableOpacity style={[styles.sectionButton, { backgroundColor: Colors.blue }]} onPress={() => navigation.navigate('Learn', { language })}>
+          <Text style={[styles.sectionText, {color: Colors.lightBlue}]}>{copyData.homeScreen.learn}</Text>
+          <Image resizeMode='contain' style={styles.sectionImage} source={require('../assets/question-mark.png')}></Image>
         </TouchableOpacity>
-        <TouchableOpacity style={[styles.sectionButton, { backgroundColor: Colors.red }]} onPress={() => navigate('CheckIn')}>
+        <TouchableOpacity style={[styles.sectionButton, { backgroundColor: Colors.red }]} onPress={() => navigation.navigate('CheckIn', { language })}>
+        <Text style={[styles.sectionText, {color: Colors.lightRed}]}>{copyData.homeScreen.checkIn}</Text>
           <Image resizeMode='contain' style={styles.sectionImage} source={require('../assets/anchor.png')}></Image>
-          <Text style={[styles.sectionText, {color: Colors.lightRed}]}>Mindful {"\n"}Check In</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={[styles.sectionButton, { backgroundColor: Colors.green }]} onPress={() => navigate('PlaylistsList', {category: 'sits'})}>
+        <TouchableOpacity style={[styles.sectionButton, { backgroundColor: Colors.green }]} onPress={() => navigation.navigate('PlaylistsList', {category: 'sits', language})}>
+        <Text style={[styles.sectionText, {color: Colors.lightGreen}]}>{copyData.homeScreen.sits}</Text>
           <Image resizeMode='contain' style={styles.sectionImage} source={require('../assets/smile.png')}></Image>
-          <Text style={[styles.sectionText, {color: Colors.lightGreen}]}>Mindful Sits</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={[styles.sectionButton, { backgroundColor: Colors.orange }]} onPress={() => navigate('PlaylistsList', {category: 'hip-hop'})}>
+        <TouchableOpacity style={[styles.sectionButton, { backgroundColor: Colors.orange }]} onPress={() => navigation.navigate('PlaylistsList', {category: 'hip-hop', language})}>
+        <Text style={[styles.sectionText, {color: Colors.lightOrange}]}>{copyData.homeScreen.hipHop}</Text>
           <Image resizeMode='contain' style={styles.sectionImage} source={require('../assets/headphones.png')}></Image>
-          <Text style={[styles.sectionText, {color: Colors.lightOrange}]}>Mindful {"\n"}Hip Hop</Text>
         </TouchableOpacity>
       </View>
     );
