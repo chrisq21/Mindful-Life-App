@@ -1,5 +1,7 @@
-import {createStackNavigator, createAppContainer} from 'react-navigation';
-
+import React from 'react';
+import { Button } from 'react-native';
+import { createStackNavigator, createDrawerNavigator, createAppContainer, DrawerActions } from 'react-navigation';
+import About from '../components/About';
 import HomeScreen from '../screens/Home';
 import LanguageSelection from '../screens/LanguageSelection';
 import PlaylistsList from '../screens/PlaylistsList';
@@ -18,6 +20,16 @@ const MainNavigator = createStackNavigator({
   CheckIn: {screen: CheckInScreen}
 });
 
-const App = createAppContainer(MainNavigator);
+const DrawerNavigator = createDrawerNavigator(
+{
+  MainNavigator: { screen: MainNavigator }
+},
+{
+  drawerPosition: 'right',
+  contentComponent: About,
+  drawerWidth: 300
+});
+
+const App = createAppContainer(DrawerNavigator);
 
 export default App;

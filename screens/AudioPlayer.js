@@ -11,6 +11,8 @@ export default class AudioPlayer extends React.Component {
     const category = navigation.getParam('category', '');
     return {
       title: '',
+      drawerLabel: 'About',
+      headerRight: <DrawerIcon navigation={navigation} />,
       headerStyle: {
         backgroundColor: getThemeColorByCategory(category),
         borderBottomWidth: 0

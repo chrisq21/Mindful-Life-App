@@ -4,6 +4,7 @@ import MLPFlatList from '../components/MLPFlatList'
 import { getTitleByCategory, getThemeColorByCategory, getLightThemeColorByCategory } from '../utils/categoryValues'
 import { ScreenContainerStyles, ListStyles } from '../styles/baseStyles'
 import { Colors } from '../constants/colors'
+import DrawerIcon from '../components/DrawerIcon'
 import { CLIENT_ID } from '../constants/SoundCloud'
 
 export default class TracksList extends React.Component {
@@ -12,6 +13,8 @@ export default class TracksList extends React.Component {
     const category = navigation.getParam('category', '');
     return {
       title: getTitleByCategory(category),
+      drawerLabel: 'About',
+      headerRight: <DrawerIcon navigation={navigation} />,
       headerStyle: {
         backgroundColor: getThemeColorByCategory(category),
         borderBottomWidth: 0

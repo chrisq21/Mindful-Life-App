@@ -3,6 +3,7 @@ import { ScrollView, View, Text, FlatList, Button, Image, TouchableHighlight, St
 import MLPFlatList from '../components/MLPFlatList'
 import { getTitleByCategory, getUserSlugByCategory, getThemeColorByCategory, getLightThemeColorByCategory } from '../utils/categoryValues'
 import { ScreenContainerStyles, ListStyles } from '../styles/baseStyles'
+import DrawerIcon from '../components/DrawerIcon'
 import { Colors } from '../constants/colors'
 import { CLIENT_ID } from '../constants/SoundCloud'
 
@@ -12,6 +13,8 @@ export default class PlaylistsList extends React.Component {
     const category = navigation.getParam('category', '');
     return {
       title: getTitleByCategory(category),
+      drawerLabel: 'About',
+      headerRight: <DrawerIcon navigation={navigation} />,
       headerStyle: {
         backgroundColor: getThemeColorByCategory(category),
         borderBottomWidth: 0

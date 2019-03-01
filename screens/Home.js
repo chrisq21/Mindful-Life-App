@@ -3,17 +3,25 @@ import { TouchableOpacity, View, Text, Button, StyleSheet, Image } from 'react-n
 import { ScreenContainerStyles } from '../styles/baseStyles';
 import { spanishCopy, englishCopy } from '../constants/copy'
 import { Colors } from '../constants/colors'
+import DrawerIcon from '../components/DrawerIcon'
+
 export default class Home extends React.Component {
-  static navigationOptions = {
-    title: 'Home',
-    headerStyle: {
-      backgroundColor: 'black',
-      borderBottomWidth: 0
-    },
-    headerTintColor: Colors.lightBlue,
-    headerTitleStyle: {
-      color: Colors.lightBlue
-    },
+
+  static navigationOptions = ({ navigation }) => {
+    const category = navigation.getParam('category', '');
+    return {
+      title: 'Home',
+      drawerLabel: 'About',
+      headerRight: <DrawerIcon navigation={navigation} />,
+      headerStyle: {
+        backgroundColor: 'black',
+        borderBottomWidth: 0
+      },
+      headerTintColor: Colors.lightBlue,
+      headerTitleStyle: {
+        color: Colors.lightBlue
+      },
+    };
   };
 
   render() {

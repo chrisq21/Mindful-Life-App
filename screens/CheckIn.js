@@ -1,21 +1,27 @@
 import React from 'react';
 import { StyleSheet, View, Text, ScrollView, Image } from 'react-native';
 import { ScreenContainerStyles } from '../styles/baseStyles';
+import DrawerIcon from '../components/DrawerIcon'
 import { Colors } from '../constants/colors';
 import { spanishCopy, englishCopy } from '../constants/copy'
 
 export default class CheckIn extends React.Component {
 
-  static navigationOptions = {
-    title: 'Check In',
-    headerStyle: {
-      backgroundColor: Colors.red,
-      borderBottomWidth: 0
-    },
-    headerTintColor: Colors.lightRed,
-    headerTitleStyle: {
-      color: Colors.lightRed
-    },
+  static navigationOptions = ({ navigation }) => {
+    const category = navigation.getParam('category', '');
+    return {
+      title: 'Check In',
+      drawerLabel: 'About',
+      headerRight: <DrawerIcon navigation={navigation} />,
+      headerStyle: {
+        backgroundColor: Colors.red,
+        borderBottomWidth: 0
+      },
+      headerTintColor: Colors.lightRed,
+      headerTitleStyle: {
+        color: Colors.lightRed
+      },
+    };
   };
 
   render() {
