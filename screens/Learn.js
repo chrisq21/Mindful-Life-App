@@ -1,5 +1,7 @@
 import React from 'react';
-import { ScrollView, View, Text, Image, StyleSheet } from 'react-native';
+import { ScrollView, View, Text, Image, StyleSheet, Dimensions } from 'react-native';
+import { Video } from 'expo'
+import VideoPlayer from '../components/VideoPlayer'
 import { ScreenContainerStyles } from '../styles/baseStyles'
 import { spanishCopy, englishCopy } from '../constants/copy'
 import { Colors } from '../constants/colors'
@@ -28,19 +30,25 @@ export default class Learn extends React.Component {
     const { navigation } = this.props;
     const language = navigation.getParam('language', 'english');
     const copyData = language === 'spanish' ? spanishCopy : englishCopy;
+    const { width } = Dimensions.get('window');
 
     return (
       <View style={{ backgroundColor: Colors.blue }}>
         <ScrollView>
-          <View style={[styles.screenContainer, ScreenContainerStyles]}>
+          <View style={ScreenContainerStyles}>
             <View style={styles.sectionContainer}>
-              <Text style={styles.sectionHeader}>{copyData.learnScreen.whatIsHeader}</Text>
-              <Image resizeMode='contain' style={styles.sectionImage} source={require('../assets/meditating.png')}></Image>
-              <Text style={styles.sectionBodyText}>
-              {copyData.learnScreen.whatIsBody}
-              </Text>
+              <View style={styles.paddingContainer}>
+                <Text style={styles.sectionHeader}>{copyData.learnScreen.whatIsHeader}</Text>
+              </View>
+              <VideoPlayer width={width} />
+              <View style={styles.paddingContainer}>
+                <Text style={styles.sectionBodyText}>
+                  {copyData.learnScreen.whatIsBody}
+                </Text>
+              </View>
             </View>
-            <View style={styles.sectionContainer}>
+            <Image style={[styles.sectionImage]} source={require('../assets/meditating.png')}></Image>
+            <View style={[styles.sectionContainer, styles.paddingContainer]}>
               <Text style={styles.sectionHeader}>Benefits</Text>
               <Text style={styles.sectionBodyText}>
               {copyData.learnScreen.benefitsBody1}
@@ -48,10 +56,15 @@ export default class Learn extends React.Component {
               <Text style={styles.sectionBodyText}>
               {copyData.learnScreen.benefitsBody2}
               </Text>
-              <Image resizeMode='contain' style={styles.sectionImage} source={require('../assets/clouds.png')}></Image>
+              <Image style={styles.sectionImage} source={require('../assets/clouds.png')}></Image>
+            </View>
+            <View style={[styles.sectionContainer, styles.paddingContainer]}>
+              <Text style={styles.sectionHeader}>Posters</Text>
+              <Image style={[styles.sectionImage, styles.posterImage]} source={require('../assets/poster.png')}></Image>
+              <Image style={[styles.sectionImage, styles.posterImage]} source={require('../assets/together.png')}></Image>
             </View>
           </View>
-          <Image resizeMode='contain' style={styles.sectionImage} source={require('../assets/poster.png')}></Image>
+
         </ScrollView>
       </View>
     );
@@ -59,10 +72,11 @@ export default class Learn extends React.Component {
 }
 
 const styles = StyleSheet.create({
-  screenContainer: {
+  paddingContainer: {
     padding: 30
   },
   sectionContainer: {
+    flex: 1,
     marginTop: 30,
     marginBottom: 30
   },
@@ -77,6 +91,11 @@ const styles = StyleSheet.create({
     resizeMode: 'contain',
     marginTop: 10,
     marginBottom: 10
+  },
+  posterImage: {
+    height: 450,
+    width: null,
+    resizeMode: 'contain'
   },
   sectionBodyText: {
     color: 'white',

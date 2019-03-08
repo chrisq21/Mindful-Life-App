@@ -30,6 +30,7 @@ export default class MLPFlatList extends React.Component {
         keyExtractor={(item, index) => `key:${index}`}
         data={this.props.listData}
         renderItem={this.renderRow}
+        contentContainerStyle={{ paddingBottom: 100 }}
       />
     );
   }

@@ -8,13 +8,13 @@
       "ios",
       "android"
     ],
-    "version": "1.0.1",
+    "version": "2.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
-      "backgroundColor": "#359CD8"
+      "backgroundColor": "#49a5f9"
     },
     "updates": {
       "fallbackToCacheTimeout": 0
@@ -25,10 +25,12 @@
     "description": "",
     "ios": {
       "bundleIdentifier": "com.chrisqueen.mindfullifeprojectapp",
-      "supportsTablet": true
+      "supportsTablet": false
     },
     "android": {
-      "package": "com.chrisqueen.mindful_life_project_app"
+      "package": "com.chrisqueen.mindful_life_project_app",
+      "permissions": [],
+      "versionCode": 2
     }
   }
 }

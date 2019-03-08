@@ -2,6 +2,7 @@ import React from 'react';
 import { Alert, View, Text, Slider, Button, TouchableOpacity, Image, StyleSheet, ActivityIndicator } from 'react-native';
 import { ScreenContainerStyles } from '../styles/baseStyles'
 import { getThemeColorByCategory, getLightThemeColorByCategory, getDarkThemeColorByCategory } from '../utils/categoryValues'
+import DrawerIcon from '../components/DrawerIcon'
 import { Colors } from '../constants/colors'
 import { CLIENT_ID } from '../constants/SoundCloud'
 
@@ -75,10 +76,13 @@ export default class AudioPlayer extends React.Component {
     this.audioObject.setOnPlaybackStatusUpdate(this.onPlaybackStatusUpdate);
 
     try {
+
       const audioPlayerData = this.props.navigation.getParam('audioPlayerData', null);
-      // TODO throw alert error if trackUrl is null
+      console.log("audioPlayerData.trackUrl: ", audioPlayerData);
       await this.audioObject.loadAsync({uri: `${audioPlayerData.trackUrl}?client_id=${CLIENT_ID}`}, { shouldPlay: true });
       await this.playAudioAsync();
+
+
     } catch (error) {
       console.log("Error loading: ", error);
       this.showAlert();
@@ -141,6 +145,12 @@ export default class AudioPlayer extends React.Component {
     this.setState({ isDraggingSlider: false });
   }
 
+  millisToMinutesAndSeconds(millis) {
+    var minutes = Math.floor(millis / 60000);
+    var seconds = ((millis % 60000) / 1000).toFixed(0);
+    return (seconds == 60 ? (minutes+1) + ":00" : minutes + ":" + (seconds < 10 ? "0" : "") + seconds);
+  }
+
   render() {
     const { navigation } = this.props
     const audioPlayerData = navigation.getParam('audioPlayerData', null);
@@ -175,6 +185,10 @@ export default class AudioPlayer extends React.Component {
                 minimumTrackTintColor={getDarkThemeColorByCategory(category)}
                 maximumTrackTintColor='white'
                 />
+                <View style={{justifyContent: 'space-between', flexDirection: 'row'}}>
+                  <Text style={{ color: 'white' }}>{this.millisToMinutesAndSeconds(this.state.currentAudioTime)}</Text>
+                  <Text style={{ color: 'white' }}>{this.millisToMinutesAndSeconds(this.state.maxAudioTime)}</Text>
+                </View>
               </View>
           </View>
         )}

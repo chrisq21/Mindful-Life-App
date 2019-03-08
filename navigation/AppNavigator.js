@@ -27,7 +27,7 @@ const DrawerNavigator = createDrawerNavigator(
 {
   drawerPosition: 'right',
   contentComponent: About,
-  drawerWidth: 300
+  drawerLockMode: 'locked-closed'
 });
 
 const App = createAppContainer(DrawerNavigator);
