@@ -1,7 +1,7 @@
 import React from 'react';
 import { ScrollView, View, Text, FlatList, Button, Image, TouchableHighlight, StyleSheet, ActivityIndicator } from 'react-native';
 import MLPFlatList from '../components/MLPFlatList'
-import { getTitleByCategory, getUserSlugByCategory, getThemeColorByCategory, getLightThemeColorByCategory } from '../utils/categoryValues'
+import { getTitleByCategory, getUserSlugByCategoryAndLanguage, getThemeColorByCategory, getLightThemeColorByCategory } from '../utils/categoryValues'
 import { ScreenContainerStyles, ListStyles } from '../styles/baseStyles'
 import DrawerIcon from '../components/DrawerIcon'
 import { Colors } from '../constants/colors'
@@ -39,9 +39,8 @@ export default class PlaylistsList extends React.Component {
 
   getFetchUserEndpoint() {
     const category = this.props.navigation.getParam('category', '');
-    const slug = getUserSlugByCategory(category);
-    console.log('Slug: ', slug)
-    console.log(`http://api.soundcloud.com/resolve?url=http://soundcloud.com/${slug}&client_id=${CLIENT_ID}`)
+    const language = this.props.navigation.getParam('language', '');
+    const slug = getUserSlugByCategoryAndLanguage(category, language);
     return `http://api.soundcloud.com/resolve?url=http://soundcloud.com/${slug}&client_id=${CLIENT_ID}`;
   }
 

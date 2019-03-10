@@ -5,8 +5,11 @@ export function getTitleByCategory(category) {
   return title;
 }
 
-export function getUserSlugByCategory(category) {
-  const slug = category === 'hip-hop' ? 'mindful-life-hip-hop' : 'mindful-life-project';
+export function getUserSlugByCategoryAndLanguage(category, language) {
+  let slug = category === 'hip-hop' ? 'mindful-life-hip-hop' : 'mindful-life-project';
+  if (category != 'hip-hop' && language == 'spanish') {
+    slug = 'user-825440555'
+  }
   return slug
 }
 

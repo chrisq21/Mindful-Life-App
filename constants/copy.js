@@ -43,6 +43,10 @@ export const englishCopy = {
       body4: 'Grateful or worried?',
       body5: 'Close your eyes, name the emotion (for example "happy, happy, happy")'
     }
+  },
+  about: {
+    body1: 'Mindful Life Project began teaching mindfulness in Richmond, CA elementary schools in October of 2012 working with 150 students. Now, Mindful Life Project works with thousands of students and teachers in underserved schools.',
+    body2: 'Mindful Life Project\'s mission is to empower children through mindfulness, yoga, expressive arts and performing arts to gain self-awareness, confidence, self-regulation and resilience, leading to lifelong success.'
   }
 }
 
@@ -91,5 +95,9 @@ export const spanishCopy = {
       body4: '¿Agradecido o preocupado?',
       body5: 'Cierre los ojos, ponga nombre a su emocion (por ejemplo "feliz, feliz, feliz") y respira'
     }
+  },
+  about: {
+    body1: 'Mindful Life Project comenzó a enseñar mindfulness en las escuelas primarias de Richmond, California, en octubre de 2012, trabajando con 150 estudiantes. Ahora, Mindful Life Project trabaja con miles de estudiantes y maestros en escuelas marginadas.',
+    body2: 'La misión de Mindful Life Project es capacitar a los estudiantes a través de la atención plena, el yoga, las artes expresivas y las artes escénicas para adquirir conciencia de sí mismo, confianza, autorregulación y resiliencia, lo que lleva al éxito de por vida.'
   }
 }

@@ -68,7 +68,7 @@ export default class AudioPlayer extends React.Component {
       playsInSilentModeIOS: true,
       shouldDuckAndroid: false,
       interruptionModeAndroid: Expo.Audio.INTERRUPTION_MODE_ANDROID_DO_NOT_MIX,
-      playThroughEarpieceAndroid: true
+      playThroughEarpieceAndroid: false
     });
 
     this.audioObject = new Expo.Audio.Sound();

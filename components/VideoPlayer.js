@@ -10,6 +10,17 @@ export default class VideoPlayer extends React.Component {
 		shouldPlay: false,
 	}
 
+	componentDidMount() {
+		Expo.Audio.setAudioModeAsync({
+      allowsRecordingIOS: false,
+      interruptionModeIOS: Expo.Audio.INTERRUPTION_MODE_IOS_DO_NOT_MIX,
+      playsInSilentModeIOS: true,
+      shouldDuckAndroid: false,
+      interruptionModeAndroid: Expo.Audio.INTERRUPTION_MODE_ANDROID_DO_NOT_MIX,
+      playThroughEarpieceAndroid: false
+    });
+	}
+
 	handlePlayAndPause = () => {
 		this.setState(prevState => ({
 			shouldPlay: !prevState.shouldPlay
