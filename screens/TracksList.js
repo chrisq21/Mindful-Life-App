@@ -39,15 +39,29 @@ export default class TracksList extends React.Component {
     navigation.navigate('AudioPlayer', { audioPlayerData, category });
   }
 
+  getStreamableTracks(tracksData) {
+    let streamableTracks = [];
+    for(index in tracksData) {
+      const track = tracksData[index];
+      if(track.streamable) {
+        streamableTracks.push(track);
+      }
+    }
+
+    return streamableTracks
+  }
+
   render() {
     const { navigation } = this.props
     const category = navigation.getParam('category', '');
     const tracksData = navigation.getParam('tracks', []);
+    const streamableTracks = this.getStreamableTracks(tracksData)
+    
     return (
       <View style={[ListStyles.screenContainer, ScreenContainerStyles, { backgroundColor: getThemeColorByCategory(category) }]}>
         <Text style={[ListStyles.header, { color: getLightThemeColorByCategory(category) }]}>Tracks</Text>
         <MLPFlatList
-          listData={tracksData}
+          listData={streamableTracks}
           onRowPressHandler={(rowData) => this.onRowPressHandler(rowData, navigation)}
           category={category}
         />
