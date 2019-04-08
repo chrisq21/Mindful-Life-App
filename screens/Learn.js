@@ -31,6 +31,9 @@ export default class Learn extends React.Component {
     const language = navigation.getParam('language', 'english');
     const copyData = language === 'spanish' ? spanishCopy : englishCopy;
     const { width } = Dimensions.get('window');
+    const videoSource = language === 'spanish' 
+      ? require('../assets/animation_spanish.mp4')
+      : require('../assets/animation.mp4');
 
     return (
       <View style={{ backgroundColor: Colors.blue }}>
@@ -40,7 +43,7 @@ export default class Learn extends React.Component {
               <View style={styles.paddingContainer}>
                 <Text style={styles.sectionHeader}>{copyData.learnScreen.whatIsHeader}</Text>
               </View>
-              <VideoPlayer width={width} />
+              <VideoPlayer source={videoSource} width={width} />
               <View style={styles.paddingContainer}>
                 <Text style={styles.sectionBodyText}>
                   {copyData.learnScreen.whatIsBody}

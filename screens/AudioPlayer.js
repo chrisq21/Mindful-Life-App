@@ -1,5 +1,6 @@
 import React from 'react';
 import { Alert, View, Text, Slider, Button, TouchableOpacity, Image, StyleSheet, ActivityIndicator } from 'react-native';
+import { KeepAwake } from 'expo'
 import { ScreenContainerStyles } from '../styles/baseStyles'
 import { getThemeColorByCategory, getLightThemeColorByCategory, getDarkThemeColorByCategory } from '../utils/categoryValues'
 import DrawerIcon from '../components/DrawerIcon'
@@ -169,6 +170,7 @@ export default class AudioPlayer extends React.Component {
         )}
         {this.state.isAudioReady && (
           <View style={styles.innerContainer}>
+            <KeepAwake />
             <Text style={[styles.playlistTitle, { color: getDarkThemeColorByCategory(category) }]}>{audioPlayerData.playlistTitle}</Text>
             <Text style={styles.trackTitle}>{audioPlayerData.trackTitle}</Text>
             <View style={styles.controlsContainer}>

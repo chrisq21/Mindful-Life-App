@@ -8,7 +8,7 @@
       "ios",
       "android"
     ],
-    "version": "2.0.2",
+    "version": "2.0.5",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "splash": {
@@ -24,13 +24,13 @@
     ],
     "description": "",
     "ios": {
-      "bundleIdentifier": "com.chrisqueen.mindfullifeprojectapp",
-      "supportsTablet": false
+      "bundleIdentifier": "com.chris.mindfullife",
+      "supportsTablet": true
     },
     "android": {
       "package": "com.chrisqueen.mindful_life_project_app",
       "permissions": [],
-      "versionCode": 4
+      "versionCode": 6
     }
   }
 }

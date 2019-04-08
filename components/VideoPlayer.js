@@ -34,13 +34,12 @@ export default class VideoPlayer extends React.Component {
 	}
 
   render() {
-		const { width } = this.props
-
+		const { width, source } = this.props
     return (
       <View style={styles.container}>
 				<View>
 						<Video
-							source={require('../assets/animation.mp4')}
+							source={source}
 							shouldPlay={this.state.shouldPlay}
 							resizeMode='contain'
 							style={{ width, aspectRatio: 1.78 }}
