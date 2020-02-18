@@ -6,11 +6,7 @@ export default class DrawerIcon extends React.Component {
     return (
       <View style={styles.container}>
         <TouchableOpacity onPress={() => this.props.navigation.toggleDrawer()}>
-          <Image
-            style={{ width: 25 }}
-            source={require('../assets/menu.png')}
-            resizeMode="contain"
-          />
+          <Image style={styles.image} source={require('../assets/menu.png')} resizeMode="contain" />
         </TouchableOpacity>
       </View>
     )
@@ -21,5 +17,8 @@ const styles = StyleSheet.create({
   container: {
     alignItems: 'center',
     marginRight: 10,
+  },
+  image: {
+    width: 25,
   },
 })
