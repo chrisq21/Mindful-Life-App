@@ -14,8 +14,8 @@ export default class About extends React.Component {
             October of 2012 working with 150 students. Now, Mindful Life Project works with
             thousands of students and teachers in underserved schools.
           </Text>
-          <Text style={[styles.text, { marginTop: 15, marginBottom: 15 }]}>
-            Mindful Life Project's mission is to empower children through mindfulness, yoga,
+          <Text style={[styles.text, styles.textWithVerticalMargins]}>
+            Mindful Life Project&apos;s mission is to empower children through mindfulness, yoga,
             expressive arts and performing arts to gain self-awareness, confidence, self-regulation
             and resilience, leading to lifelong success.
           </Text>
@@ -66,8 +66,12 @@ const styles = StyleSheet.create({
     padding: 18,
   },
   text: {
-    color: 'white',
+    color: Colors.white,
     fontSize: 20,
     lineHeight: 25,
+  },
+  textWithVerticalMargins: {
+    marginBottom: 15,
+    marginTop: 15,
   },
 })
