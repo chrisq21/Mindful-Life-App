@@ -1,12 +1,10 @@
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-import AppNavigator from './navigation/AppNavigator';
+import React from 'react'
+import { StyleSheet, Text, View } from 'react-native'
+import AppNavigator from './navigation/AppNavigator'
 
 export default class App extends React.Component {
   render() {
-    return (
-      <AppNavigator />
-    );
+    return <AppNavigator />
   }
 }
 
@@ -16,6 +14,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
-    fontFamily: 'Aclonica'
+    fontFamily: 'Aclonica',
   },
-});
+})

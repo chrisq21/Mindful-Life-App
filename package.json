@@ -7,8 +7,8 @@
     "eject": "expo eject",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
-    "prettier": "prettier --check **/*.js",
-    "prettier:fix": "prettier --write **/*.js"
+    "prettier": "prettier --check *.js && **/*.js",
+    "prettier:fix": "prettier --write *.js && **/*.js"
   },
   "dependencies": {
     "@react-native-community/masked-view": "^0.1.6",
