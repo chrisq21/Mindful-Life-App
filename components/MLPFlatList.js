@@ -1,9 +1,10 @@
 import React from 'react'
 import { View, TouchableOpacity, Text, FlatList, StyleSheet } from 'react-native'
+import PropTypes from 'prop-types'
 import { getLightThemeColorByCategory, getDarkThemeColorByCategory } from '../utils/categoryValues'
 import { Colors } from '../constants/colors'
 
-export default class MLPFlatList extends React.Component {
+class MLPFlatList extends React.Component {
   constructor(props) {
     super(props)
 
@@ -41,6 +42,14 @@ export default class MLPFlatList extends React.Component {
     )
   }
 }
+
+MLPFlatList.propTypes = {
+  category: PropTypes.string.isRequired,
+  onRowPressHandler: PropTypes.func.isRequired,
+  listData: PropTypes.object.isRequired,
+}
+
+export default MLPFlatList
 
 const styles = StyleSheet.create({
   firstBorder: {
