@@ -1,7 +1,8 @@
 import React from 'react'
 import { StyleSheet, View, TouchableOpacity, Image } from 'react-native'
+import PropTypes from 'prop-types'
 
-export default class DrawerIcon extends React.Component {
+class DrawerIcon extends React.Component {
   render() {
     return (
       <View style={styles.container}>
@@ -12,6 +13,14 @@ export default class DrawerIcon extends React.Component {
     )
   }
 }
+
+DrawerIcon.propTypes = {
+  navigation: PropTypes.shape({
+    toggleDrawer: PropTypes.func.isRequired,
+  }).isRequired,
+}
+
+export default DrawerIcon
 
 const styles = StyleSheet.create({
   container: {
