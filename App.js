@@ -7,13 +7,3 @@ export default class App extends React.Component {
     return <AppNavigator />
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    alignItems: 'center',
-    backgroundColor: '#fff',
-    flex: 1,
-    fontFamily: 'Aclonica',
-    justifyContent: 'center',
-  },
-})
