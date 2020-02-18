@@ -43,18 +43,18 @@ export default class MLPFlatList extends React.Component {
 }
 
 const styles = StyleSheet.create({
-  rowContainer: {
-    paddingTop: 30,
-    paddingBottom: 30,
-    justifyContent: 'center',
-    borderBottomWidth: 1,
-  },
-  rowTitle: {
-    paddingLeft: 30,
-    fontSize: 18,
-    fontWeight: 'bold',
-  },
   firstBorder: {
     borderTopWidth: 1,
+  },
+  rowContainer: {
+    borderBottomWidth: 1,
+    justifyContent: 'center',
+    paddingBottom: 30,
+    paddingTop: 30,
+  },
+  rowTitle: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    paddingLeft: 30,
   },
 })

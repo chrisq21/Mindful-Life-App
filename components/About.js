@@ -9,7 +9,7 @@ export default class About extends React.Component {
       <View style={[styles.screenContainer, ScreenContainerStyles]}>
         <ScrollView>
           <Image resizeMode="contain" source={require('../assets/icon.png')} style={styles.logo} />
-          <Text style={[styles.text]}>
+          <Text style={styles.text}>
             Mindful Life Project began teaching mindfulness in Richmond, CA elementary schools in
             October of 2012 working with 150 students. Now, Mindful Life Project works with
             thousands of students and teachers in underserved schools.
@@ -42,32 +42,32 @@ export default class About extends React.Component {
 }
 
 const styles = StyleSheet.create({
+  link: {
+    fontSize: 30,
+    fontWeight: 'bold',
+    lineHeight: 30,
+    marginBottom: 20,
+    textDecorationLine: 'underline',
+  },
+  linksContainer: {
+    alignItems: 'center',
+    paddingBottom: 10,
+    paddingTop: 10,
+  },
+  logo: {
+    flex: 1,
+    marginBottom: 10,
+    marginTop: 10,
+    resizeMode: 'contain',
+    width: null,
+  },
   screenContainer: {
     backgroundColor: Colors.blue,
     padding: 18,
   },
-  logo: {
-    flex: 1,
-    width: null,
-    resizeMode: 'contain',
-    marginTop: 10,
-    marginBottom: 10,
-  },
   text: {
-    fontSize: 20,
     color: 'white',
+    fontSize: 20,
     lineHeight: 25,
-  },
-  linksContainer: {
-    paddingTop: 10,
-    paddingBottom: 10,
-    alignItems: 'center',
-  },
-  link: {
-    fontWeight: 'bold',
-    lineHeight: 30,
-    marginBottom: 20,
-    fontSize: 30,
-    textDecorationLine: 'underline',
   },
 })

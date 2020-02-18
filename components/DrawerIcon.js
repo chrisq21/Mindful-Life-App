@@ -19,7 +19,7 @@ export default class DrawerIcon extends React.Component {
 
 const styles = StyleSheet.create({
   container: {
-    marginRight: 10,
     alignItems: 'center',
+    marginRight: 10,
   },
 })
