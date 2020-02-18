@@ -1,5 +1,5 @@
-import React from 'react';
-import { StyleSheet, View, TouchableOpacity, Image } from 'react-native';
+import React from 'react'
+import { StyleSheet, View, TouchableOpacity, Image } from 'react-native'
 
 export default class DrawerIcon extends React.Component {
   render() {
@@ -8,18 +8,18 @@ export default class DrawerIcon extends React.Component {
         <TouchableOpacity onPress={() => this.props.navigation.toggleDrawer()}>
           <Image
             style={{ width: 25 }}
-            source={require("../assets/menu.png")}
-            resizeMode='contain'
+            source={require('../assets/menu.png')}
+            resizeMode="contain"
           />
         </TouchableOpacity>
       </View>
-    );
+    )
   }
 }
 
 const styles = StyleSheet.create({
   container: {
     marginRight: 10,
-    alignItems: 'center'
-  }
-});
+    alignItems: 'center',
+  },
+})

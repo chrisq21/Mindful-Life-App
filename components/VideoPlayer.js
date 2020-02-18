@@ -1,73 +1,73 @@
-import React from 'react';
-import { StyleSheet, Text, View, Dimensions } from 'react-native';
-import { Video } from 'expo';
-import { MaterialIcons, Octicons } from '@expo/vector-icons';
+import React from 'react'
+import { StyleSheet, Text, View, Dimensions } from 'react-native'
+import { Video } from 'expo'
+import { MaterialIcons, Octicons } from '@expo/vector-icons'
 
 export default class VideoPlayer extends React.Component {
-	state = {
-		mute: false,
-		fullScreen: false,
-		shouldPlay: false,
-	}
+  state = {
+    mute: false,
+    fullScreen: false,
+    shouldPlay: false,
+  }
 
-	componentDidMount() {
-		Expo.Audio.setAudioModeAsync({
+  componentDidMount() {
+    Expo.Audio.setAudioModeAsync({
       allowsRecordingIOS: false,
       interruptionModeIOS: Expo.Audio.INTERRUPTION_MODE_IOS_DO_NOT_MIX,
       playsInSilentModeIOS: true,
       shouldDuckAndroid: false,
       interruptionModeAndroid: Expo.Audio.INTERRUPTION_MODE_ANDROID_DO_NOT_MIX,
-      playThroughEarpieceAndroid: false
-    });
-	}
+      playThroughEarpieceAndroid: false,
+    })
+  }
 
-	handlePlayAndPause = () => {
-		this.setState(prevState => ({
-			shouldPlay: !prevState.shouldPlay
-		}));
-	}
+  handlePlayAndPause = () => {
+    this.setState((prevState) => ({
+      shouldPlay: !prevState.shouldPlay,
+    }))
+  }
 
-	handleVolume = () => {
-		this.setState(prevState => ({
-			mute: !prevState.mute,
-		}));
-	}
+  handleVolume = () => {
+    this.setState((prevState) => ({
+      mute: !prevState.mute,
+    }))
+  }
 
   render() {
-		const { width, source } = this.props
+    const { width, source } = this.props
     return (
       <View style={styles.container}>
-				<View>
-						<Video
-							source={source}
-							shouldPlay={this.state.shouldPlay}
-							resizeMode='contain'
-							style={{ width, aspectRatio: 1.78 }}
-							isMuted={this.state.mute}
-						/>
-						<View style={styles.controlBar}>
-							<MaterialIcons
-								name={this.state.shouldPlay ? "pause" : "play-arrow"}
-								size={45}
-								color="white"
-								onPress={this.handlePlayAndPause}
-							/>
-						</View>
-					</View>
+        <View>
+          <Video
+            source={source}
+            shouldPlay={this.state.shouldPlay}
+            resizeMode="contain"
+            style={{ width, aspectRatio: 1.78 }}
+            isMuted={this.state.mute}
+          />
+          <View style={styles.controlBar}>
+            <MaterialIcons
+              name={this.state.shouldPlay ? 'pause' : 'play-arrow'}
+              size={45}
+              color="white"
+              onPress={this.handlePlayAndPause}
+            />
+          </View>
+        </View>
       </View>
-		);
+    )
   }
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1
-	},
-	controlBar: {
-		height: 45,
-		flexDirection: 'row',
-		alignItems: 'center',
-		justifyContent: 'center',
-		backgroundColor: "rgba(0, 0, 0, 0.5)",
-	}
-});
+    flex: 1,
+  },
+  controlBar: {
+    height: 45,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+  },
+})

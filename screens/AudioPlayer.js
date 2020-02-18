@@ -1,53 +1,66 @@
-import React from 'react';
-import { Alert, View, Text, Slider, Button, TouchableOpacity, Image, StyleSheet, ActivityIndicator } from 'react-native';
+import React from 'react'
+import {
+  Alert,
+  View,
+  Text,
+  Slider,
+  Button,
+  TouchableOpacity,
+  Image,
+  StyleSheet,
+  ActivityIndicator,
+} from 'react-native'
 import { KeepAwake } from 'expo'
 import { ScreenContainerStyles } from '../styles/baseStyles'
-import { getThemeColorByCategory, getLightThemeColorByCategory, getDarkThemeColorByCategory } from '../utils/categoryValues'
+import {
+  getThemeColorByCategory,
+  getLightThemeColorByCategory,
+  getDarkThemeColorByCategory,
+} from '../utils/categoryValues'
 import DrawerIcon from '../components/DrawerIcon'
 import { Colors } from '../constants/colors'
 import { CLIENT_ID } from '../constants/SoundCloud'
 
 export default class AudioPlayer extends React.Component {
-
   static navigationOptions = ({ navigation }) => {
-    const category = navigation.getParam('category', '');
+    const category = navigation.getParam('category', '')
     return {
       title: '',
       drawerLabel: 'About',
       headerRight: <DrawerIcon navigation={navigation} />,
       headerStyle: {
         backgroundColor: getThemeColorByCategory(category),
-        borderBottomWidth: 0
+        borderBottomWidth: 0,
       },
       headerTintColor: getLightThemeColorByCategory(category),
       headerTitleStyle: {
-        color: getLightThemeColorByCategory(category)
+        color: getLightThemeColorByCategory(category),
       },
-    };
-  };
+    }
+  }
 
   constructor(props) {
-    super(props);
-    this.pollAudioStatus = false;
+    super(props)
+    this.pollAudioStatus = false
     this.state = {
       isAudioReady: false,
       isAudioPlaying: false,
       currentAudioTime: 0,
       maxAudioTime: 1,
-      isDraggingSlider: false
-    };
+      isDraggingSlider: false,
+    }
 
-    this.pauseAudioAsync = this.pauseAudioAsync.bind(this);
-    this.playAudioAsync = this.playAudioAsync.bind(this);
-    this.onPlaybackStatusUpdate = this.onPlaybackStatusUpdate.bind(this);
-    this.onSlidingComplete = this.onSlidingComplete.bind(this);
-    this.onSliderValueChange = this.onSliderValueChange.bind(this);
-    this.showAlert = this.showAlert.bind(this);
-    this.updateSlider = this.updateSlider.bind(this);
+    this.pauseAudioAsync = this.pauseAudioAsync.bind(this)
+    this.playAudioAsync = this.playAudioAsync.bind(this)
+    this.onPlaybackStatusUpdate = this.onPlaybackStatusUpdate.bind(this)
+    this.onSlidingComplete = this.onSlidingComplete.bind(this)
+    this.onSliderValueChange = this.onSliderValueChange.bind(this)
+    this.showAlert = this.showAlert.bind(this)
+    this.updateSlider = this.updateSlider.bind(this)
   }
 
   componentDidMount() {
-    this.setupAudioData();
+    this.setupAudioData()
   }
 
   componentWillUnmount() {
@@ -55,11 +68,10 @@ export default class AudioPlayer extends React.Component {
       Expo's Audio object has a bug that continues to poll for audioStatus after unloadAsync is called.
       This forces the onPlaybackStatusUpdate function to stop polling for audioObject status
     */
-    this.pollAudioStatus = false;
-    this.audioObject.unloadAsync()
-      .then(null, (error) => {
-        this.showAlert();
-      })
+    this.pollAudioStatus = false
+    this.audioObject.unloadAsync().then(null, (error) => {
+      this.showAlert()
+    })
   }
 
   async setupAudioData() {
@@ -69,65 +81,67 @@ export default class AudioPlayer extends React.Component {
       playsInSilentModeIOS: true,
       shouldDuckAndroid: false,
       interruptionModeAndroid: Expo.Audio.INTERRUPTION_MODE_ANDROID_DO_NOT_MIX,
-      playThroughEarpieceAndroid: false
-    });
+      playThroughEarpieceAndroid: false,
+    })
 
-    this.audioObject = new Expo.Audio.Sound();
-    this.pollAudioStatus = true;
-    this.audioObject.setOnPlaybackStatusUpdate(this.onPlaybackStatusUpdate);
+    this.audioObject = new Expo.Audio.Sound()
+    this.pollAudioStatus = true
+    this.audioObject.setOnPlaybackStatusUpdate(this.onPlaybackStatusUpdate)
 
     try {
-
-      const audioPlayerData = this.props.navigation.getParam('audioPlayerData', null);
-      console.log("audioPlayerData.trackUrl: ", audioPlayerData);
-      await this.audioObject.loadAsync({uri: `${audioPlayerData.trackUrl}?client_id=${CLIENT_ID}`}, { shouldPlay: true });
-      await this.playAudioAsync();
-
-
+      const audioPlayerData = this.props.navigation.getParam('audioPlayerData', null)
+      console.log('audioPlayerData.trackUrl: ', audioPlayerData)
+      await this.audioObject.loadAsync(
+        { uri: `${audioPlayerData.trackUrl}?client_id=${CLIENT_ID}` },
+        { shouldPlay: true }
+      )
+      await this.playAudioAsync()
     } catch (error) {
-      console.log("Error loading: ", error);
-      this.showAlert();
+      console.log('Error loading: ', error)
+      this.showAlert()
     }
   }
 
   async pauseAudioAsync() {
-    this.audioObject.pauseAsync()
-      .then(() => this.setState({ isAudioPlaying: false }),
-        (error) => this.showAlert()
-      )
+    this.audioObject.pauseAsync().then(
+      () => this.setState({ isAudioPlaying: false }),
+      (error) => this.showAlert()
+    )
   }
 
   async playAudioAsync() {
-    this.audioObject.playAsync()
-      .then(() => this.setState({ isAudioPlaying: true }),
-        (error) => this.showAlert()
-      )
+    this.audioObject.playAsync().then(
+      () => this.setState({ isAudioPlaying: true }),
+      (error) => this.showAlert()
+    )
   }
 
   showAlert() {
-    Alert.alert("Uh oh! An error occured. You may need to restart the app or check your internet connection.");
+    Alert.alert(
+      'Uh oh! An error occured. You may need to restart the app or check your internet connection.'
+    )
   }
 
   updateSlider(maxAudioTime, currentAudioTime) {
-    if(this.state.maxAudioTime != maxAudioTime) {
+    if (this.state.maxAudioTime != maxAudioTime) {
       this.setState({ maxAudioTime: maxAudioTime })
     }
-    if(!this.state.isDraggingSlider) {
-      this.setState({ currentAudioTime: currentAudioTime });
+    if (!this.state.isDraggingSlider) {
+      this.setState({ currentAudioTime: currentAudioTime })
     }
   }
 
   onPlaybackStatusUpdate(playBackData) {
-    if(this.pollAudioStatus) {
-      if(playBackData.isLoaded && !playBackData.isBuffering) {
+    if (this.pollAudioStatus) {
+      if (playBackData.isLoaded && !playBackData.isBuffering) {
         // Song is ready
-        if(!this.state.isAudioReady) {
+        if (!this.state.isAudioReady) {
           this.setState({ isAudioReady: true })
         }
         this.updateSlider(playBackData.durationMillis, playBackData.positionMillis)
       } else {
         // Song is loading or buffering
-        if(this.state.isAudioReady) {
+        if (this.state.isAudioReady) {
           this.setState({ isAudioReady: false })
         }
       }
@@ -135,27 +149,26 @@ export default class AudioPlayer extends React.Component {
   }
 
   onSliderValueChange() {
-    this.setState({ isDraggingSlider: true });
+    this.setState({ isDraggingSlider: true })
   }
 
   onSlidingComplete(value) {
-    this.audioObject.setStatusAsync({ positionMillis: value })
-      .then(null, (error) => {
-        this.showAlert()
-      })
-    this.setState({ isDraggingSlider: false });
+    this.audioObject.setStatusAsync({ positionMillis: value }).then(null, (error) => {
+      this.showAlert()
+    })
+    this.setState({ isDraggingSlider: false })
   }
 
   millisToMinutesAndSeconds(millis) {
-    var minutes = Math.floor(millis / 60000);
-    var seconds = ((millis % 60000) / 1000).toFixed(0);
-    return (seconds == 60 ? (minutes+1) + ":00" : minutes + ":" + (seconds < 10 ? "0" : "") + seconds);
+    var minutes = Math.floor(millis / 60000)
+    var seconds = ((millis % 60000) / 1000).toFixed(0)
+    return seconds == 60 ? minutes + 1 + ':00' : minutes + ':' + (seconds < 10 ? '0' : '') + seconds
   }
 
   render() {
     const { navigation } = this.props
-    const audioPlayerData = navigation.getParam('audioPlayerData', null);
-    const category = navigation.getParam('category', '');
+    const audioPlayerData = navigation.getParam('audioPlayerData', null)
+    const category = navigation.getParam('category', '')
     const controlButtonImgSource = this.state.isAudioPlaying
       ? require('../assets/pause-btn.png')
       : require('../assets/play-btn.png')
@@ -164,19 +177,30 @@ export default class AudioPlayer extends React.Component {
       ? this.pauseAudioAsync
       : this.playAudioAsync
     return (
-      <View style={[styles.screenContainer, ScreenContainerStyles, { backgroundColor: getThemeColorByCategory(category) }]}>
+      <View
+        style={[
+          styles.screenContainer,
+          ScreenContainerStyles,
+          { backgroundColor: getThemeColorByCategory(category) },
+        ]}
+      >
         {!this.state.isAudioReady && (
-          <ActivityIndicator size='large' color='white' style={{justifyContent: 'center'}}/>
+          <ActivityIndicator size="large" color="white" style={{ justifyContent: 'center' }} />
         )}
         {this.state.isAudioReady && (
           <View style={styles.innerContainer}>
             <KeepAwake />
-            <Text style={[styles.playlistTitle, { color: getDarkThemeColorByCategory(category) }]}>{audioPlayerData.playlistTitle}</Text>
+            <Text style={[styles.playlistTitle, { color: getDarkThemeColorByCategory(category) }]}>
+              {audioPlayerData.playlistTitle}
+            </Text>
             <Text style={styles.trackTitle}>{audioPlayerData.trackTitle}</Text>
             <View style={styles.controlsContainer}>
-                <TouchableOpacity onPress={controlButtonHandler} style={styles.controlButtonContainer}>
-                  <Image resizeMode='contain' source={controlButtonImgSource}></Image>
-                </TouchableOpacity>
+              <TouchableOpacity
+                onPress={controlButtonHandler}
+                style={styles.controlButtonContainer}
+              >
+                <Image resizeMode="contain" source={controlButtonImgSource}></Image>
+              </TouchableOpacity>
               <Slider
                 style={styles.slider}
                 minimumValue={0}
@@ -185,24 +209,28 @@ export default class AudioPlayer extends React.Component {
                 onSlidingComplete={this.onSlidingComplete}
                 onValueChange={this.onSliderValueChange}
                 minimumTrackTintColor={getDarkThemeColorByCategory(category)}
-                maximumTrackTintColor='white'
-                />
-                <View style={{justifyContent: 'space-between', flexDirection: 'row'}}>
-                  <Text style={{ color: 'white' }}>{this.millisToMinutesAndSeconds(this.state.currentAudioTime)}</Text>
-                  <Text style={{ color: 'white' }}>{this.millisToMinutesAndSeconds(this.state.maxAudioTime)}</Text>
-                </View>
+                maximumTrackTintColor="white"
+              />
+              <View style={{ justifyContent: 'space-between', flexDirection: 'row' }}>
+                <Text style={{ color: 'white' }}>
+                  {this.millisToMinutesAndSeconds(this.state.currentAudioTime)}
+                </Text>
+                <Text style={{ color: 'white' }}>
+                  {this.millisToMinutesAndSeconds(this.state.maxAudioTime)}
+                </Text>
               </View>
+            </View>
           </View>
         )}
       </View>
-    );
+    )
   }
 }
 
 const styles = StyleSheet.create({
   screenContainer: {
     flexDirection: 'row',
-    justifyContent: 'center'
+    justifyContent: 'center',
   },
   innerContainer: {
     alignItems: 'center',
@@ -214,18 +242,18 @@ const styles = StyleSheet.create({
   controlsContainer: {
     paddingTop: 30,
     flexGrow: 1,
-    width: '95%'
+    width: '95%',
   },
   controlButtonContainer: {
     alignSelf: 'center',
     paddingTop: 20,
-    paddingBottom: 20
+    paddingBottom: 20,
   },
   playlistTitle: {
     fontSize: 22,
     textAlign: 'center',
     fontWeight: 'bold',
-    paddingTop: 10
+    paddingTop: 10,
   },
   trackTitle: {
     color: 'white',
@@ -233,9 +261,9 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontWeight: 'bold',
     paddingTop: 10,
-    paddingBottom: 10
+    paddingBottom: 10,
   },
   slider: {
-    width: '100%'
-  }
-});
+    width: '100%',
+  },
+})
