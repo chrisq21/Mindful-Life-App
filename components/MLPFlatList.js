@@ -23,7 +23,7 @@ export default class MLPFlatList extends React.Component {
               { borderColor: getDarkThemeColorByCategory(category) },
             ]}
           >
-            <Text style={[styles.rowTitle, { color: 'white' }]}>{rowData.item.title}</Text>
+            <Text style={styles.rowTitle}>{rowData.item.title}</Text>
           </View>
         </TouchableOpacity>
       </View>
@@ -36,7 +36,7 @@ export default class MLPFlatList extends React.Component {
         keyExtractor={(item, index) => `key:${index}`}
         data={this.props.listData}
         renderItem={this.renderRow}
-        contentContainerStyle={{ paddingBottom: 100 }}
+        contentContainerStyle={styles.flatList}
       />
     )
   }
@@ -46,6 +46,9 @@ const styles = StyleSheet.create({
   firstBorder: {
     borderTopWidth: 1,
   },
+  flatList: {
+    paddingBottom: 100,
+  },
   rowContainer: {
     borderBottomWidth: 1,
     justifyContent: 'center',
@@ -53,6 +56,7 @@ const styles = StyleSheet.create({
     paddingTop: 30,
   },
   rowTitle: {
+    color: Colors.white,
     fontSize: 18,
     fontWeight: 'bold',
     paddingLeft: 30,
