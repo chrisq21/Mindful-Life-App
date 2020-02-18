@@ -1,13 +1,8 @@
 module.exports = {
   env: {
-    browser: true,
-    es6: true,
+    'react-native/react-native': true,
   },
-  extends: 'airbnb',
-  globals: {
-    Atomics: 'readonly',
-    SharedArrayBuffer: 'readonly',
-  },
+  extends: ['plugin:react/recommended', 'plugin:react-native/all', 'plugin:prettier/recommended'],
   parserOptions: {
     ecmaFeatures: {
       jsx: true,
@@ -15,9 +10,6 @@ module.exports = {
     ecmaVersion: 2018,
     sourceType: 'module',
   },
-  plugins: [
-    'react',
-  ],
-  rules: {
-  },
-};
+  plugins: ['react', 'react-native', 'prettier'],
+  rules: {},
+}
