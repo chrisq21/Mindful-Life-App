@@ -1,6 +1,8 @@
 import React from 'react';
 import { Button } from 'react-native';
-import { createStackNavigator, createDrawerNavigator, createAppContainer, DrawerActions } from 'react-navigation';
+import { createAppContainer, DrawerActions } from 'react-navigation';
+import { createDrawerNavigator } from 'react-navigation-drawer'
+import { createStackNavigator } from 'react-navigation-stack'
 import About from '../components/About';
 import HomeScreen from '../screens/Home';
 import LanguageSelection from '../screens/LanguageSelection';
