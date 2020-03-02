@@ -19,5 +19,6 @@ module.exports = {
   plugins: ['react', 'react-native', 'prettier'],
   rules: {
     'react/jsx-filename-extension': 'off',
+    'class-methods-use-this': 'warn',
   },
 }
