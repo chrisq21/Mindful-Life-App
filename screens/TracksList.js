@@ -1,14 +1,6 @@
 import React from 'react'
-import {
-  ScrollView,
-  View,
-  Text,
-  FlatList,
-  Button,
-  Image,
-  TouchableHighlight,
-  StyleSheet,
-} from 'react-native'
+import PropTypes from 'prop-types'
+import { View, Text } from 'react-native'
 import MLPFlatList from '../components/MLPFlatList'
 import {
   getTitleByCategory,
@@ -16,11 +8,9 @@ import {
   getLightThemeColorByCategory,
 } from '../utils/categoryValues'
 import { ScreenContainerStyles, ListStyles } from '../styles/baseStyles'
-import { Colors } from '../constants/colors'
 import DrawerIcon from '../components/DrawerIcon'
-import { CLIENT_ID } from '../constants/SoundCloud'
 
-export default class TracksList extends React.Component {
+class TracksList extends React.Component {
   static navigationOptions = ({ navigation }) => {
     const category = navigation.getParam('category', '')
     return {
@@ -38,7 +28,15 @@ export default class TracksList extends React.Component {
     }
   }
 
-  onRowPressHandler(rowData, navigation) {
+  constructor() {
+    super()
+
+    this.onRowPressHandler = this.onRowPressHandler.bind(this)
+    this.getStreamableTracks = this.getStreamableTracks.bind(this)
+  }
+
+  onRowPressHandler(rowData) {
+    const { navigation } = this.props
     // TODO make sure rowData.track.stream_url exists
     const trackData = rowData.item
     const playlistTitle = navigation.getParam('playlistTitle', '')
@@ -53,12 +51,11 @@ export default class TracksList extends React.Component {
 
   getStreamableTracks(tracksData) {
     const streamableTracks = []
-    for (index in tracksData) {
-      const track = tracksData[index]
+    tracksData.forEach((track) => {
       if (track.streamable) {
         streamableTracks.push(track)
       }
-    }
+    })
 
     return streamableTracks
   }
@@ -82,10 +79,19 @@ export default class TracksList extends React.Component {
         </Text>
         <MLPFlatList
           listData={streamableTracks}
-          onRowPressHandler={(rowData) => this.onRowPressHandler(rowData, navigation)}
+          onRowPressHandler={this.onRowPressHandler}
           category={category}
         />
       </View>
     )
   }
 }
+
+TracksList.propTypes = {
+  navigation: PropTypes.shape({
+    getParam: PropTypes.func,
+    navigate: PropTypes.func,
+  }).isRequired,
+}
+
+export default TracksList
