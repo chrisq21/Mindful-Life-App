@@ -2,7 +2,13 @@ module.exports = {
   env: {
     'react-native/react-native': true,
   },
-  extends: ['plugin:react/recommended', 'plugin:react-native/all', 'plugin:prettier/recommended'],
+  extends: [
+    'plugin:react/recommended',
+    'plugin:react-native/all',
+    'airbnb',
+    'plugin:prettier/recommended',
+  ],
+  parser: 'babel-eslint',
   parserOptions: {
     ecmaFeatures: {
       jsx: true,
@@ -11,5 +17,4 @@ module.exports = {
     sourceType: 'module',
   },
   plugins: ['react', 'react-native', 'prettier'],
-  rules: {},
 }
