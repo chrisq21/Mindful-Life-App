@@ -7,7 +7,7 @@ export function getTitleByCategory(category) {
 
 export function getUserSlugByCategoryAndLanguage(category, language) {
   let slug = category === 'hip-hop' ? 'mindful-life-hip-hop' : 'mindful-life-project'
-  if (category != 'hip-hop' && language == 'spanish') {
+  if (category !== 'hip-hop' && language === 'spanish') {
     slug = 'user-825440555'
   }
   return slug
