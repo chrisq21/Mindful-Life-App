@@ -17,4 +17,7 @@ module.exports = {
     sourceType: 'module',
   },
   plugins: ['react', 'react-native', 'prettier'],
+  rules: {
+    'react/jsx-filename-extension': 'off',
+  },
 }
