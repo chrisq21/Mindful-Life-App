@@ -9,5 +9,5 @@ export const Colors = {
   darkGreen: '#109801',
   orange: '#FFA500',
   lightOrange: '#ffe5b2',
-  darkOrange: '#d08700'
+  darkOrange: '#d08700',
 }
