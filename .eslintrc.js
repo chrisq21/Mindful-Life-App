@@ -11,5 +11,7 @@ module.exports = {
     sourceType: 'module',
   },
   plugins: ['react', 'react-native', 'prettier'],
-  rules: {},
+  rules: {
+    'no-unused-vars': 2,
+  },
 }

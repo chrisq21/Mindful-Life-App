@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyleSheet, View, Text, ScrollView, Image, TouchableOpacity, Linking } from 'react-native'
+import { StyleSheet, View, Text, ScrollView, Image, Linking } from 'react-native'
 import { ScreenContainerStyles } from '../styles/baseStyles'
 import { Colors } from '../constants/colors'
 

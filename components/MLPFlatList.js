@@ -1,7 +1,7 @@
 import React from 'react'
 import { View, TouchableOpacity, Text, FlatList, StyleSheet } from 'react-native'
 import PropTypes from 'prop-types'
-import { getLightThemeColorByCategory, getDarkThemeColorByCategory } from '../utils/categoryValues'
+import { getDarkThemeColorByCategory } from '../utils/categoryValues'
 import { Colors } from '../constants/colors'
 
 class MLPFlatList extends React.Component {

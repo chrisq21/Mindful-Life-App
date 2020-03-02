@@ -1,6 +1,4 @@
-import React from 'react'
-import { Button } from 'react-native'
-import { createAppContainer, DrawerActions } from 'react-navigation'
+import { createAppContainer } from 'react-navigation'
 import { createDrawerNavigator } from 'react-navigation-drawer'
 import { createStackNavigator } from 'react-navigation-stack'
 import About from '../components/About'
