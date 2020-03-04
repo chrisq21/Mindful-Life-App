@@ -1,15 +1,16 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import {
   Alert,
   View,
   Text,
   Slider,
-  Button,
   TouchableOpacity,
   Image,
   StyleSheet,
   ActivityIndicator,
 } from 'react-native'
+import { Audio } from 'expo-av'
 import { KeepAwake } from 'expo'
 import { ScreenContainerStyles } from '../styles/baseStyles'
 import {
@@ -21,7 +22,48 @@ import DrawerIcon from '../components/DrawerIcon'
 import { Colors } from '../constants/colors'
 import { CLIENT_ID } from '../constants/SoundCloud'
 
-export default class AudioPlayer extends React.Component {
+const styles = StyleSheet.create({
+  controlButtonContainer: {
+    alignSelf: 'center',
+    paddingBottom: 20,
+    paddingTop: 20,
+  },
+  controlsContainer: {
+    flexGrow: 1,
+    paddingTop: 30,
+    width: '95%',
+  },
+  innerContainer: {
+    alignItems: 'center',
+    flexGrow: 1,
+    paddingLeft: 30,
+    paddingRight: 30,
+    paddingTop: 30,
+  },
+  playlistTitle: {
+    fontSize: 22,
+    fontWeight: 'bold',
+    paddingTop: 10,
+    textAlign: 'center',
+  },
+  screenContainer: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+  },
+  slider: {
+    width: '100%',
+  },
+  trackTitle: {
+    color: 'white',
+    fontSize: 35,
+    fontWeight: 'bold',
+    paddingBottom: 10,
+    paddingTop: 10,
+    textAlign: 'center',
+  },
+})
+
+class AudioPlayer extends React.Component {
   static navigationOptions = ({ navigation }) => {
     const category = navigation.getParam('category', '')
     return {
@@ -69,22 +111,22 @@ export default class AudioPlayer extends React.Component {
       This forces the onPlaybackStatusUpdate function to stop polling for audioObject status
     */
     this.pollAudioStatus = false
-    this.audioObject.unloadAsync().then(null, (error) => {
+    this.audioObject.unloadAsync().then(null, () => {
       this.showAlert()
     })
   }
 
   async setupAudioData() {
-    Expo.Audio.setAudioModeAsync({
+    Audio.setAudioModeAsync({
       allowsRecordingIOS: false,
-      interruptionModeIOS: Expo.Audio.INTERRUPTION_MODE_IOS_DO_NOT_MIX,
+      interruptionModeIOS: Audio.INTERRUPTION_MODE_IOS_DO_NOT_MIX,
       playsInSilentModeIOS: true,
       shouldDuckAndroid: false,
-      interruptionModeAndroid: Expo.Audio.INTERRUPTION_MODE_ANDROID_DO_NOT_MIX,
+      interruptionModeAndroid: Audio.INTERRUPTION_MODE_ANDROID_DO_NOT_MIX,
       playThroughEarpieceAndroid: false,
     })
 
-    this.audioObject = new Expo.Audio.Sound()
+    this.audioObject = new Audio.Sound()
     this.pollAudioStatus = true
     this.audioObject.setOnPlaybackStatusUpdate(this.onPlaybackStatusUpdate)
 
@@ -105,14 +147,14 @@ export default class AudioPlayer extends React.Component {
   async pauseAudioAsync() {
     this.audioObject.pauseAsync().then(
       () => this.setState({ isAudioPlaying: false }),
-      (error) => this.showAlert()
+      () => this.showAlert()
     )
   }
 
   async playAudioAsync() {
     this.audioObject.playAsync().then(
       () => this.setState({ isAudioPlaying: true }),
-      (error) => this.showAlert()
+      () => this.showAlert()
     )
   }
 
@@ -228,43 +270,10 @@ export default class AudioPlayer extends React.Component {
   }
 }
 
-const styles = StyleSheet.create({
-  controlButtonContainer: {
-    alignSelf: 'center',
-    paddingBottom: 20,
-    paddingTop: 20,
-  },
-  controlsContainer: {
-    flexGrow: 1,
-    paddingTop: 30,
-    width: '95%',
-  },
-  innerContainer: {
-    alignItems: 'center',
-    flexGrow: 1,
-    paddingLeft: 30,
-    paddingRight: 30,
-    paddingTop: 30,
-  },
-  playlistTitle: {
-    fontSize: 22,
-    fontWeight: 'bold',
-    paddingTop: 10,
-    textAlign: 'center',
-  },
-  screenContainer: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-  },
-  slider: {
-    width: '100%',
-  },
-  trackTitle: {
-    color: 'white',
-    fontSize: 35,
-    fontWeight: 'bold',
-    paddingBottom: 10,
-    paddingTop: 10,
-    textAlign: 'center',
-  },
-})
+AudioPlayer.propTypes = {
+  navigation: PropTypes.shape({
+    getParam: PropTypes.func,
+  }).isRequired,
+}
+
+export default AudioPlayer
