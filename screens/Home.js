@@ -1,13 +1,42 @@
 import React from 'react'
-import { TouchableOpacity, View, Text, Button, StyleSheet, Image } from 'react-native'
+import PropTypes from 'prop-types'
+import { TouchableOpacity, View, Text, StyleSheet, Image } from 'react-native'
 import { ScreenContainerStyles } from '../styles/baseStyles'
 import { spanishCopy, englishCopy } from '../constants/copy'
 import { Colors } from '../constants/colors'
 import DrawerIcon from '../components/DrawerIcon'
+import questionMarkSrc from '../assets/question-mark.png'
+import anchorImgSrc from '../assets/anchor.png'
+import smileImgSrc from '../assets/smile.png'
+import headphoneImgSrc from '../assets/headphones.png'
 
-export default class Home extends React.Component {
+const styles = StyleSheet.create({
+  sectionButton: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    borderBottomWidth: 1,
+    paddingRight: 20,
+    paddingLeft: 20,
+  },
+  sectionImage: {
+    alignSelf: 'center',
+    flex: 1,
+    height: '50%',
+    resizeMode: 'contain',
+  },
+  sectionText: {
+    color: Colors.white,
+    flex: 2,
+    fontSize: 30,
+    fontWeight: 'bold',
+    marginLeft: 20,
+  },
+})
+
+class Home extends React.Component {
   static navigationOptions = ({ navigation }) => {
-    const category = navigation.getParam('category', '')
     return {
       title: 'Home',
       drawerLabel: 'About',
@@ -37,11 +66,7 @@ export default class Home extends React.Component {
           <Text style={[styles.sectionText, { color: Colors.lightBlue }]}>
             {copyData.homeScreen.learn}
           </Text>
-          <Image
-            resizeMode="contain"
-            style={styles.sectionImage}
-            source={require('../assets/question-mark.png')}
-          />
+          <Image resizeMode="contain" style={styles.sectionImage} source={questionMarkSrc} />
         </TouchableOpacity>
         <TouchableOpacity
           style={[styles.sectionButton, { backgroundColor: Colors.red }]}
@@ -50,11 +75,7 @@ export default class Home extends React.Component {
           <Text style={[styles.sectionText, { color: Colors.lightRed }]}>
             {copyData.homeScreen.checkIn}
           </Text>
-          <Image
-            resizeMode="contain"
-            style={styles.sectionImage}
-            source={require('../assets/anchor.png')}
-          />
+          <Image resizeMode="contain" style={styles.sectionImage} source={anchorImgSrc} />
         </TouchableOpacity>
         <TouchableOpacity
           style={[styles.sectionButton, { backgroundColor: Colors.green }]}
@@ -63,11 +84,7 @@ export default class Home extends React.Component {
           <Text style={[styles.sectionText, { color: Colors.lightGreen }]}>
             {copyData.homeScreen.sits}
           </Text>
-          <Image
-            resizeMode="contain"
-            style={styles.sectionImage}
-            source={require('../assets/smile.png')}
-          />
+          <Image resizeMode="contain" style={styles.sectionImage} source={smileImgSrc} />
         </TouchableOpacity>
         <TouchableOpacity
           style={[styles.sectionButton, { backgroundColor: Colors.orange }]}
@@ -76,38 +93,18 @@ export default class Home extends React.Component {
           <Text style={[styles.sectionText, { color: Colors.lightOrange }]}>
             {copyData.homeScreen.hipHop}
           </Text>
-          <Image
-            resizeMode="contain"
-            style={styles.sectionImage}
-            source={require('../assets/headphones.png')}
-          />
+          <Image resizeMode="contain" style={styles.sectionImage} source={headphoneImgSrc} />
         </TouchableOpacity>
       </View>
     )
   }
 }
 
-const styles = StyleSheet.create({
-  sectionButton: {
-    flex: 1,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    borderBottomWidth: 1,
-    paddingRight: 20,
-    paddingLeft: 20,
-  },
-  sectionImage: {
-    alignSelf: 'center',
-    flex: 1,
-    height: '50%',
-    resizeMode: 'contain',
-  },
-  sectionText: {
-    color: 'white',
-    flex: 2,
-    fontSize: 30,
-    fontWeight: 'bold',
-    marginLeft: 20,
-  },
-})
+Home.propTypes = {
+  navigation: PropTypes.shape({
+    getParam: PropTypes.func,
+    navigate: PropTypes.func,
+  }).isRequired,
+}
+
+export default Home
