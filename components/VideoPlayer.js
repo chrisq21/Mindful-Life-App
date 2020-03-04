@@ -1,22 +1,37 @@
 import React from 'react'
-import { StyleSheet, Text, View, Dimensions } from 'react-native'
+import PropTypes from 'prop-types'
+import { StyleSheet, View } from 'react-native'
 import { Video } from 'expo'
-import { MaterialIcons, Octicons } from '@expo/vector-icons'
+import { Audio } from 'expo-av'
+import { MaterialIcons } from '@expo/vector-icons' // eslint-disable-line import/no-extraneous-dependencies
+import Colors from '../constants/colors'
 
-export default class VideoPlayer extends React.Component {
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+  controlBar: {
+    alignItems: 'center',
+    backgroundColor: Colors.blackHalfOpacity,
+    flexDirection: 'row',
+    height: 45,
+    justifyContent: 'center',
+  },
+})
+
+class VideoPlayer extends React.Component {
   state = {
     mute: false,
-    fullScreen: false,
     shouldPlay: false,
   }
 
   componentDidMount() {
-    Expo.Audio.setAudioModeAsync({
+    Audio.setAudioModeAsync({
       allowsRecordingIOS: false,
-      interruptionModeIOS: Expo.Audio.INTERRUPTION_MODE_IOS_DO_NOT_MIX,
+      interruptionModeIOS: Audio.INTERRUPTION_MODE_IOS_DO_NOT_MIX,
       playsInSilentModeIOS: true,
       shouldDuckAndroid: false,
-      interruptionModeAndroid: Expo.Audio.INTERRUPTION_MODE_ANDROID_DO_NOT_MIX,
+      interruptionModeAndroid: Audio.INTERRUPTION_MODE_ANDROID_DO_NOT_MIX,
       playThroughEarpieceAndroid: false,
     })
   }
@@ -35,19 +50,20 @@ export default class VideoPlayer extends React.Component {
 
   render() {
     const { width, source } = this.props
+    const { shouldPlay, mute } = this.state
     return (
       <View style={styles.container}>
         <View>
           <Video
             source={source}
-            shouldPlay={this.state.shouldPlay}
+            shouldPlay={shouldPlay}
             resizeMode="contain"
-            style={{ width, aspectRatio: 1.78 }}
-            isMuted={this.state.mute}
+            style={{ width, aspectRatio: 1.78 }} // eslint-disable-line react-native/no-inline-styles
+            isMuted={mute}
           />
           <View style={styles.controlBar}>
             <MaterialIcons
-              name={this.state.shouldPlay ? 'pause' : 'play-arrow'}
+              name={shouldPlay ? 'pause' : 'play-arrow'}
               size={45}
               color="white"
               onPress={this.handlePlayAndPause}
@@ -59,15 +75,9 @@ export default class VideoPlayer extends React.Component {
   }
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-  controlBar: {
-    alignItems: 'center',
-    backgroundColor: 'rgba(0, 0, 0, 0.5)',
-    flexDirection: 'row',
-    height: 45,
-    justifyContent: 'center',
-  },
-})
+VideoPlayer.propTypes = {
+  width: PropTypes.number.isRequired,
+  source: PropTypes.string.isRequired,
+}
+
+export default VideoPlayer
