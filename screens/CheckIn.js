@@ -1,13 +1,49 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { StyleSheet, View, Text, ScrollView, Image } from 'react-native'
 import { ScreenContainerStyles } from '../styles/baseStyles'
 import DrawerIcon from '../components/DrawerIcon'
 import { Colors } from '../constants/colors'
 import { spanishCopy, englishCopy } from '../constants/copy'
+import checkInImgSrc from '../assets/checkin.png'
 
-export default class CheckIn extends React.Component {
+const styles = StyleSheet.create({
+  screenContainer: {
+    backgroundColor: Colors.red,
+    padding: 30,
+  },
+  sectionBodyContainer: {
+    lineHeight: 30,
+    marginBottom: 15,
+    marginTop: 25,
+  },
+  sectionBodyText: {
+    color: Colors.white,
+    fontSize: 22,
+    fontWeight: 'bold',
+    marginBottom: 10,
+    marginTop: 10,
+  },
+  sectionContainer: {
+    marginBottom: 30,
+    marginTop: 30,
+  },
+  sectionHeader: {
+    color: Colors.lightRed,
+    fontSize: 25,
+    fontWeight: 'bold',
+  },
+  sectionImage: {
+    flex: 1,
+    marginBottom: 10,
+    marginTop: 10,
+    resizeMode: 'contain',
+    width: null,
+  },
+})
+
+class CheckIn extends React.Component {
   static navigationOptions = ({ navigation }) => {
-    const category = navigation.getParam('category', '')
     return {
       title: 'Check In',
       drawerLabel: 'About',
@@ -31,11 +67,7 @@ export default class CheckIn extends React.Component {
     return (
       <View style={[styles.screenContainer, ScreenContainerStyles]}>
         <ScrollView>
-          <Image
-            resizeMode="contain"
-            style={styles.sectionImage}
-            source={require('../assets/checkin.png')}
-          />
+          <Image resizeMode="contain" style={styles.sectionImage} source={checkInImgSrc} />
           <View style={styles.sectionContainer}>
             <Text style={styles.sectionHeader}>{copyData.checkInScreen.step1.header}</Text>
             <View style={styles.sectionBodyContainer}>
@@ -80,37 +112,10 @@ export default class CheckIn extends React.Component {
   }
 }
 
-const styles = StyleSheet.create({
-  screenContainer: {
-    backgroundColor: Colors.red,
-    padding: 30,
-  },
-  sectionBodyContainer: {
-    lineHeight: 30,
-    marginBottom: 15,
-    marginTop: 25,
-  },
-  sectionBodyText: {
-    color: 'white',
-    fontSize: 22,
-    fontWeight: 'bold',
-    marginBottom: 10,
-    marginTop: 10,
-  },
-  sectionContainer: {
-    marginBottom: 30,
-    marginTop: 30,
-  },
-  sectionHeader: {
-    color: Colors.lightRed,
-    fontSize: 25,
-    fontWeight: 'bold',
-  },
-  sectionImage: {
-    flex: 1,
-    marginBottom: 10,
-    marginTop: 10,
-    resizeMode: 'contain',
-    width: null,
-  },
-})
+CheckIn.propTypes = {
+  navigation: PropTypes.shape({
+    getParam: PropTypes.func,
+  }).isRequired,
+}
+
+export default CheckIn
