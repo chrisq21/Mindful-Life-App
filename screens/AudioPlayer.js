@@ -21,8 +21,20 @@ import {
 import DrawerIcon from '../components/DrawerIcon'
 import { Colors } from '../constants/colors'
 import { CLIENT_ID } from '../constants/SoundCloud'
+import pauseBtnImgSrc from '../assets/pause-btn.png'
+import playBtnImgSrc from '../assets/play-btn.png'
 
 const styles = StyleSheet.create({
+  activityIndicator: {
+    justifyContent: 'center',
+  },
+  audioDescriptionWrapper: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+  audioText: {
+    color: Colors.white,
+  },
   controlButtonContainer: {
     alignSelf: 'center',
     paddingBottom: 20,
@@ -54,7 +66,7 @@ const styles = StyleSheet.create({
     width: '100%',
   },
   trackTitle: {
-    color: 'white',
+    color: Colors.white,
     fontSize: 35,
     fontWeight: 'bold',
     paddingBottom: 10,
@@ -116,6 +128,32 @@ class AudioPlayer extends React.Component {
     })
   }
 
+  onPlaybackStatusUpdate(playBackData) {
+    const { isAudioReady } = this.state
+    if (this.pollAudioStatus) {
+      if (playBackData.isLoaded && !playBackData.isBuffering) {
+        // Song is ready
+        if (!isAudioReady) {
+          this.setState({ isAudioReady: true })
+        }
+        this.updateSlider(playBackData.durationMillis, playBackData.positionMillis)
+      } else if (isAudioReady) {
+        this.setState({ isAudioReady: false })
+      }
+    }
+  }
+
+  onSliderValueChange() {
+    this.setState({ isDraggingSlider: true })
+  }
+
+  onSlidingComplete(value) {
+    this.audioObject.setStatusAsync({ positionMillis: value }).then(null, () => {
+      this.showAlert()
+    })
+    this.setState({ isDraggingSlider: false })
+  }
+
   async setupAudioData() {
     Audio.setAudioModeAsync({
       allowsRecordingIOS: false,
@@ -131,8 +169,8 @@ class AudioPlayer extends React.Component {
     this.audioObject.setOnPlaybackStatusUpdate(this.onPlaybackStatusUpdate)
 
     try {
-      const audioPlayerData = this.props.navigation.getParam('audioPlayerData', null)
-      console.log('audioPlayerData.trackUrl: ', audioPlayerData)
+      const { navigation } = this.props
+      const audioPlayerData = navigation.getParam('audioPlayerData', null)
       await this.audioObject.loadAsync(
         { uri: `${audioPlayerData.trackUrl}?client_id=${CLIENT_ID}` },
         { shouldPlay: true }
@@ -164,60 +202,30 @@ class AudioPlayer extends React.Component {
     )
   }
 
-  updateSlider(maxAudioTime, currentAudioTime) {
-    if (this.state.maxAudioTime != maxAudioTime) {
-      this.setState({ maxAudioTime })
+  updateSlider(newMaxAudioTime, currentAudioTime) {
+    const { maxAudioTime, isDraggingSlider } = this.state
+    if (maxAudioTime !== newMaxAudioTime) {
+      this.setState({ maxAudioTime: newMaxAudioTime })
     }
-    if (!this.state.isDraggingSlider) {
+    if (!isDraggingSlider) {
       this.setState({ currentAudioTime })
     }
-  }
-
-  onPlaybackStatusUpdate(playBackData) {
-    if (this.pollAudioStatus) {
-      if (playBackData.isLoaded && !playBackData.isBuffering) {
-        // Song is ready
-        if (!this.state.isAudioReady) {
-          this.setState({ isAudioReady: true })
-        }
-        this.updateSlider(playBackData.durationMillis, playBackData.positionMillis)
-      } else {
-        // Song is loading or buffering
-        if (this.state.isAudioReady) {
-          this.setState({ isAudioReady: false })
-        }
-      }
-    }
-  }
-
-  onSliderValueChange() {
-    this.setState({ isDraggingSlider: true })
-  }
-
-  onSlidingComplete(value) {
-    this.audioObject.setStatusAsync({ positionMillis: value }).then(null, (error) => {
-      this.showAlert()
-    })
-    this.setState({ isDraggingSlider: false })
   }
 
   millisToMinutesAndSeconds(millis) {
     const minutes = Math.floor(millis / 60000)
     const seconds = ((millis % 60000) / 1000).toFixed(0)
-    return seconds == 60 ? `${minutes + 1}:00` : `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`
+    return seconds === 60 ? `${minutes + 1}:00` : `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`
   }
 
   render() {
     const { navigation } = this.props
+    const { isAudioPlaying, isAudioReady, maxAudioTime, currentAudioTime } = this.state
     const audioPlayerData = navigation.getParam('audioPlayerData', null)
     const category = navigation.getParam('category', '')
-    const controlButtonImgSource = this.state.isAudioPlaying
-      ? require('../assets/pause-btn.png')
-      : require('../assets/play-btn.png')
+    const controlButtonImgSource = isAudioPlaying ? pauseBtnImgSrc : playBtnImgSrc
 
-    const controlButtonHandler = this.state.isAudioPlaying
-      ? this.pauseAudioAsync
-      : this.playAudioAsync
+    const controlButtonHandler = isAudioPlaying ? this.pauseAudioAsync : this.playAudioAsync
     return (
       <View
         style={[
@@ -226,10 +234,10 @@ class AudioPlayer extends React.Component {
           { backgroundColor: getThemeColorByCategory(category) },
         ]}
       >
-        {!this.state.isAudioReady && (
-          <ActivityIndicator size="large" color="white" style={{ justifyContent: 'center' }} />
+        {!isAudioReady && (
+          <ActivityIndicator size="large" color="white" style={styles.activityIndicator} />
         )}
-        {this.state.isAudioReady && (
+        {isAudioReady && (
           <View style={styles.innerContainer}>
             <KeepAwake />
             <Text style={[styles.playlistTitle, { color: getDarkThemeColorByCategory(category) }]}>
@@ -241,26 +249,24 @@ class AudioPlayer extends React.Component {
                 onPress={controlButtonHandler}
                 style={styles.controlButtonContainer}
               >
-                >
+                <Text>&gt;</Text>
                 <Image resizeMode="contain" source={controlButtonImgSource} />
               </TouchableOpacity>
               <Slider
                 style={styles.slider}
                 minimumValue={0}
-                maximumValue={this.state.maxAudioTime}
-                value={this.state.currentAudioTime}
+                maximumValue={maxAudioTime}
+                value={currentAudioTime}
                 onSlidingComplete={this.onSlidingComplete}
                 onValueChange={this.onSliderValueChange}
                 minimumTrackTintColor={getDarkThemeColorByCategory(category)}
                 maximumTrackTintColor="white"
               />
-              <View style={{ justifyContent: 'space-between', flexDirection: 'row' }}>
-                <Text style={{ color: 'white' }}>
-                  {this.millisToMinutesAndSeconds(this.state.currentAudioTime)}
+              <View style={styles.audioDescriptionWrapper}>
+                <Text style={styles.audioText}>
+                  {this.millisToMinutesAndSeconds(currentAudioTime)}
                 </Text>
-                <Text style={{ color: 'white' }}>
-                  {this.millisToMinutesAndSeconds(this.state.maxAudioTime)}
-                </Text>
+                <Text style={styles.audioText}>{this.millisToMinutesAndSeconds(maxAudioTime)}</Text>
               </View>
             </View>
           </View>
