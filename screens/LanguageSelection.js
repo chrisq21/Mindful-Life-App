@@ -1,9 +1,29 @@
 import React from 'react'
-import { TouchableOpacity, View, Text, Button, StyleSheet, Image } from 'react-native'
+import PropTypes from 'prop-types'
+import { TouchableOpacity, View, Text, StyleSheet } from 'react-native'
 import { ScreenContainerStyles } from '../styles/baseStyles'
 import { Colors } from '../constants/colors'
 
-export default class LanguageSelection extends React.Component {
+const styles = StyleSheet.create({
+  sectionButton: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    borderBottomWidth: 1,
+    paddingRight: 20,
+    paddingLeft: 20,
+  },
+  sectionText: {
+    color: Colors.white,
+    flex: 2,
+    fontSize: 35,
+    fontWeight: 'bold',
+    marginLeft: 20,
+  },
+})
+
+class LanguageSelection extends React.Component {
   static navigationOptions = {
     title: 'Language',
     headerStyle: {
@@ -17,18 +37,18 @@ export default class LanguageSelection extends React.Component {
   }
 
   render() {
-    const { navigate } = this.props.navigation
+    const { navigation } = this.props
     return (
       <View style={ScreenContainerStyles}>
         <TouchableOpacity
           style={[styles.sectionButton, { backgroundColor: Colors.blue }]}
-          onPress={() => navigate('Home', { language: 'english' })}
+          onPress={() => navigation.navigate('Home', { language: 'english' })}
         >
           <Text style={[styles.sectionText, { color: Colors.lightBlue }]}>English</Text>
         </TouchableOpacity>
         <TouchableOpacity
           style={[styles.sectionButton, { backgroundColor: Colors.red }]}
-          onPress={() => navigate('Home', { language: 'spanish' })}
+          onPress={() => navigation.navigate('Home', { language: 'spanish' })}
         >
           <Text style={[styles.sectionText, { color: Colors.lightRed }]}>Español</Text>
         </TouchableOpacity>
@@ -37,21 +57,10 @@ export default class LanguageSelection extends React.Component {
   }
 }
 
-const styles = StyleSheet.create({
-  sectionButton: {
-    flex: 1,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    borderBottomWidth: 1,
-    paddingRight: 20,
-    paddingLeft: 20,
-  },
-  sectionText: {
-    color: 'white',
-    flex: 2,
-    fontSize: 35,
-    fontWeight: 'bold',
-    marginLeft: 20,
-  },
-})
+LanguageSelection.propTypes = {
+  navigation: PropTypes.shape({
+    navigate: PropTypes.func,
+  }).isRequired,
+}
+
+export default LanguageSelection
