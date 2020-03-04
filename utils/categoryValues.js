@@ -1,4 +1,4 @@
-import { Colors } from '../constants/colors'
+import Colors from '../constants/colors'
 
 export function getTitleByCategory(category) {
   const title = category === 'hip-hop' ? 'Mindful Hip Hop' : 'Mindful Sits'

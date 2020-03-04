@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { StyleSheet, View, Text, ScrollView, Image } from 'react-native'
 import { ScreenContainerStyles } from '../styles/baseStyles'
 import DrawerIcon from '../components/DrawerIcon'
-import { Colors } from '../constants/colors'
+import Colors from '../constants/colors'
 import { spanishCopy, englishCopy } from '../constants/copy'
 import checkInImgSrc from '../assets/checkin.png'
 

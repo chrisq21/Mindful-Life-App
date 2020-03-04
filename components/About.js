@@ -1,7 +1,7 @@
 import React from 'react'
 import { StyleSheet, View, Text, ScrollView, Image, TouchableOpacity, Linking } from 'react-native'
 import { ScreenContainerStyles } from '../styles/baseStyles'
-import { Colors } from '../constants/colors'
+import Colors from '../constants/colors'
 
 export default class About extends React.Component {
   render() {
@@ -29,7 +29,8 @@ export default class About extends React.Component {
             <Text
               style={[styles.text, styles.link]}
               onPress={() =>
-                Linking.openURL('https://www.mightycause.com/organization/The-Mindful-Life-Project')}
+                Linking.openURL('https://www.mightycause.com/organization/The-Mindful-Life-Project')
+              }
             >
               Donate
             </Text>

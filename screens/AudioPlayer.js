@@ -19,8 +19,8 @@ import {
   getDarkThemeColorByCategory,
 } from '../utils/categoryValues'
 import DrawerIcon from '../components/DrawerIcon'
-import { Colors } from '../constants/colors'
-import { CLIENT_ID } from '../constants/SoundCloud'
+import Colors from '../constants/colors'
+import CLIENT_ID from '../constants/SoundCloud'
 import pauseBtnImgSrc from '../assets/pause-btn.png'
 import playBtnImgSrc from '../assets/play-btn.png'
 

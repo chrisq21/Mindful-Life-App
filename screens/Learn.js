@@ -4,7 +4,7 @@ import { ScrollView, View, Text, Image, StyleSheet, Dimensions } from 'react-nat
 import VideoPlayer from '../components/VideoPlayer'
 import { ScreenContainerStyles } from '../styles/baseStyles'
 import { spanishCopy, englishCopy } from '../constants/copy'
-import { Colors } from '../constants/colors'
+import Colors from '../constants/colors'
 import DrawerIcon from '../components/DrawerIcon'
 import animatedVideoSrc from '../assets/animation.mp4'
 import animatedVideoSpanishSrc from '../assets/animation_spanish.mp4'

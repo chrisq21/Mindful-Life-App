@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { TouchableOpacity, View, Text, StyleSheet } from 'react-native'
 import { ScreenContainerStyles } from '../styles/baseStyles'
-import { Colors } from '../constants/colors'
+import Colors from '../constants/colors'
 
 const styles = StyleSheet.create({
   sectionButton: {

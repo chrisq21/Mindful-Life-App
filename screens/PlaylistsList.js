@@ -10,7 +10,7 @@ import {
 } from '../utils/categoryValues'
 import { ScreenContainerStyles, ListStyles } from '../styles/baseStyles'
 import DrawerIcon from '../components/DrawerIcon'
-import { CLIENT_ID } from '../constants/SoundCloud'
+import CLIENT_ID from '../constants/SoundCloud'
 
 const styles = StyleSheet.create({
   activityIndicator: {
