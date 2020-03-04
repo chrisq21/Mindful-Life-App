@@ -1,15 +1,6 @@
 import React from 'react'
-import {
-  ScrollView,
-  View,
-  Text,
-  FlatList,
-  Button,
-  Image,
-  TouchableHighlight,
-  StyleSheet,
-  ActivityIndicator,
-} from 'react-native'
+import PropTypes from 'prop-types'
+import { View, Text, ActivityIndicator, StyleSheet } from 'react-native'
 import MLPFlatList from '../components/MLPFlatList'
 import {
   getTitleByCategory,
@@ -19,10 +10,17 @@ import {
 } from '../utils/categoryValues'
 import { ScreenContainerStyles, ListStyles } from '../styles/baseStyles'
 import DrawerIcon from '../components/DrawerIcon'
-import { Colors } from '../constants/colors'
 import { CLIENT_ID } from '../constants/SoundCloud'
 
-export default class PlaylistsList extends React.Component {
+const styles = StyleSheet.create({
+  activityIndicator: {
+    flexDirection: 'row',
+    flexGrow: 1,
+    justifyContent: 'center',
+  },
+})
+
+class PlaylistsList extends React.Component {
   static navigationOptions = ({ navigation }) => {
     const category = navigation.getParam('category', '')
     return {
@@ -51,9 +49,21 @@ export default class PlaylistsList extends React.Component {
     this.fetchUserData()
   }
 
+  onRowPressHandler(rowData, navigation) {
+    // TODO make sure rowData.track.stream_url exists
+    const playlistData = rowData.item
+    const category = navigation.getParam('category', '')
+    navigation.navigate('TracksList', {
+      tracks: playlistData.tracks,
+      playlistTitle: playlistData.title,
+      category,
+    })
+  }
+
   getFetchUserEndpoint() {
-    const category = this.props.navigation.getParam('category', '')
-    const language = this.props.navigation.getParam('language', '')
+    const { navigation } = this.props
+    const category = navigation.getParam('category', '')
+    const language = navigation.getParam('language', '')
     const slug = getUserSlugByCategoryAndLanguage(category, language)
     return `http://api.soundcloud.com/resolve?url=http://soundcloud.com/${slug}&client_id=${CLIENT_ID}`
   }
@@ -82,19 +92,9 @@ export default class PlaylistsList extends React.Component {
     }
   }
 
-  onRowPressHandler(rowData, navigation) {
-    // TODO make sure rowData.track.stream_url exists
-    const playlistData = rowData.item
-    const category = navigation.getParam('category', '')
-    navigation.navigate('TracksList', {
-      tracks: playlistData.tracks,
-      playlistTitle: playlistData.title,
-      category,
-    })
-  }
-
   render() {
     const { navigation } = this.props
+    const { playlistData } = this.state
     const category = navigation.getParam('category', '')
     return (
       <View
@@ -104,24 +104,31 @@ export default class PlaylistsList extends React.Component {
           { backgroundColor: getThemeColorByCategory(category) },
         ]}
       >
-        {this.state.playlistData.length <= 0 && (
-          <ActivityIndicator
-            size="large"
-            color="white"
-            style={{ justifyContent: 'center', flexDirection: 'row', flexGrow: 1 }}
-          />}
-        {this.state.playlistData.length > 0 && (
+        {playlistData.length <= 0 && (
+          <ActivityIndicator size="large" color="white" style={styles.activityIndicator} />
+        )}
+        {playlistData.length > 0 && (
           <View>
-            <Text style={[ListStyles.header, { color: getLightThemeColorByCategory(category) }]}>Playlists</Text>
+            <Text style={[ListStyles.header, { color: getLightThemeColorByCategory(category) }]}>
+              Playlists
+            </Text>
             <MLPFlatList
-              listData={this.state.playlistData}
+              listData={playlistData}
               onRowPressHandler={(rowData) => this.onRowPressHandler(rowData, navigation)}
               category={category}
             />
           </View>
         )}
-
       </View>
     )
   }
 }
+
+PlaylistsList.propTypes = {
+  navigation: PropTypes.shape({
+    getParam: PropTypes.func,
+    navigate: PropTypes.func,
+  }).isRequired,
+}
+
+export default PlaylistsList
