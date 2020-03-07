@@ -31,6 +31,6 @@ const DrawerNavigator = createDrawerNavigator(
   }
 )
 
-const App = createAppContainer(DrawerNavigator)
+const AppNavigator = createAppContainer(DrawerNavigator)
 
-export default App
+export default AppNavigator
