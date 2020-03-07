@@ -35,74 +35,71 @@ const styles = StyleSheet.create({
   },
 })
 
-class Home extends React.Component {
-  static navigationOptions = ({ navigation }) => {
-    return {
-      title: 'Home',
-      drawerLabel: 'About',
-      headerRight: <DrawerIcon navigation={navigation} />,
-      headerStyle: {
-        backgroundColor: 'black',
-        borderBottomWidth: 0,
-      },
-      headerTintColor: Colors.lightBlue,
-      headerTitleStyle: {
-        color: Colors.lightBlue,
-      },
-    }
-  }
+// TODO: Refactor navigationOptions
+// static navigationOptions = ({ navigation }) => {
+//   return {
+//     title: 'Home',
+//     drawerLabel: 'About',
+//     headerRight: <DrawerIcon navigation={navigation} />,
+//     headerStyle: {
+//       backgroundColor: 'black',
+//       borderBottomWidth: 0,
+//     },
+//     headerTintColor: Colors.lightBlue,
+//     headerTitleStyle: {
+//       color: Colors.lightBlue,
+//     },
+//   }
+// }
 
-  render() {
-    const { navigation } = this.props
-    const language = navigation.getParam('language', 'english')
-    const copyData = language === 'spanish' ? spanishCopy : englishCopy
+function Home({ navigation, route }) {
+  const { language } = route.params
+  const copyData = language === 'spanish' ? spanishCopy : englishCopy
 
-    return (
-      <View style={ScreenContainerStyles}>
-        <TouchableOpacity
-          style={[styles.sectionButton, { backgroundColor: Colors.blue }]}
-          onPress={() => navigation.navigate('Learn', { language })}
-        >
-          <Text style={[styles.sectionText, { color: Colors.lightBlue }]}>
-            {copyData.homeScreen.learn}
-          </Text>
-          <Image resizeMode="contain" style={styles.sectionImage} source={questionMarkSrc} />
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={[styles.sectionButton, { backgroundColor: Colors.red }]}
-          onPress={() => navigation.navigate('CheckIn', { language })}
-        >
-          <Text style={[styles.sectionText, { color: Colors.lightRed }]}>
-            {copyData.homeScreen.checkIn}
-          </Text>
-          <Image resizeMode="contain" style={styles.sectionImage} source={anchorImgSrc} />
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={[styles.sectionButton, { backgroundColor: Colors.green }]}
-          onPress={() => navigation.navigate('PlaylistsList', { category: 'sits', language })}
-        >
-          <Text style={[styles.sectionText, { color: Colors.lightGreen }]}>
-            {copyData.homeScreen.sits}
-          </Text>
-          <Image resizeMode="contain" style={styles.sectionImage} source={smileImgSrc} />
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={[styles.sectionButton, { backgroundColor: Colors.orange }]}
-          onPress={() => navigation.navigate('PlaylistsList', { category: 'hip-hop', language })}
-        >
-          <Text style={[styles.sectionText, { color: Colors.lightOrange }]}>
-            {copyData.homeScreen.hipHop}
-          </Text>
-          <Image resizeMode="contain" style={styles.sectionImage} source={headphoneImgSrc} />
-        </TouchableOpacity>
-      </View>
-    )
-  }
+  return (
+    <View style={ScreenContainerStyles}>
+      <TouchableOpacity
+        style={[styles.sectionButton, { backgroundColor: Colors.blue }]}
+        onPress={() => navigation.navigate('Learn', { language })}
+      >
+        <Text style={[styles.sectionText, { color: Colors.lightBlue }]}>
+          {copyData.homeScreen.learn}
+        </Text>
+        <Image resizeMode="contain" style={styles.sectionImage} source={questionMarkSrc} />
+      </TouchableOpacity>
+      <TouchableOpacity
+        style={[styles.sectionButton, { backgroundColor: Colors.red }]}
+        onPress={() => navigation.navigate('CheckIn', { language })}
+      >
+        <Text style={[styles.sectionText, { color: Colors.lightRed }]}>
+          {copyData.homeScreen.checkIn}
+        </Text>
+        <Image resizeMode="contain" style={styles.sectionImage} source={anchorImgSrc} />
+      </TouchableOpacity>
+      <TouchableOpacity
+        style={[styles.sectionButton, { backgroundColor: Colors.green }]}
+        onPress={() => navigation.navigate('PlaylistsList', { category: 'sits', language })}
+      >
+        <Text style={[styles.sectionText, { color: Colors.lightGreen }]}>
+          {copyData.homeScreen.sits}
+        </Text>
+        <Image resizeMode="contain" style={styles.sectionImage} source={smileImgSrc} />
+      </TouchableOpacity>
+      <TouchableOpacity
+        style={[styles.sectionButton, { backgroundColor: Colors.orange }]}
+        onPress={() => navigation.navigate('PlaylistsList', { category: 'hip-hop', language })}
+      >
+        <Text style={[styles.sectionText, { color: Colors.lightOrange }]}>
+          {copyData.homeScreen.hipHop}
+        </Text>
+        <Image resizeMode="contain" style={styles.sectionImage} source={headphoneImgSrc} />
+      </TouchableOpacity>
+    </View>
+  )
 }
 
 Home.propTypes = {
   navigation: PropTypes.shape({
-    getParam: PropTypes.func,
     navigate: PropTypes.func,
   }).isRequired,
 }

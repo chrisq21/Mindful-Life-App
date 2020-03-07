@@ -23,38 +23,36 @@ const styles = StyleSheet.create({
   },
 })
 
-class LanguageSelection extends React.Component {
-  static navigationOptions = {
-    title: 'Language',
-    headerStyle: {
-      backgroundColor: 'black',
-      borderBottomWidth: 0,
-    },
-    headerTintColor: Colors.lightBlue,
-    headerTitleStyle: {
-      color: Colors.lightBlue,
-    },
-  }
+// TODO: What to do with navigationOptions?
+// static navigationOptions = {
+//   title: 'Language',
+//   headerStyle: {
+//     backgroundColor: 'black',
+//     borderBottomWidth: 0,
+//   },
+//   headerTintColor: Colors.lightBlue,
+//   headerTitleStyle: {
+//     color: Colors.lightBlue,
+//   },
+// }
 
-  render() {
-    const { navigation } = this.props
-    return (
-      <View style={ScreenContainerStyles}>
-        <TouchableOpacity
-          style={[styles.sectionButton, { backgroundColor: Colors.blue }]}
-          onPress={() => navigation.navigate('Home', { language: 'english' })}
-        >
-          <Text style={[styles.sectionText, { color: Colors.lightBlue }]}>English</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={[styles.sectionButton, { backgroundColor: Colors.red }]}
-          onPress={() => navigation.navigate('Home', { language: 'spanish' })}
-        >
-          <Text style={[styles.sectionText, { color: Colors.lightRed }]}>Español</Text>
-        </TouchableOpacity>
-      </View>
-    )
-  }
+function LanguageSelection({ navigation }) {
+  return (
+    <View style={ScreenContainerStyles}>
+      <TouchableOpacity
+        style={[styles.sectionButton, { backgroundColor: Colors.blue }]}
+        onPress={() => navigation.navigate('Home', { language: 'english' })}
+      >
+        <Text style={[styles.sectionText, { color: Colors.lightBlue }]}>English</Text>
+      </TouchableOpacity>
+      <TouchableOpacity
+        style={[styles.sectionButton, { backgroundColor: Colors.red }]}
+        onPress={() => navigation.navigate('Home', { language: 'spanish' })}
+      >
+        <Text style={[styles.sectionText, { color: Colors.lightRed }]}>Español</Text>
+      </TouchableOpacity>
+    </View>
+  )
 }
 
 LanguageSelection.propTypes = {
