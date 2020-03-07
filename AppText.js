@@ -1,9 +1,16 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { Text } from 'react-native'
 import { BaseTextStyles } from './styles/baseStyles'
 
-export default class AppText extends React.Component {
-  render() {
-    return <Text style={[BaseTextStyles, this.props.style]}>{this.props.children}</Text>
-  }
+function AppText(props) {
+  const { style, children } = props
+  return <Text style={[BaseTextStyles, style]}>{children}</Text>
 }
+
+AppText.propTypes = {
+  style: PropTypes.object.isRequired,
+  children: PropTypes.array.isRequired,
+}
+
+export default AppText
