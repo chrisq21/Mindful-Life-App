@@ -29,7 +29,7 @@ const styles = StyleSheet.create({
     padding: 18,
   },
   text: {
-    color: Color.white,
+    color: Colors.white,
     fontSize: 20,
     lineHeight: 25,
   },
