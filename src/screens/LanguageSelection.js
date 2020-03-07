@@ -23,19 +23,6 @@ const styles = StyleSheet.create({
   },
 })
 
-// TODO: What to do with navigationOptions?
-// static navigationOptions = {
-//   title: 'Language',
-//   headerStyle: {
-//     backgroundColor: 'black',
-//     borderBottomWidth: 0,
-//   },
-//   headerTintColor: Colors.lightBlue,
-//   headerTitleStyle: {
-//     color: Colors.lightBlue,
-//   },
-// }
-
 function LanguageSelection({ navigation }) {
   return (
     <View style={ScreenContainerStyles}>

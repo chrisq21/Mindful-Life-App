@@ -21,22 +21,7 @@ const styles = StyleSheet.create({
 })
 
 class PlaylistsList extends React.Component {
-  static navigationOptions = ({ navigation }) => {
-    const category = navigation.getParam('category', '')
-    return {
-      title: getTitleByCategory(category),
-      drawerLabel: 'About',
-      headerRight: <DrawerIcon navigation={navigation} />,
-      headerStyle: {
-        backgroundColor: getThemeColorByCategory(category),
-        borderBottomWidth: 0,
-      },
-      headerTintColor: getLightThemeColorByCategory(category),
-      headerTitleStyle: {
-        color: getLightThemeColorByCategory(category),
-      },
-    }
-  }
+  // TODO: Add programatic options
 
   constructor(props) {
     super(props)

@@ -43,21 +43,9 @@ const styles = StyleSheet.create({
 })
 
 class CheckIn extends React.Component {
-  static navigationOptions = ({ navigation }) => {
-    return {
-      title: 'Check In',
-      drawerLabel: 'About',
-      headerRight: <DrawerIcon navigation={navigation} />,
-      headerStyle: {
-        backgroundColor: Colors.red,
-        borderBottomWidth: 0,
-      },
-      headerTintColor: Colors.lightRed,
-      headerTitleStyle: {
-        color: Colors.lightRed,
-      },
-    }
-  }
+  // TODO: Bring back drawer config
+  // drawerLabel: 'About',
+  // headerRight: <DrawerIcon navigation={navigation} />,
 
   render() {
     const { navigation } = this.props

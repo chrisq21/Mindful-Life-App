@@ -35,22 +35,9 @@ const styles = StyleSheet.create({
   },
 })
 
-// TODO: Refactor navigationOptions
-// static navigationOptions = ({ navigation }) => {
-//   return {
-//     title: 'Home',
-//     drawerLabel: 'About',
-//     headerRight: <DrawerIcon navigation={navigation} />,
-//     headerStyle: {
-//       backgroundColor: 'black',
-//       borderBottomWidth: 0,
-//     },
-//     headerTintColor: Colors.lightBlue,
-//     headerTitleStyle: {
-//       color: Colors.lightBlue,
-//     },
-//   }
-// }
+// TODO: Bring back drawer config
+// drawerLabel: 'Home',
+// headerRight: <DrawerIcon navigation={navigation} />,
 
 function Home({ navigation, route }) {
   const { language } = route.params

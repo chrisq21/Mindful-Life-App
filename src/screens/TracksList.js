@@ -11,22 +11,7 @@ import { ScreenContainerStyles, ListStyles } from '../styles/baseStyles'
 import DrawerIcon from '../components/DrawerIcon'
 
 class TracksList extends React.Component {
-  static navigationOptions = ({ navigation }) => {
-    const category = navigation.getParam('category', '')
-    return {
-      title: getTitleByCategory(category),
-      drawerLabel: 'About',
-      headerRight: <DrawerIcon navigation={navigation} />,
-      headerStyle: {
-        backgroundColor: getThemeColorByCategory(category),
-        borderBottomWidth: 0,
-      },
-      headerTintColor: getLightThemeColorByCategory(category),
-      headerTitleStyle: {
-        color: getLightThemeColorByCategory(category),
-      },
-    }
-  }
+  // TODO: Add programatic options
 
   constructor() {
     super()

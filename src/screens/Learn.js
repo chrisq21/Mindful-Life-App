@@ -49,22 +49,9 @@ const styles = StyleSheet.create({
 })
 
 class Learn extends React.Component {
-  static navigationOptions = ({ navigation }) => {
-    return {
-      title: 'Learn',
-      drawerLabel: 'About',
-      headerRight: <DrawerIcon navigation={navigation} />,
-      headerStyle: {
-        backgroundColor: Colors.blue,
-        borderBottomWidth: 0,
-      },
-      headerTintColor: Colors.lightBlue,
-      headerTitleStyle: {
-        color: Colors.lightBlue,
-      },
-    }
-  }
-
+  // TODO: Bring back drawer config
+  // drawerLabel: 'Learn',
+  // headerRight: <DrawerIcon navigation={navigation} />,
   render() {
     const { navigation } = this.props
     const language = navigation.getParam('language', 'english')
