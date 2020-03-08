@@ -2,13 +2,8 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { View, Text } from 'react-native'
 import MLPFlatList from '../components/MLPFlatList'
-import {
-  getTitleByCategory,
-  getThemeColorByCategory,
-  getLightThemeColorByCategory,
-} from '../utils/categoryValues'
+import { getThemeColorByCategory, getLightThemeColorByCategory } from '../utils/categoryValues'
 import { ScreenContainerStyles, ListStyles } from '../styles/baseStyles'
-import DrawerIcon from '../components/DrawerIcon'
 
 class TracksList extends React.Component {
   // TODO: Add programatic options
@@ -74,6 +69,13 @@ TracksList.propTypes = {
   navigation: PropTypes.shape({
     getParam: PropTypes.func,
     navigate: PropTypes.func,
+  }).isRequired,
+  route: PropTypes.shape({
+    params: PropTypes.shape({
+      playlistTitle: PropTypes.string,
+      category: PropTypes.string,
+      tracks: PropTypes.array,
+    }).isRequired,
   }).isRequired,
 }
 
