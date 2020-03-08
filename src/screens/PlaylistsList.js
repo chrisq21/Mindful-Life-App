@@ -78,9 +78,10 @@ class PlaylistsList extends React.Component {
   }
 
   render() {
-    const { navigation } = this.props
+    const { navigation, route } = this.props
+    const { category } = route.params
     const { playlistData } = this.state
-    const category = navigation.getParam('category', '')
+
     return (
       <View
         style={[

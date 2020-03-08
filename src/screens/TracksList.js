@@ -13,30 +13,29 @@ import DrawerIcon from '../components/DrawerIcon'
 class TracksList extends React.Component {
   // TODO: Add programatic options
 
-  constructor() {
-    super()
+  constructor(props) {
+    super(props)
 
     this.onRowPressHandler = this.onRowPressHandler.bind(this)
     this.getStreamableTracks = this.getStreamableTracks.bind(this)
   }
 
   onRowPressHandler(rowData) {
-    const { navigation } = this.props
+    const { navigation, route } = this.props
     // TODO make sure rowData.track.stream_url exists
+    const { playlistTitle, category } = route.params
     const trackData = rowData.item
-    const playlistTitle = navigation.getParam('playlistTitle', '')
     const audioPlayerData = {
       trackTitle: trackData.title,
       trackUrl: trackData.stream_url,
       playlistTitle,
     }
-    const category = navigation.getParam('category', '')
     navigation.navigate('AudioPlayer', { audioPlayerData, category })
   }
 
-  getStreamableTracks(tracksData) {
+  getStreamableTracks(tracks) {
     const streamableTracks = []
-    tracksData.forEach((track) => {
+    tracks.forEach((track) => {
       if (track.streamable) {
         streamableTracks.push(track)
       }
@@ -46,10 +45,9 @@ class TracksList extends React.Component {
   }
 
   render() {
-    const { navigation } = this.props
-    const category = navigation.getParam('category', '')
-    const tracksData = navigation.getParam('tracks', [])
-    const streamableTracks = this.getStreamableTracks(tracksData)
+    const { route } = this.props
+    const { category, tracks } = route.params
+    const streamableTracks = this.getStreamableTracks(tracks)
 
     return (
       <View
