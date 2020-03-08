@@ -48,53 +48,48 @@ const styles = StyleSheet.create({
   },
 })
 
-class Learn extends React.Component {
-  // TODO: Bring back drawer config
-  // drawerLabel: 'Learn',
-  // headerRight: <DrawerIcon navigation={navigation} />,
-  render() {
-    const { navigation } = this.props
-    const language = navigation.getParam('language', 'english')
-    const copyData = language === 'spanish' ? spanishCopy : englishCopy
-    const { width } = Dimensions.get('window')
-    const videoSource = language === 'spanish' ? animatedVideoSpanishSrc : animatedVideoSrc
+function Learn({ route }) {
+  const { language } = route.params
+  const copyData = language === 'spanish' ? spanishCopy : englishCopy
+  const { width } = Dimensions.get('window')
+  const videoSource = language === 'spanish' ? animatedVideoSpanishSrc : animatedVideoSrc
 
-    return (
-      <View style={{ backgroundColor: Colors.blue }}>
-        <ScrollView>
-          <View style={ScreenContainerStyles}>
-            <View style={styles.sectionContainer}>
-              <View style={styles.paddingContainer}>
-                <Text style={styles.sectionHeader}>{copyData.learnScreen.whatIsHeader}</Text>
-              </View>
-              <VideoPlayer source={videoSource} width={width} />
-              <View style={styles.paddingContainer}>
-                <Text style={styles.sectionBodyText}>{copyData.learnScreen.whatIsBody}</Text>
-              </View>
+  return (
+    <View style={{ backgroundColor: Colors.blue }}>
+      <ScrollView>
+        <View style={ScreenContainerStyles}>
+          <View style={styles.sectionContainer}>
+            <View style={styles.paddingContainer}>
+              <Text style={styles.sectionHeader}>{copyData.learnScreen.whatIsHeader}</Text>
             </View>
-            <Image style={styles.sectionImage} source={meditationImgSrc} />
-            <View style={[styles.sectionContainer, styles.paddingContainer]}>
-              <Text style={styles.sectionHeader}>Benefits</Text>
-              <Text style={styles.sectionBodyText}>{copyData.learnScreen.benefitsBody1}</Text>
-              <Text style={styles.sectionBodyText}>{copyData.learnScreen.benefitsBody2}</Text>
-              <Image style={styles.sectionImage} source={cloudsImgSrc} />
-            </View>
-            <View style={[styles.sectionContainer, styles.paddingContainer]}>
-              <Text style={styles.sectionHeader}>Posters</Text>
-              <Image style={[styles.sectionImage, styles.posterImage]} source={posterImgSrc} />
-              <Image style={[styles.sectionImage, styles.posterImage]} source={togetherImgSrc} />
+            <VideoPlayer source={videoSource} width={width} />
+            <View style={styles.paddingContainer}>
+              <Text style={styles.sectionBodyText}>{copyData.learnScreen.whatIsBody}</Text>
             </View>
           </View>
-        </ScrollView>
-      </View>
-    )
-  }
+          <Image style={styles.sectionImage} source={meditationImgSrc} />
+          <View style={[styles.sectionContainer, styles.paddingContainer]}>
+            <Text style={styles.sectionHeader}>Benefits</Text>
+            <Text style={styles.sectionBodyText}>{copyData.learnScreen.benefitsBody1}</Text>
+            <Text style={styles.sectionBodyText}>{copyData.learnScreen.benefitsBody2}</Text>
+            <Image style={styles.sectionImage} source={cloudsImgSrc} />
+          </View>
+          <View style={[styles.sectionContainer, styles.paddingContainer]}>
+            <Text style={styles.sectionHeader}>Posters</Text>
+            <Image style={[styles.sectionImage, styles.posterImage]} source={posterImgSrc} />
+            <Image style={[styles.sectionImage, styles.posterImage]} source={togetherImgSrc} />
+          </View>
+        </View>
+      </ScrollView>
+    </View>
+  )
 }
 
 Learn.propTypes = {
-  navigation: PropTypes.shape({
-    getParam: PropTypes.func,
-    navigate: PropTypes.func,
+  route: PropTypes.shape({
+    params: PropTypes.shape({
+      language: PropTypes.string.isRequired,
+    }).isRequired,
   }).isRequired,
 }
 
