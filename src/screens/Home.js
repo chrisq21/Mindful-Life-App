@@ -4,7 +4,6 @@ import { TouchableOpacity, View, Text, StyleSheet, Image } from 'react-native'
 import { ScreenContainerStyles } from '../styles/baseStyles'
 import { spanishCopy, englishCopy } from '../constants/copy'
 import Colors from '../constants/colors'
-import DrawerIcon from '../components/DrawerIcon'
 import questionMarkSrc from '../assets/question-mark.png'
 import anchorImgSrc from '../assets/anchor.png'
 import smileImgSrc from '../assets/smile.png'
@@ -88,6 +87,11 @@ function Home({ navigation, route }) {
 Home.propTypes = {
   navigation: PropTypes.shape({
     navigate: PropTypes.func,
+  }).isRequired,
+  route: PropTypes.shape({
+    params: PropTypes.shape({
+      language: PropTypes.string.isRequired,
+    }).isRequired,
   }).isRequired,
 }
 
