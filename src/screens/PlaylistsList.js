@@ -3,13 +3,11 @@ import PropTypes from 'prop-types'
 import { View, Text, ActivityIndicator, StyleSheet } from 'react-native'
 import MLPFlatList from '../components/MLPFlatList'
 import {
-  getTitleByCategory,
   getUserSlugByCategoryAndLanguage,
   getThemeColorByCategory,
   getLightThemeColorByCategory,
 } from '../utils/categoryValues'
 import { ScreenContainerStyles, ListStyles } from '../styles/baseStyles'
-import DrawerIcon from '../components/DrawerIcon'
 import CLIENT_ID from '../constants/SoundCloud'
 
 const styles = StyleSheet.create({
@@ -114,6 +112,13 @@ PlaylistsList.propTypes = {
   navigation: PropTypes.shape({
     getParam: PropTypes.func,
     navigate: PropTypes.func,
+  }).isRequired,
+  route: PropTypes.shape({
+    params: PropTypes.shape({
+      playlistTitle: PropTypes.string,
+      category: PropTypes.string,
+      tracks: PropTypes.array,
+    }).isRequired,
   }).isRequired,
 }
 
