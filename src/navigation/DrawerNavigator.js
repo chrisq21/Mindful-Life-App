@@ -1,6 +1,6 @@
 import React from 'react'
-import MainNavigator from './MainNavigator'
 import { createDrawerNavigator } from '@react-navigation/drawer'
+import MainNavigator from './MainNavigator'
 import About from '../components/About'
 
 const Drawer = createDrawerNavigator()
