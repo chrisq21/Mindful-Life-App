@@ -32,10 +32,11 @@ class PlaylistsList extends React.Component {
     this.fetchUserData()
   }
 
-  onRowPressHandler(rowData, navigation) {
-    // TODO make sure rowData.track.stream_url exists
+  onRowPressHandler(rowData) {
+    const { navigation, route } = this.props
+    const { category } = route.params
     const playlistData = rowData.item
-    const category = navigation.getParam('category', '')
+
     navigation.navigate('TracksList', {
       tracks: playlistData.tracks,
       playlistTitle: playlistData.title,
@@ -44,9 +45,8 @@ class PlaylistsList extends React.Component {
   }
 
   getFetchUserEndpoint() {
-    const { navigation } = this.props
-    const category = navigation.getParam('category', '')
-    const language = navigation.getParam('language', '')
+    const { route } = this.props
+    const { category, language } = route.params
     const slug = getUserSlugByCategoryAndLanguage(category, language)
     return `http://api.soundcloud.com/resolve?url=http://soundcloud.com/${slug}&client_id=${CLIENT_ID}`
   }
@@ -76,7 +76,7 @@ class PlaylistsList extends React.Component {
   }
 
   render() {
-    const { navigation, route } = this.props
+    const { route } = this.props
     const { category } = route.params
     const { playlistData } = this.state
 
@@ -98,7 +98,7 @@ class PlaylistsList extends React.Component {
             </Text>
             <MLPFlatList
               listData={playlistData}
-              onRowPressHandler={(rowData) => this.onRowPressHandler(rowData, navigation)}
+              onRowPressHandler={(rowData) => this.onRowPressHandler(rowData)}
               category={category}
             />
           </View>
@@ -110,14 +110,13 @@ class PlaylistsList extends React.Component {
 
 PlaylistsList.propTypes = {
   navigation: PropTypes.shape({
-    getParam: PropTypes.func,
     navigate: PropTypes.func,
   }).isRequired,
   route: PropTypes.shape({
     params: PropTypes.shape({
       playlistTitle: PropTypes.string,
       category: PropTypes.string,
-      tracks: PropTypes.array,
+      language: PropTypes.string,
     }).isRequired,
   }).isRequired,
 }

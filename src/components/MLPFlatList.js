@@ -67,7 +67,7 @@ class MLPFlatList extends React.Component {
 MLPFlatList.propTypes = {
   category: PropTypes.string.isRequired,
   onRowPressHandler: PropTypes.func.isRequired,
-  listData: PropTypes.object.isRequired,
+  listData: PropTypes.array.isRequired,
 }
 
 export default MLPFlatList

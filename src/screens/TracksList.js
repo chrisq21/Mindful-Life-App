@@ -67,7 +67,6 @@ class TracksList extends React.Component {
 
 TracksList.propTypes = {
   navigation: PropTypes.shape({
-    getParam: PropTypes.func,
     navigate: PropTypes.func,
   }).isRequired,
   route: PropTypes.shape({

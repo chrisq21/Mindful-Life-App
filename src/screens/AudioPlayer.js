@@ -13,12 +13,7 @@ import {
 import { Audio } from 'expo-av'
 import { KeepAwake } from 'expo'
 import { ScreenContainerStyles } from '../styles/baseStyles'
-import {
-  getThemeColorByCategory,
-  getLightThemeColorByCategory,
-  getDarkThemeColorByCategory,
-} from '../utils/categoryValues'
-import DrawerIcon from '../components/DrawerIcon'
+import { getThemeColorByCategory, getDarkThemeColorByCategory } from '../utils/categoryValues'
 import Colors from '../constants/colors'
 import CLIENT_ID from '../constants/SoundCloud'
 import pauseBtnImgSrc from '../assets/pause-btn.png'
@@ -76,23 +71,6 @@ const styles = StyleSheet.create({
 })
 
 class AudioPlayer extends React.Component {
-  static navigationOptions = ({ navigation }) => {
-    const category = navigation.getParam('category', '')
-    return {
-      title: '',
-      drawerLabel: 'About',
-      headerRight: <DrawerIcon navigation={navigation} />,
-      headerStyle: {
-        backgroundColor: getThemeColorByCategory(category),
-        borderBottomWidth: 0,
-      },
-      headerTintColor: getLightThemeColorByCategory(category),
-      headerTitleStyle: {
-        color: getLightThemeColorByCategory(category),
-      },
-    }
-  }
-
   constructor(props) {
     super(props)
     this.pollAudioStatus = false
@@ -169,8 +147,8 @@ class AudioPlayer extends React.Component {
     this.audioObject.setOnPlaybackStatusUpdate(this.onPlaybackStatusUpdate)
 
     try {
-      const { navigation } = this.props
-      const audioPlayerData = navigation.getParam('audioPlayerData', null)
+      const { route } = this.props
+      const { audioPlayerData } = route.params
       await this.audioObject.loadAsync(
         { uri: `${audioPlayerData.trackUrl}?client_id=${CLIENT_ID}` },
         { shouldPlay: true }
@@ -219,13 +197,13 @@ class AudioPlayer extends React.Component {
   }
 
   render() {
-    const { navigation } = this.props
+    const { route } = this.props
+    const { audioPlayerData, category } = route.params
     const { isAudioPlaying, isAudioReady, maxAudioTime, currentAudioTime } = this.state
-    const audioPlayerData = navigation.getParam('audioPlayerData', null)
-    const category = navigation.getParam('category', '')
-    const controlButtonImgSource = isAudioPlaying ? pauseBtnImgSrc : playBtnImgSrc
 
+    const controlButtonImgSource = isAudioPlaying ? pauseBtnImgSrc : playBtnImgSrc
     const controlButtonHandler = isAudioPlaying ? this.pauseAudioAsync : this.playAudioAsync
+
     return (
       <View
         style={[
@@ -277,8 +255,11 @@ class AudioPlayer extends React.Component {
 }
 
 AudioPlayer.propTypes = {
-  navigation: PropTypes.shape({
-    getParam: PropTypes.func,
+  route: PropTypes.shape({
+    params: PropTypes.shape({
+      audioPlayerData: PropTypes.object,
+      category: PropTypes.string,
+    }),
   }).isRequired,
 }
 
