@@ -25,7 +25,7 @@ class TracksList extends React.Component {
       trackUrl: trackData.stream_url,
       playlistTitle,
     }
-    navigation.navigate('AudioPlayer', { audioPlayerData, category })
+    navigation.navigate('AudioPlayer', { ...audioPlayerData, category })
   }
 
   getStreamableTracks(tracks) {
