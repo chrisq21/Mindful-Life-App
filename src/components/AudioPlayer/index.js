@@ -4,6 +4,7 @@ import PropTypes from 'prop-types'
 import CLIENT_ID from '../../constants/SoundCloud'
 import { Audio } from 'expo-av'
 import { getAudioModeData } from './helpers'
+import ControlButton from './ControlButton'
 
 /* Audio Instance */
 let audioInstance = null
@@ -136,6 +137,7 @@ function AudioPlayer({ route }) {
   const play = async () => {
     if (audioInstance) {
       await audioInstance.playAsync()
+      setIsPlaying(true)
     }
   }
 
@@ -144,7 +146,8 @@ function AudioPlayer({ route }) {
    */
   const pause = async () => {
     if (audioInstance) {
-      await audioInstance.puaseAsync()
+      await audioInstance.pauseAsync()
+      setIsPlaying(false)
     }
   }
 
@@ -175,6 +178,7 @@ function AudioPlayer({ route }) {
 
   return (
     <View>
+      <ControlButton isPlayButton={!isPlaying} onPress={isPlaying ? pause : play} />
       <Slider
         minimumValue={0}
         value={sliderPosition}
