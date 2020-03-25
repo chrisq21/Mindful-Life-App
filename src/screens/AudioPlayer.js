@@ -16,8 +16,9 @@ import { ScreenContainerStyles } from '../styles/baseStyles'
 import { getThemeColorByCategory, getDarkThemeColorByCategory } from '../utils/categoryValues'
 import Colors from '../constants/colors'
 import CLIENT_ID from '../constants/SoundCloud'
-import pauseBtnImgSrc from '../assets/pause-btn.png'
-import playBtnImgSrc from '../assets/play-btn.png'
+
+import pauseBtnImgSrc from '../components/AudioPlayer/ControlButton/images/pause-btn.png'
+import playBtnImgSrc from '../components/AudioPlayer/ControlButton/images/play-btn.png'
 
 const styles = StyleSheet.create({
   activityIndicator: {

@@ -1,8 +1,8 @@
-import React, { useState, useEffect, useCallback } from 'react'
-import { View, Slider, Text, Button } from 'react-native'
+import React, { useState, useEffect } from 'react'
+import { ActivityIndicator, Slider, View } from 'react-native'
 import PropTypes from 'prop-types'
-import CLIENT_ID from '../../constants/SoundCloud'
 import { Audio } from 'expo-av'
+import CLIENT_ID from '../../constants/SoundCloud'
 import { getAudioModeData } from './helpers'
 import ControlButton from './ControlButton'
 
@@ -15,26 +15,6 @@ function AudioPlayer({ route }) {
   const [isPlaying, setIsPlaying] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
   const [isDraggingSlider, setIsDraggingSlider] = useState(false)
-
-  useEffect(() => {
-    /**
-     * Called only when the component mounts. Calls async methods to:
-     *  set audio settings, load audio, and play the audio sequentially
-     */
-    const setupAudioAndPlay = async () => {
-      try {
-        await setAudioSettings()
-        await loadAudio()
-        await play()
-      } catch (error) {
-        console.log('Mount error: ', error)
-      }
-    }
-
-    setupAudioAndPlay()
-
-    return unsetAudioInstance
-  }, [])
 
   /* [start] Audio methods  */
 
@@ -58,36 +38,6 @@ function AudioPlayer({ route }) {
         Audio.INTERRUPTION_MODE_ANDROID_DO_NOT_MIX
       )
     )
-  }
-
-  /**
-   * Loads audio from SoundCloud.
-   * Builds the SoundCloud api endpoint from a given 'track url' and SoundCloud client id.
-   * Calls setOnPlaybackStatusUpdate to retrieve track status updates.
-   * Once the track is loaded, we know it's duration, so we update the durationMillis state variable.
-   */
-  const loadAudio = async () => {
-    setIsLoading(true)
-    const { trackUrl } = route.params
-    if (!trackUrl) {
-      // TODO Handle Error
-      return
-    }
-    audioInstance = new Audio.Sound()
-
-    try {
-      const uri = `${trackUrl}?client_id=${CLIENT_ID}`
-      const sourceData = { uri }
-      const audioStatus = await audioInstance.loadAsync(sourceData)
-      if (!audioStatus.isLoaded) throw 'Track could not be loaded'
-
-      setOnPlaybackStatusUpdate()
-
-      /* Set the track duration to be used by UI */
-      setDurationMillis(audioStatus.durationMillis)
-    } catch (error) {
-      console.log('Error load: ', error)
-    }
   }
 
   /* [start] Playback Status methods  */
@@ -122,6 +72,37 @@ function AudioPlayer({ route }) {
   /* [end] Playback Status Update  */
 
   /**
+   * Loads audio from SoundCloud.
+   * Builds the SoundCloud api endpoint from a given 'track url' and SoundCloud client id.
+   * Calls setOnPlaybackStatusUpdate to retrieve track status updates.
+   * Once the track is loaded, we know it's duration, so we update the durationMillis state variable.
+   */
+  const loadAudio = async () => {
+    setIsLoading(true)
+    const { trackUrl } = route.params
+    if (!trackUrl) {
+      // TODO Handle Error
+      return
+    }
+    audioInstance = new Audio.Sound()
+
+    try {
+      const uri = `${trackUrl}?client_id=${CLIENT_ID}`
+      const sourceData = { uri }
+      const audioStatus = await audioInstance.loadAsync(sourceData)
+      if (!audioStatus.isLoaded) throw new Error('Track could not be loaded')
+
+      setIsLoading(false)
+      setOnPlaybackStatusUpdate()
+
+      /* Set the track duration to be used by UI */
+      setDurationMillis(audioStatus.durationMillis)
+    } catch (error) {
+      console.log('Error load: ', error)
+    }
+  }
+
+  /**
    * Sets the track position in milliseconds
    * @param {positionMillis} number
    */
@@ -151,6 +132,26 @@ function AudioPlayer({ route }) {
     }
   }
 
+  useEffect(() => {
+    /**
+     * Called only when the component mounts. Calls async methods to:
+     *  set audio settings, load audio, and play the audio sequentially
+     */
+    const setupAudioAndPlay = async () => {
+      try {
+        await setAudioSettings()
+        await loadAudio()
+        await play()
+      } catch (error) {
+        console.log('Mount error: ', error)
+      }
+    }
+
+    setupAudioAndPlay()
+
+    return unsetAudioInstance
+  }, [])
+
   /* [end] Audio methods  */
 
   /**
@@ -178,18 +179,31 @@ function AudioPlayer({ route }) {
 
   return (
     <View>
-      <ControlButton isPlayButton={!isPlaying} onPress={isPlaying ? pause : play} />
-      <Slider
-        minimumValue={0}
-        value={sliderPosition}
-        maximumValue={durationMillis}
-        onValueChange={onSliderChange}
-        onSlidingComplete={onSlidingComplete}
-        minimumTrackTintColor="black"
-        maximumTrackTintColor="white"
-      />
+      {isLoading && <ActivityIndicator size="large" color="black" />}
+      {!isLoading && (
+        <View>
+          <ControlButton isPlayButton={!isPlaying} onPress={isPlaying ? pause : play} />
+          <Slider
+            minimumValue={0}
+            value={sliderPosition}
+            maximumValue={durationMillis}
+            onValueChange={onSliderChange}
+            onSlidingComplete={onSlidingComplete}
+            minimumTrackTintColor="black"
+            maximumTrackTintColor="white"
+          />
+        </View>
+      )}
     </View>
   )
+}
+
+AudioPlayer.propTypes = {
+  route: PropTypes.shape({
+    params: PropTypes.shape({
+      trackUrl: PropTypes.string,
+    }),
+  }).isRequired,
 }
 
 export default AudioPlayer

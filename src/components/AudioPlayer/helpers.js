@@ -4,10 +4,10 @@
  * @param {string} interruptionModeAndroid
  * @return AudioMode data
  */
-export const getAudioModeData = (interruptionModeiOS, interruptionModeAndroid) => ({
+export const getAudioModeData = (interruptionModeIOS, interruptionModeAndroid) => ({
   allowsRecordingIOS: false,
-  interruptionModeIOS: interruptionModeiOS,
-  interruptionModeAndroid: interruptionModeAndroid,
+  interruptionModeIOS,
+  interruptionModeAndroid,
   playsInSilentModeIOS: true,
   playThroughEarpieceAndroid: false,
   shouldDuckAndroid: false,
