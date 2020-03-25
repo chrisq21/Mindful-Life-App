@@ -113,7 +113,8 @@ function AudioPlayer({ route }) {
   }
 
   /**
-   * Play audio
+   * Play audio.
+   * Sets isPlaying state variable to true
    */
   const play = async () => {
     if (audioInstance) {
@@ -124,6 +125,7 @@ function AudioPlayer({ route }) {
 
   /**
    * Pause audio
+   * Sets isPlaying state variable to false
    */
   const pause = async () => {
     if (audioInstance) {
