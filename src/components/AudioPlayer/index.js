@@ -1,5 +1,5 @@
 import React, { useState, useEffect, Fragment } from 'react'
-import { ActivityIndicator, View, Text, AppState } from 'react-native'
+import { ActivityIndicator, AppState } from 'react-native'
 import PropTypes from 'prop-types'
 import { Audio } from 'expo-av'
 import CLIENT_ID from '../../constants/SoundCloud'
