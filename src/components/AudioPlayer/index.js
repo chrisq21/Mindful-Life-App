@@ -1,11 +1,19 @@
-import React, { useState, useEffect } from 'react'
-import { ActivityIndicator, Slider, View, AppState } from 'react-native'
+import React, { useState, useEffect, Fragment } from 'react'
+import { ActivityIndicator, View, Text, AppState } from 'react-native'
 import PropTypes from 'prop-types'
 import { Audio } from 'expo-av'
 import CLIENT_ID from '../../constants/SoundCloud'
 import { getAudioModeData } from './helpers'
+import AudioSlider from './AudioSlider'
 import ControlButton from './ControlButton'
-import Styled from './styles'
+import {
+  AudioPlayerWrapper,
+  AudioPlayerInnerWrapper,
+  ControlsWrapper,
+  DescriptionWrapper,
+  PlaylistTitle,
+  TrackTitle,
+} from './styles'
 
 /* Audio Instance */
 let audioInstance = null
@@ -16,15 +24,7 @@ function AudioPlayer({ route }) {
   const [isLoading, setIsLoading] = useState(false)
   const [isDraggingSlider, setIsDraggingSlider] = useState(false)
   const [durationMillis, setDurationMillis] = useState(0)
-  const [sliderPosition, setSliderPosition] = useState(0)
-
-  useEffect(() => {
-    AppState.addEventListener('change', handleAppStateChange)
-
-    return () => {
-      AppState.removeEventListener('change', handleAppStateChange)
-    }
-  })
+  const [sliderPositionMillis, setSliderPositionMillis] = useState(0)
 
   const handleAppStateChange = (nextAppState) => {
     if (!isAppActive && nextAppState === 'active') {
@@ -34,6 +34,14 @@ function AudioPlayer({ route }) {
       setIsAppActive(false)
     }
   }
+
+  useEffect(() => {
+    AppState.addEventListener('change', handleAppStateChange)
+
+    return () => {
+      AppState.removeEventListener('change', handleAppStateChange)
+    }
+  })
 
   /* [start] Audio methods  */
 
@@ -67,7 +75,7 @@ function AudioPlayer({ route }) {
    */
   const onPlaybackStatusUpdate = (status) => {
     if (status.isPlaying && !isDraggingSlider && isAppActive) {
-      setSliderPosition(status.positionMillis)
+      setSliderPositionMillis(status.positionMillis)
     }
   }
 
@@ -198,24 +206,31 @@ function AudioPlayer({ route }) {
     }
   }
 
+  const { trackTitle, playlistTitle } = route.params
+
   return (
-    <Styled.AudioPlayerWrapper>
-      {isLoading && <ActivityIndicator size="large" color="black" />}
-      {!isLoading && (
-        <View>
-          <ControlButton isPlayButton={!isPlaying} onPress={isPlaying ? pause : play} />
-          <Slider
-            minimumValue={0}
-            value={sliderPosition}
-            maximumValue={durationMillis}
-            onValueChange={onSliderChange}
-            onSlidingComplete={onSlidingComplete}
-            minimumTrackTintColor="black"
-            maximumTrackTintColor="white"
-          />
-        </View>
-      )}
-    </Styled.AudioPlayerWrapper>
+    <AudioPlayerWrapper>
+      <AudioPlayerInnerWrapper>
+        {isLoading && <ActivityIndicator size="large" color="black" />}
+        {!isLoading && (
+          <Fragment>
+            <DescriptionWrapper>
+              <PlaylistTitle>{playlistTitle}</PlaylistTitle>
+              <TrackTitle>{trackTitle}</TrackTitle>
+            </DescriptionWrapper>
+            <ControlsWrapper>
+              <ControlButton isPlayButton={!isPlaying} onPress={isPlaying ? pause : play} />
+              <AudioSlider
+                durationMillis={durationMillis}
+                sliderPositionMillis={sliderPositionMillis}
+                onSliderChange={onSliderChange}
+                onSlidingComplete={onSlidingComplete}
+              />
+            </ControlsWrapper>
+          </Fragment>
+        )}
+      </AudioPlayerInnerWrapper>
+    </AudioPlayerWrapper>
   )
 }
 
@@ -223,6 +238,8 @@ AudioPlayer.propTypes = {
   route: PropTypes.shape({
     params: PropTypes.shape({
       trackUrl: PropTypes.string,
+      trackTitle: PropTypes.string,
+      playlistTitle: PropTypes.string,
     }),
   }).isRequired,
 }
