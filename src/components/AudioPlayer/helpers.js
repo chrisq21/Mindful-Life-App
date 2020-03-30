@@ -6,12 +6,12 @@
  */
 export const getAudioModeData = (interruptionModeIOS, interruptionModeAndroid) => ({
   allowsRecordingIOS: false,
-  interruptionModeIOS,
-  interruptionModeAndroid,
   playsInSilentModeIOS: true,
+  interruptionModeIOS,
+  staysActiveInBackground: true,
+  interruptionModeAndroid,
   playThroughEarpieceAndroid: false,
   shouldDuckAndroid: false,
-  staysActiveInBackground: true,
 })
 
 /**

@@ -1,20 +1,39 @@
 import React, { useState, useEffect } from 'react'
-import { ActivityIndicator, Slider, View } from 'react-native'
+import { ActivityIndicator, Slider, View, AppState } from 'react-native'
 import PropTypes from 'prop-types'
 import { Audio } from 'expo-av'
 import CLIENT_ID from '../../constants/SoundCloud'
 import { getAudioModeData } from './helpers'
 import ControlButton from './ControlButton'
+import Styled from './styles'
 
 /* Audio Instance */
 let audioInstance = null
 
 function AudioPlayer({ route }) {
-  const [sliderPosition, setSliderPosition] = useState(0)
-  const [durationMillis, setDurationMillis] = useState(0)
+  const [isAppActive, setIsAppActive] = useState(true)
   const [isPlaying, setIsPlaying] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
   const [isDraggingSlider, setIsDraggingSlider] = useState(false)
+  const [durationMillis, setDurationMillis] = useState(0)
+  const [sliderPosition, setSliderPosition] = useState(0)
+
+  useEffect(() => {
+    AppState.addEventListener('change', handleAppStateChange)
+
+    return () => {
+      AppState.removeEventListener('change', handleAppStateChange)
+    }
+  })
+
+  const handleAppStateChange = (nextAppState) => {
+    if (!isAppActive && nextAppState === 'active') {
+      setIsAppActive(setIsAppActive(true))
+    }
+    if (isAppActive && nextAppState.match(/inactive|background/)) {
+      setIsAppActive(false)
+    }
+  }
 
   /* [start] Audio methods  */
 
@@ -47,7 +66,7 @@ function AudioPlayer({ route }) {
    * @param {object} status
    */
   const onPlaybackStatusUpdate = (status) => {
-    if (status.isPlaying && !isDraggingSlider) {
+    if (status.isPlaying && !isDraggingSlider && isAppActive) {
       setSliderPosition(status.positionMillis)
     }
   }
@@ -67,7 +86,7 @@ function AudioPlayer({ route }) {
    */
   useEffect(() => {
     setOnPlaybackStatusUpdate()
-  }, [isDraggingSlider])
+  }, [isDraggingSlider, isAppActive])
 
   /* [end] Playback Status Update  */
 
@@ -180,7 +199,7 @@ function AudioPlayer({ route }) {
   }
 
   return (
-    <View>
+    <Styled.AudioPlayerWrapper>
       {isLoading && <ActivityIndicator size="large" color="black" />}
       {!isLoading && (
         <View>
@@ -196,7 +215,7 @@ function AudioPlayer({ route }) {
           />
         </View>
       )}
-    </View>
+    </Styled.AudioPlayerWrapper>
   )
 }
 

@@ -25,7 +25,12 @@
     "description": "",
     "ios": {
       "bundleIdentifier": "com.chris.mindfullife",
-      "supportsTablet": true
+      "supportsTablet": true,
+      "infoPlist": {
+        "UIBackgroundModes": [
+          "audio"
+        ]
+      }
     },
     "android": {
       "package": "com.chrisqueen.mindful_life_project_app",

@@ -4,6 +4,10 @@ import PropTypes from 'prop-types'
 import pauseBtnImgSrc from './images/pause-btn.png'
 import playBtnImgSrc from './images/play-btn.png'
 
+/**
+ * Play and Pause button
+ */
+
 const ControlButton = ({ isPlayButton, onPress }) => (
   <TouchableOpacity onPress={onPress}>
     <Image resizeMode="contain" source={isPlayButton ? playBtnImgSrc : pauseBtnImgSrc} />
