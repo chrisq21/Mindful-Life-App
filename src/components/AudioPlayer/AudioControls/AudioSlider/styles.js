@@ -1,4 +1,5 @@
-import styled from 'styled-components'
+import styled from 'styled-components/native'
+import Colors from '../../../../styles/Colors'
 
 export const AudioSliderWrapper = styled.View`
   margin-top: 50px;
@@ -11,4 +12,8 @@ export const SliderTimesWrapper = styled.View`
   flex-direction: row;
   justify-content: space-between;
   margin-top: 5px;
+`
+
+export const SliderTime = styled.Text`
+  color: ${Colors.white};
 `
