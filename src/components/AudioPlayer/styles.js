@@ -1,10 +1,12 @@
 import styled from 'styled-components/native'
+import Colors from '../../styles/Colors'
 
 export const AudioPlayerWrapper = styled.View`
   display: flex;
   flex: 1;
   flex-direction: column;
   align-items: center;
+  background-color: ${({ category }) => (category === 'hip-hop' ? Colors.orange : Colors.green)};
 `
 
 export const AudioPlayerInnerWrapper = styled.View`
@@ -25,7 +27,9 @@ export const DescriptionWrapper = styled.View`
 `
 
 export const PlaylistTitle = styled.Text`
-  font-size: 18px;
+  font-size: 25px;
+  font-weight: bold;
+  color: ${({ category }) => (category === 'hip-hop' ? Colors.darkOrange : Colors.darkGreen)};
 `
 
 export const TrackTitle = styled.Text`
@@ -34,12 +38,5 @@ export const TrackTitle = styled.Text`
   padding-bottom: 10px;
   padding-top: 10px;
   text-align: center;
-`
-
-export const ControlsWrapper = styled.View`
-  display: flex;
-  flex-direction: column;
-  flex: 2;
-  align-items: center;
-  width: 100%;
+  color: ${Colors.white};
 `

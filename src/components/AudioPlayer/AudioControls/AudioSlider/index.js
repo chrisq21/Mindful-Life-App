@@ -3,8 +3,15 @@ import { Slider, Text } from 'react-native'
 import PropTypes from 'prop-types'
 import { getFormattedTime } from './helpers'
 import { AudioSliderWrapper, SliderTimesWrapper } from './styles'
+import Colors from '../../../../styles/Colors'
 
-function AudioSlider({ durationMillis, sliderPositionMillis, onSliderChange, onSlidingComplete }) {
+function AudioSlider({
+  durationMillis,
+  sliderPositionMillis,
+  onSliderChange,
+  onSlidingComplete,
+  category,
+}) {
   const formattedTrackPosition = getFormattedTime(sliderPositionMillis)
   const formattedTrackDuration = getFormattedTime(durationMillis)
   return (
@@ -15,7 +22,7 @@ function AudioSlider({ durationMillis, sliderPositionMillis, onSliderChange, onS
         maximumValue={durationMillis}
         onValueChange={onSliderChange}
         onSlidingComplete={onSlidingComplete}
-        minimumTrackTintColor="black"
+        minimumTrackTintColor={category === 'hip-hop' ? Colors.darkOrange : Colors.darkGreen}
         maximumTrackTintColor="white"
       />
       <SliderTimesWrapper>
@@ -27,6 +34,7 @@ function AudioSlider({ durationMillis, sliderPositionMillis, onSliderChange, onS
 }
 
 AudioSlider.propTypes = {
+  category: PropTypes.string.isRequired,
   durationMillis: PropTypes.number.isRequired,
   sliderPositionMillis: PropTypes.number.isRequired,
   onSliderChange: PropTypes.func.isRequired,

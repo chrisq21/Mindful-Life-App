@@ -2,14 +2,13 @@ import React, { useState, useEffect, Fragment } from 'react'
 import { ActivityIndicator, AppState } from 'react-native'
 import PropTypes from 'prop-types'
 import { Audio } from 'expo-av'
+import AudioControls from './AudioControls'
 import CLIENT_ID from '../../constants/SoundCloud'
 import { getAudioModeData } from './helpers'
-import AudioSlider from './AudioSlider'
-import ControlButton from './ControlButton'
+
 import {
   AudioPlayerWrapper,
   AudioPlayerInnerWrapper,
-  ControlsWrapper,
   DescriptionWrapper,
   PlaylistTitle,
   TrackTitle,
@@ -206,27 +205,28 @@ function AudioPlayer({ route }) {
     }
   }
 
-  const { trackTitle, playlistTitle } = route.params
+  const { trackTitle, playlistTitle, category } = route.params
 
   return (
-    <AudioPlayerWrapper>
+    <AudioPlayerWrapper category={category}>
       <AudioPlayerInnerWrapper>
         {isLoading && <ActivityIndicator size="large" color="black" />}
         {!isLoading && (
           <Fragment>
             <DescriptionWrapper>
-              <PlaylistTitle>{playlistTitle}</PlaylistTitle>
-              <TrackTitle>{trackTitle}</TrackTitle>
+              <PlaylistTitle category={category}>{playlistTitle}</PlaylistTitle>
+              <TrackTitle category={category}>{trackTitle}</TrackTitle>
             </DescriptionWrapper>
-            <ControlsWrapper>
-              <ControlButton isPlayButton={!isPlaying} onPress={isPlaying ? pause : play} />
-              <AudioSlider
-                durationMillis={durationMillis}
-                sliderPositionMillis={sliderPositionMillis}
-                onSliderChange={onSliderChange}
-                onSlidingComplete={onSlidingComplete}
-              />
-            </ControlsWrapper>
+            <AudioControls
+              play={play}
+              pause={pause}
+              isPlaying={isPlaying}
+              category={category}
+              durationMillis={durationMillis}
+              sliderPositionMillis={sliderPositionMillis}
+              onSliderChange={onSliderChange}
+              onSlidingComplete={onSlidingComplete}
+            />
           </Fragment>
         )}
       </AudioPlayerInnerWrapper>
@@ -237,6 +237,7 @@ function AudioPlayer({ route }) {
 AudioPlayer.propTypes = {
   route: PropTypes.shape({
     params: PropTypes.shape({
+      category: PropTypes.string,
       trackUrl: PropTypes.string,
       trackTitle: PropTypes.string,
       playlistTitle: PropTypes.string,

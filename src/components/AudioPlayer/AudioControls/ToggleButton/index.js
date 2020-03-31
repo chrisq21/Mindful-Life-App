@@ -8,15 +8,15 @@ import playBtnImgSrc from './images/play-btn.png'
  * Play and Pause button
  */
 
-const ControlButton = ({ isPlayButton, onPress }) => (
+const ToggleButton = ({ isPlayButton, onPress }) => (
   <TouchableOpacity onPress={onPress}>
     <Image resizeMode="contain" source={isPlayButton ? playBtnImgSrc : pauseBtnImgSrc} />
   </TouchableOpacity>
 )
 
-ControlButton.propTypes = {
+ToggleButton.propTypes = {
   isPlayButton: PropTypes.bool.isRequired,
   onPress: PropTypes.func.isRequired,
 }
 
-export default ControlButton
+export default ToggleButton
