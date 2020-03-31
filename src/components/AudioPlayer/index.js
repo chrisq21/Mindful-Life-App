@@ -1,10 +1,11 @@
 import React, { useState, useEffect, Fragment } from 'react'
-import { ActivityIndicator, AppState } from 'react-native'
+import { AppState } from 'react-native'
 import PropTypes from 'prop-types'
 import { Audio } from 'expo-av'
 import AudioControls from './AudioControls'
 import CLIENT_ID from '../../constants/SoundCloud'
 import { getAudioModeData } from './helpers'
+import LoadingSpinner from '../shared/LoadingSpinner'
 
 import {
   AudioPlayerWrapper,
@@ -210,7 +211,7 @@ function AudioPlayer({ route }) {
   return (
     <AudioPlayerWrapper category={category}>
       <AudioPlayerInnerWrapper>
-        {isLoading && <ActivityIndicator size="large" color="black" />}
+        {isLoading && <LoadingSpinner />}
         {!isLoading && (
           <Fragment>
             <DescriptionWrapper>
