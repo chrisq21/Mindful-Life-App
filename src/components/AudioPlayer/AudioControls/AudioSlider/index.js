@@ -1,5 +1,5 @@
 import React from 'react'
-import { Slider, Text } from 'react-native'
+import { Slider } from 'react-native'
 import PropTypes from 'prop-types'
 import { getFormattedTime } from './helpers'
 import { AudioSliderWrapper, SliderTimesWrapper, SliderTime } from './styles'
