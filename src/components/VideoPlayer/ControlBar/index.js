@@ -1,8 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components/native'
-import Colors from '../../../styles/Colors'
 import { MaterialIcons } from '@expo/vector-icons'
+import Colors from '../../../styles/Colors'
 
 const ControlBarWrapper = styled.View`
   width: 100%;

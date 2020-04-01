@@ -12,6 +12,9 @@ function VideoPlayer({ source }) {
     setIsPlaying(!isPlaying)
   }
 
+  const videoInlineStyles = { width: '100%', aspectRatio: 1.78 }
+  const loadingPosterInlineStyles = { height: '100%', width: '100%' }
+
   return (
     <View>
       <Video
@@ -22,10 +25,10 @@ function VideoPlayer({ source }) {
         resizeMode="contain"
         shouldPlay={isPlaying}
         isLooping
-        style={{ width: '100%', aspectRatio: 1.78 }}
-        usePoster={true}
+        style={videoInlineStyles}
+        usePoster
         posterSource={LoadingImageSrc}
-        posterStyle={{ height: '100%', width: '100%' }}
+        posterStyle={loadingPosterInlineStyles}
       />
       <ControlBar isPlaying={isPlaying} toggleVideo={toggleVideo} />
     </View>
