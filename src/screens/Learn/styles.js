@@ -1,9 +1,13 @@
+import ScreenWrapper from '../../components/Shared/ScreenWrapper'
 import styled from 'styled-components/native'
 import Colors from '../../styles/Colors'
 
-export const SectionContainer = styled.View`
+export const LearnScreenWrapper = styled(ScreenWrapper)`
+  background-color: ${Colors.blue};
+`
+
+export const SectionWrapper = styled.View`
   width: 100%;
-  margin: 30px 0;
 `
 
 const BaseTextWrapper = styled.Text`
