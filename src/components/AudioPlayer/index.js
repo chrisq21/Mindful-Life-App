@@ -5,7 +5,7 @@ import { Audio } from 'expo-av'
 import AudioControls from './AudioControls'
 import CLIENT_ID from '../../constants/SoundCloud'
 import { getAudioModeData } from './helpers'
-import LoadingSpinner from '../shared/LoadingSpinner'
+import LoadingSpinner from '../Shared/LoadingSpinner'
 
 import {
   AudioPlayerWrapper,
