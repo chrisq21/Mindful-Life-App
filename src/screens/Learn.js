@@ -52,7 +52,7 @@ function Learn({ route }) {
   const copyData = language === 'spanish' ? spanishCopy : englishCopy
   const { width } = Dimensions.get('window')
   const videoSource = language === 'spanish' ? animatedVideoSpanishSrc : animatedVideoSrc
-
+  console.log('animatedVideoSrc: ', animatedVideoSrc)
   return (
     <View style={{ backgroundColor: Colors.blue }}>
       <ScrollView>
