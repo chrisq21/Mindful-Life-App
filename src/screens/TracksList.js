@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { View, Text } from 'react-native'
-import MLPFlatList from '../components/MLPFlatList'
+import RowList from '../components/RowList'
 import { getThemeColorByCategory, getLightThemeColorByCategory } from '../utils/categoryValues'
 import { ScreenContainerStyles, ListStyles } from '../styles/baseStyles'
 
@@ -55,7 +55,7 @@ class TracksList extends React.Component {
         <Text style={[ListStyles.header, { color: getLightThemeColorByCategory(category) }]}>
           Tracks
         </Text>
-        <MLPFlatList
+        <RowList
           listData={streamableTracks}
           onRowPressHandler={this.onRowPressHandler}
           category={category}

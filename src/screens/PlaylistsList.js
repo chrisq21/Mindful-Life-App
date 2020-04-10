@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { View, Text, ActivityIndicator, StyleSheet } from 'react-native'
-import MLPFlatList from '../components/MLPFlatList'
+import RowList from '../components/RowList'
 import {
   getUserSlugByCategoryAndLanguage,
   getThemeColorByCategory,
@@ -96,7 +96,7 @@ class PlaylistsList extends React.Component {
             <Text style={[ListStyles.header, { color: getLightThemeColorByCategory(category) }]}>
               Playlists
             </Text>
-            <MLPFlatList
+            <RowList
               listData={playlistData}
               onRowPressHandler={(rowData) => this.onRowPressHandler(rowData)}
               category={category}
