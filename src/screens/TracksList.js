@@ -15,11 +15,10 @@ class TracksList extends React.Component {
     this.getStreamableTracks = this.getStreamableTracks.bind(this)
   }
 
-  onRowPressHandler(rowData) {
+  onRowPressHandler(trackData) {
     const { navigation, route } = this.props
     // TODO make sure rowData.track.stream_url exists
     const { playlistTitle, category } = route.params
-    const trackData = rowData.item
     const audioPlayerData = {
       trackTitle: trackData.title,
       trackUrl: trackData.stream_url,

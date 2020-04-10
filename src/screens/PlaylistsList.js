@@ -32,10 +32,9 @@ class PlaylistsList extends React.Component {
     this.fetchUserData()
   }
 
-  onRowPressHandler(rowData) {
+  onRowPressHandler(playlistData) {
     const { navigation, route } = this.props
     const { category } = route.params
-    const playlistData = rowData.item
 
     navigation.navigate('TracksList', {
       tracks: playlistData.tracks,

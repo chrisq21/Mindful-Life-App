@@ -25,42 +25,41 @@ const RowText = styled.Text`
   padding-left: 30px;
 `
 
-class MLPFlatList extends React.Component {
-  constructor(props) {
-    super(props)
+const Row = ({ category, onRowPressHandler, item, index }) => (
+  <View>
+    <TouchableOpacity onPress={() => onRowPressHandler(item)}>
+      <RowWrapper isFirstRow={index === 0} category={category}>
+        <RowText>{item.title}</RowText>
+      </RowWrapper>
+    </TouchableOpacity>
+  </View>
+)
 
-    this.renderRow = this.renderRow.bind(this)
-  }
-
-  renderRow(rowData) {
-    const { category, onRowPressHandler } = this.props
-    return (
-      <View>
-        <TouchableOpacity onPress={() => onRowPressHandler(rowData)}>
-          <RowWrapper isFirstRow={rowData.index === 0} category={category}>
-            <RowText>{rowData.item.title}</RowText>
-          </RowWrapper>
-        </TouchableOpacity>
-      </View>
-    )
-  }
-
-  render() {
-    const { listData } = this.props
-    return (
-      <RowListWrapper
-        keyExtractor={(_, index) => `key:${index}`}
-        data={listData}
-        renderItem={this.renderRow}
-      />
-    )
-  }
+function RowList({ listData, category, onRowPressHandler }) {
+  return (
+    <RowListWrapper
+      keyExtractor={(_, index) => `key:${index}`}
+      data={listData}
+      renderItem={({ index, item }) => (
+        <Row category={category} onRowPressHandler={onRowPressHandler} item={item} index={index} />
+      )}
+    />
+  )
 }
 
-MLPFlatList.propTypes = {
+Row.propTypes = {
+  category: PropTypes.string.isRequired,
+  onRowPressHandler: PropTypes.func.isRequired,
+  item: PropTypes.shape({
+    title: PropTypes.string.isRequired,
+  }).isRequired,
+  index: PropTypes.number.isRequired,
+}
+
+RowList.propTypes = {
   category: PropTypes.string.isRequired,
   onRowPressHandler: PropTypes.func.isRequired,
   listData: PropTypes.array.isRequired,
 }
 
-export default MLPFlatList
+export default RowList
