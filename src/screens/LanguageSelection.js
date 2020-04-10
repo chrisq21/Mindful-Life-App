@@ -1,44 +1,45 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { TouchableOpacity, View, Text, StyleSheet } from 'react-native'
-import { ScreenContainerStyles } from '../styles/baseStyles'
 import Colors from '../constants/colors'
+import ScreenWrapper from '../components/Shared/ScreenWrapper'
+import styled from 'styled-components/native'
 
-const styles = StyleSheet.create({
-  sectionButton: {
-    flex: 1,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    borderBottomWidth: 1,
-    paddingRight: 20,
-    paddingLeft: 20,
-  },
-  sectionText: {
-    color: Colors.white,
-    flex: 2,
-    fontSize: 35,
-    fontWeight: 'bold',
-    marginLeft: 20,
-  },
-})
+const LanguageButton = styled.TouchableOpacity`
+  flex: 1;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom-width: 1px;
+  padding-right: 20px;
+  padding-left: 20px;
+`
+
+const ButtonText = styled.Text`
+  color: ${Colors.white};
+  flex: 2;
+  font-size: 35px;
+  font-weight: bold;
+  margin-left: 2px;
+`
+
+const EnglishButton = styled(LanguageButton)`
+  background-color: ${Colors.blue};
+`
+
+const SpanishButton = styled(LanguageButton)`
+  background-color: ${Colors.red};
+`
 
 function LanguageSelection({ navigation }) {
   return (
-    <View style={ScreenContainerStyles}>
-      <TouchableOpacity
-        style={[styles.sectionButton, { backgroundColor: Colors.blue }]}
-        onPress={() => navigation.navigate('Home', { language: 'english' })}
-      >
-        <Text style={[styles.sectionText, { color: Colors.lightBlue }]}>English</Text>
-      </TouchableOpacity>
-      <TouchableOpacity
-        style={[styles.sectionButton, { backgroundColor: Colors.red }]}
-        onPress={() => navigation.navigate('Home', { language: 'spanish' })}
-      >
-        <Text style={[styles.sectionText, { color: Colors.lightRed }]}>Español</Text>
-      </TouchableOpacity>
-    </View>
+    <ScreenWrapper>
+      <EnglishButton onPress={() => navigation.navigate('Home', { language: 'english' })}>
+        <ButtonText>English</ButtonText>
+      </EnglishButton>
+      <SpanishButton onPress={() => navigation.navigate('Home', { language: 'spanish' })}>
+        <ButtonText>Español</ButtonText>
+      </SpanishButton>
+    </ScreenWrapper>
   )
 }
 
