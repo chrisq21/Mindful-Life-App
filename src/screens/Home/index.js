@@ -32,9 +32,7 @@ function Home({ navigation, route }) {
         <CheckInButtonText>{copyData.homeScreen.checkIn}</CheckInButtonText>
         <ImageWrapper source={anchorImgSrc} />
       </CheckInButton>
-      <SitsButton
-        onPress={() => navigation.navigate('Playlists', { category: 'sits', language })}
-      >
+      <SitsButton onPress={() => navigation.navigate('Playlists', { category: 'sits', language })}>
         <SitsButtonText>{copyData.homeScreen.sits}</SitsButtonText>
         <ImageWrapper source={smileImgSrc} />
       </SitsButton>

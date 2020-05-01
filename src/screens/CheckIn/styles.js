@@ -1,6 +1,6 @@
+import styled from 'styled-components'
 import Colors from '../../constants/colors'
 import ScreenWrapper from '../../components/Shared/ScreenWrapper'
-import styled from 'styled-components'
 
 export const CheckinScreenWrapper = styled(ScreenWrapper)`
   background-color: ${Colors.red};

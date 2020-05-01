@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
+import styled from 'styled-components/native'
 import LoadingSpinner from '../../components/Shared/LoadingSpinner'
 import List from '../../components/List'
 import { fetchUser, fetchPlaylists } from '../../lib/sound-cloud-services'
 import { ListWrapper, Heading } from '../../components/Shared/ListStyles'
-import styled from 'styled-components/native'
 import { getThemeColorByCategory, getLightThemeColorByCategory } from '../../utils/categoryValues'
 
 const LoadingSpinnerWrapper = styled(LoadingSpinner)`
@@ -58,6 +58,7 @@ function Playlists({ route, navigation }) {
       {!playlists && <LoadingSpinnerWrapper />}
       {playlists && (
         <>
+          {/* eslint-disable react-native/no-raw-text */}
           <Heading color={getLightThemeColorByCategory(category)}>Playlists</Heading>
           <List category={category} listData={playlists} onRowPress={onRowPress} />
         </>

@@ -1,8 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import styled from 'styled-components/native'
 import Colors from '../constants/colors'
 import ScreenWrapper from '../components/Shared/ScreenWrapper'
-import styled from 'styled-components/native'
 
 const LanguageButton = styled.TouchableOpacity`
   flex: 1;
@@ -34,9 +34,11 @@ function LanguageSelection({ navigation }) {
   return (
     <ScreenWrapper>
       <EnglishButton onPress={() => navigation.navigate('Home', { language: 'english' })}>
+        {/* eslint-disable react-native/no-raw-text */}
         <ButtonText>English</ButtonText>
       </EnglishButton>
       <SpanishButton onPress={() => navigation.navigate('Home', { language: 'spanish' })}>
+        {/* eslint-disable react-native/no-raw-text */}
         <ButtonText>Español</ButtonText>
       </SpanishButton>
     </ScreenWrapper>

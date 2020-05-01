@@ -27,8 +27,10 @@ export const fetchUser = async (category, language) => {
     const userData = await response.json()
     return userData
   } catch (error) {
+    // TODO Add error handling
     console.log('FETCH DATA ERROR: ', error)
   }
+  return null
 }
 
 /**
@@ -43,6 +45,8 @@ export const fetchPlaylists = async (userID) => {
     const playlistsData = await response.json()
     return playlistsData
   } catch (error) {
+    // TODO Add error handling
     console.log('fetchPlaylistData ERROR_________: ', error)
   }
+  return null
 }

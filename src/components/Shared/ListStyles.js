@@ -1,6 +1,6 @@
 import { Text } from 'react-native'
-import ScreenWrapper from './ScreenWrapper'
 import styled from 'styled-components/native'
+import ScreenWrapper from './ScreenWrapper'
 
 // TODO use styled components theme
 export const ListWrapper = styled(ScreenWrapper)`

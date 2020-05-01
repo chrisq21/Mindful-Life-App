@@ -1,5 +1,5 @@
-import ScreenWrapper from '../../components/Shared/ScreenWrapper'
 import styled from 'styled-components/native'
+import ScreenWrapper from '../../components/Shared/ScreenWrapper'
 import Colors from '../../styles/Colors'
 
 export const LearnScreenWrapper = styled(ScreenWrapper)`

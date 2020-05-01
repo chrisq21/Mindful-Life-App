@@ -33,12 +33,14 @@ function Learn({ route }) {
         </SectionWrapper>
         <ImageWrapper source={meditationImgSrc} />
         <SectionWrapper>
+          {/* eslint-disable react-native/no-raw-text */}
           <SectionHeader>Benefits</SectionHeader>
           <SectionBody>{copyData.learnScreen.benefitsBody1}</SectionBody>
           <SectionBody>{copyData.learnScreen.benefitsBody2}</SectionBody>
           <ImageWrapper source={cloudsImgSrc} />
         </SectionWrapper>
         <SectionWrapper>
+          {/* eslint-disable react-native/no-raw-text */}
           <SectionHeader>Posters</SectionHeader>
           <ImageWrapper source={posterImgSrc} />
           <ImageWrapper source={togetherImgSrc} />
