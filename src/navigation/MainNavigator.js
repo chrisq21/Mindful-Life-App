@@ -53,22 +53,28 @@ function MainNavigator() {
       <Stack.Screen
         name="Playlists"
         component={Playlists}
-        options={({ navigation }) => ({
+        options={({ route, navigation }) => ({
+          title: '',
           headerRight: () => <DrawerIcon navigation={navigation} />,
+          ...(route.params.category === 'hip-hop' ? HeaderStyles.HipHop : HeaderStyles.Sits),
         })}
       />
       <Stack.Screen
         name="Tracks"
         component={Tracks}
-        options={({ navigation }) => ({
+        options={({ route, navigation }) => ({
+          title: '',
           headerRight: () => <DrawerIcon navigation={navigation} />,
+          ...(route.params.category === 'hip-hop' ? HeaderStyles.HipHop : HeaderStyles.Sits),
         })}
       />
       <Stack.Screen
         name="AudioPlayer"
         component={AudioPlayer}
-        options={({ navigation }) => ({
+        options={({ route, navigation }) => ({
+          title: '',
           headerRight: () => <DrawerIcon navigation={navigation} />,
+          ...(route.params.category === 'hip-hop' ? HeaderStyles.HipHop : HeaderStyles.Sits),
         })}
       />
     </Stack.Navigator>
