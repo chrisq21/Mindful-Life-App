@@ -21,5 +21,6 @@ module.exports = {
     'react/jsx-filename-extension': 'off',
     'class-methods-use-this': 'warn',
     'react/forbid-prop-types': 'warn',
+    'import/prefer-default-export': 'off',
   },
 }
