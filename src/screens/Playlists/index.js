@@ -1,8 +1,18 @@
 import React, { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
-import { View, ActivityIndicator, Text } from 'react-native'
+import LoadingSpinner from '../../components/Shared/LoadingSpinner'
 import List from '../../components/List'
 import { fetchUser, fetchPlaylists } from '../../lib/sound-cloud-services'
+import { ListWrapper, Heading } from '../../components/Shared/ListStyles'
+import styled from 'styled-components/native'
+import { getThemeColorByCategory, getLightThemeColorByCategory } from '../../utils/categoryValues'
+
+const LoadingSpinnerWrapper = styled(LoadingSpinner)`
+  flex-direction: row;
+  flex-grow: 1;
+  justify-content: center;
+  align-items: center;
+`
 
 function Playlists({ route, navigation }) {
   const [playlists, setPlaylists] = useState(null)
@@ -44,15 +54,15 @@ function Playlists({ route, navigation }) {
   const { category } = route.params
 
   return (
-    <View>
-      {!playlists && <ActivityIndicator size="large" color="white" />}
+    <ListWrapper backgroundColor={getThemeColorByCategory(category)}>
+      {!playlists && <LoadingSpinnerWrapper />}
       {playlists && (
-        <View>
-          <Text>Playlists</Text>
+        <>
+          <Heading color={getLightThemeColorByCategory(category)}>Playlists</Heading>
           <List category={category} listData={playlists} onRowPress={onRowPress} />
-        </View>
+        </>
       )}
-    </View>
+    </ListWrapper>
   )
 }
 

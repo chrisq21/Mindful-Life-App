@@ -7,6 +7,8 @@ import styled from 'styled-components/native'
 
 const ListWrapper = styled.FlatList`
   padding-bottom: 100px;
+  width: 100%;
+  flex-grow: 1;
 `
 
 const RowWrapper = styled.View`
@@ -16,6 +18,8 @@ const RowWrapper = styled.View`
   padding-bottom: 30px;
   padding-top: 30px;
   border-color: ${({ category }) => getDarkThemeColorByCategory(category)};
+  flex-grow: 1;
+  width: 100%;
 `
 
 const RowText = styled.Text`

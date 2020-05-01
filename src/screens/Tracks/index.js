@@ -1,7 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { View, Text } from 'react-native'
 import List from '../../components/List'
+import { ListWrapper, Heading } from '../../components/Shared/ListStyles'
+import { getThemeColorByCategory, getLightThemeColorByCategory } from '../../utils/categoryValues'
 
 function Tracks({ route, navigation }) {
   const onRowPress = (selectedTrack) => {
@@ -17,12 +18,10 @@ function Tracks({ route, navigation }) {
   const { tracks, category, playlistTitle } = route.params
 
   return (
-    <View>
-      <View>
-        <Text>{playlistTitle}</Text>
-        <List category={category} listData={tracks} onRowPress={onRowPress} />
-      </View>
-    </View>
+    <ListWrapper backgroundColor={getThemeColorByCategory(category)}>
+      <Heading color={getLightThemeColorByCategory(category)}>{playlistTitle}</Heading>
+      <List category={category} listData={tracks} onRowPress={onRowPress} />
+    </ListWrapper>
   )
 }
 
