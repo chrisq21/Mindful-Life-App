@@ -57,7 +57,7 @@ function About() {
         <View style={styles.linksContainer}>
           <Text
             style={[styles.text, styles.link]}
-            onPress={() => Linking.openURL('http://mindfullifeproject.org/our-board/')}
+            onPress={() => Linking.openURL('http://mindfullifeproject.org/our-team/')}
           >
             Our Team
           </Text>
