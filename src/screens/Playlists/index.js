@@ -1,9 +1,16 @@
 import React, { useEffect, useState } from 'react'
-import { View, Text, ActivityIndicator } from 'react-native'
+import PropTypes from 'prop-types'
+import { View, ActivityIndicator } from 'react-native'
+import List from '../../components/List'
 import { fetchUser, fetchPlaylists } from '../../lib/sound-cloud-services'
 
 function Playlists({ route }) {
   const { category, language } = route.params
+  const [playlists, setPlaylists] = useState(null)
+
+  const onRowPress = (param) => {
+    console.log('Param: ', param)
+  }
 
   useEffect(() => {
     /**
@@ -14,9 +21,9 @@ function Playlists({ route }) {
       try {
         const user = await fetchUser(category, language)
         if (user && user.id) {
-          const playlists = await fetchPlaylists(user.id)
-          if (playlists) {
-            console.log('playlists: ', playlists)
+          const playlistsData = await fetchPlaylists(user.id)
+          if (playlistsData) {
+            setPlaylists(playlistsData)
           }
         }
       } catch (error) {
@@ -28,10 +35,24 @@ function Playlists({ route }) {
   }, [])
   return (
     <View>
-      <Text>Playlists</Text>
-      <ActivityIndicator size="large" color="white" />
+      {!playlists && <ActivityIndicator size="large" color="white" />}
+      {playlists && (
+        <View>
+          <Text>Playlists</Text>
+          <List category={category} listData={playlists} onRowPress={onRowPress} />
+        </View>
+      )}
     </View>
   )
+}
+
+Playlists.propTypes = {
+  route: PropTypes.shape({
+    params: PropTypes.shape({
+      category: PropTypes.string,
+      language: PropTypes.string,
+    }).isRequired,
+  }).isRequired,
 }
 
 export default Playlists

@@ -25,9 +25,9 @@ const RowText = styled.Text`
   padding-left: 30px;
 `
 
-const Row = ({ category, onRowPressHandler, item, index }) => (
+const Row = ({ category, onRowPress, item, index }) => (
   <View>
-    <TouchableOpacity onPress={() => onRowPressHandler(item)}>
+    <TouchableOpacity onPress={() => onRowPress(item)}>
       <RowWrapper isFirstRow={index === 0} category={category}>
         <RowText>{item.title}</RowText>
       </RowWrapper>
@@ -35,13 +35,13 @@ const Row = ({ category, onRowPressHandler, item, index }) => (
   </View>
 )
 
-function List({ listData, category, onRowPressHandler }) {
+function List({ listData, category, onRowPress }) {
   return (
     <ListWrapper
       keyExtractor={(_, index) => `key:${index}`}
       data={listData}
       renderItem={({ index, item }) => (
-        <Row category={category} onRowPressHandler={onRowPressHandler} item={item} index={index} />
+        <Row category={category} onRowPress={onRowPress} item={item} index={index} />
       )}
     />
   )
@@ -49,7 +49,7 @@ function List({ listData, category, onRowPressHandler }) {
 
 Row.propTypes = {
   category: PropTypes.string.isRequired,
-  onRowPressHandler: PropTypes.func.isRequired,
+  onRowPress: PropTypes.func.isRequired,
   item: PropTypes.shape({
     title: PropTypes.string.isRequired,
   }).isRequired,
@@ -58,7 +58,7 @@ Row.propTypes = {
 
 List.propTypes = {
   category: PropTypes.string.isRequired,
-  onRowPressHandler: PropTypes.func.isRequired,
+  onRowPress: PropTypes.func.isRequired,
   listData: PropTypes.array.isRequired,
 }
 
