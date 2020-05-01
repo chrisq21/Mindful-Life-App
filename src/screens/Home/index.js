@@ -33,13 +33,13 @@ function Home({ navigation, route }) {
         <ImageWrapper source={anchorImgSrc} />
       </CheckInButton>
       <SitsButton
-        onPress={() => navigation.navigate('PlaylistsList', { category: 'sits', language })}
+        onPress={() => navigation.navigate('Playlists', { category: 'sits', language })}
       >
         <SitsButtonText>{copyData.homeScreen.sits}</SitsButtonText>
         <ImageWrapper source={smileImgSrc} />
       </SitsButton>
       <HipHopButton
-        onPress={() => navigation.navigate('PlaylistsList', { category: 'hip-hop', language })}
+        onPress={() => navigation.navigate('Playlists', { category: 'hip-hop', language })}
       >
         <HipHopButtonText>{copyData.homeScreen.hipHop}</HipHopButtonText>
         <ImageWrapper source={headphoneImgSrc} />

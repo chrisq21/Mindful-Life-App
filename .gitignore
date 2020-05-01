@@ -1,5 +1,5 @@
 node_modules/**/*
-constants/SoundCloud.js
+constants/sound-cloud-id.js
 .expo/*
 npm-debug.*
 *.jks

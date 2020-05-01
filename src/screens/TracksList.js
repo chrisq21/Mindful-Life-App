@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { View, Text } from 'react-native'
-import RowList from '../components/RowList'
+import List from '../components/List'
 import { getThemeColorByCategory, getLightThemeColorByCategory } from '../utils/categoryValues'
 import { ScreenContainerStyles, ListStyles } from '../styles/baseStyles'
 
@@ -54,7 +54,7 @@ class TracksList extends React.Component {
         <Text style={[ListStyles.header, { color: getLightThemeColorByCategory(category) }]}>
           Tracks
         </Text>
-        <RowList
+        <List
           listData={streamableTracks}
           onRowPressHandler={this.onRowPressHandler}
           category={category}

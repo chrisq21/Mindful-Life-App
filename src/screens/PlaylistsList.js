@@ -1,14 +1,15 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { View, Text, ActivityIndicator, StyleSheet } from 'react-native'
-import RowList from '../components/RowList'
+import List from '../components/List'
 import {
   getUserSlugByCategoryAndLanguage,
   getThemeColorByCategory,
   getLightThemeColorByCategory,
 } from '../utils/categoryValues'
 import { ScreenContainerStyles, ListStyles } from '../styles/baseStyles'
-import CLIENT_ID from '../constants/SoundCloud'
+import CLIENT_ID from '../constants/sound-cloud-id'
+import ScreenWrapper from '../components/Shared/ScreenWrapper'
 
 const styles = StyleSheet.create({
   activityIndicator: {
@@ -36,7 +37,7 @@ class PlaylistsList extends React.Component {
     const { navigation, route } = this.props
     const { category } = route.params
 
-    navigation.navigate('TracksList', {
+    navigation.navigate('Tracks', {
       tracks: playlistData.tracks,
       playlistTitle: playlistData.title,
       category,
@@ -74,13 +75,25 @@ class PlaylistsList extends React.Component {
     }
   }
 
+  // screenContainer: {
+  //   padding: 10,
+  //   flexGrow: 1,
+  // },
+  // header: {
+  //   fontSize: 30,
+  //   fontWeight: 'bold',
+  //   alignSelf: 'center',
+  //   paddingTop: 25,
+  //   paddingBottom: 25,
+  // },
+
   render() {
     const { route } = this.props
     const { category } = route.params
     const { playlistData } = this.state
 
     return (
-      <View
+      <ScreenWrapper
         style={[
           ListStyles.screenContainer,
           ScreenContainerStyles,
@@ -95,14 +108,14 @@ class PlaylistsList extends React.Component {
             <Text style={[ListStyles.header, { color: getLightThemeColorByCategory(category) }]}>
               Playlists
             </Text>
-            <RowList
+            <List
               listData={playlistData}
               onRowPressHandler={(rowData) => this.onRowPressHandler(rowData)}
               category={category}
             />
           </View>
         )}
-      </View>
+      </ScreenWrapper>
     )
   }
 }

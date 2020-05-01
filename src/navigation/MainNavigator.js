@@ -2,8 +2,8 @@ import React from 'react'
 import { createStackNavigator } from '@react-navigation/stack'
 import HomeScreen from '../screens/Home'
 import LanguageSelection from '../screens/LanguageSelection'
-import PlaylistsList from '../screens/PlaylistsList'
-import TracksList from '../screens/TracksList'
+import Playlists from '../screens/Playlists'
+import Tracks from '../screens/Tracks'
 import AudioPlayer from '../components/AudioPlayer'
 import Learn from '../screens/Learn'
 import CheckIn from '../screens/CheckIn'
@@ -51,15 +51,15 @@ function MainNavigator() {
         })}
       />
       <Stack.Screen
-        name="PlaylistsList"
-        component={PlaylistsList}
+        name="Playlists"
+        component={Playlists}
         options={({ navigation }) => ({
           headerRight: () => <DrawerIcon navigation={navigation} />,
         })}
       />
       <Stack.Screen
-        name="TracksList"
-        component={TracksList}
+        name="Tracks"
+        component={Tracks}
         options={({ navigation }) => ({
           headerRight: () => <DrawerIcon navigation={navigation} />,
         })}

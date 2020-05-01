@@ -3,7 +3,7 @@ import { AppState } from 'react-native'
 import PropTypes from 'prop-types'
 import { Audio } from 'expo-av'
 import AudioControls from './AudioControls'
-import CLIENT_ID from '../../constants/SoundCloud'
+import CLIENT_ID from '../../constants/sound-cloud-id'
 import { getAudioModeData } from './helpers'
 import LoadingSpinner from '../Shared/LoadingSpinner'
 

@@ -5,7 +5,7 @@ import { getDarkThemeColorByCategory } from '../utils/categoryValues'
 import Colors from '../constants/colors'
 import styled from 'styled-components/native'
 
-const RowListWrapper = styled.FlatList`
+const ListWrapper = styled.FlatList`
   padding-bottom: 100px;
 `
 
@@ -35,9 +35,9 @@ const Row = ({ category, onRowPressHandler, item, index }) => (
   </View>
 )
 
-function RowList({ listData, category, onRowPressHandler }) {
+function List({ listData, category, onRowPressHandler }) {
   return (
-    <RowListWrapper
+    <ListWrapper
       keyExtractor={(_, index) => `key:${index}`}
       data={listData}
       renderItem={({ index, item }) => (
@@ -56,10 +56,10 @@ Row.propTypes = {
   index: PropTypes.number.isRequired,
 }
 
-RowList.propTypes = {
+List.propTypes = {
   category: PropTypes.string.isRequired,
   onRowPressHandler: PropTypes.func.isRequired,
   listData: PropTypes.array.isRequired,
 }
 
-export default RowList
+export default List
