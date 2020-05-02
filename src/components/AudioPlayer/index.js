@@ -6,7 +6,7 @@ import { ThemeProvider } from 'styled-components/native'
 import AudioControls from './AudioControls'
 import CLIENT_ID from '../../constants/sound-cloud-id'
 import { getAudioModeData } from './helpers'
-import LoadingSpinner from '../Shared/LoadingSpinner'
+import LoadingSpinner from '../shared/LoadingSpinner'
 import themes from '../../styles/themes'
 
 import {

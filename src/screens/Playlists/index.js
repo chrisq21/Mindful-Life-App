@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 import styled, { ThemeProvider } from 'styled-components/native'
-import LoadingSpinner from '../../components/Shared/LoadingSpinner'
-import List from '../../components/List'
-import { ListWrapper, Heading } from '../../components/Shared/ListStyles'
+import LoadingSpinner from '../../components/shared/LoadingSpinner'
+import List from '../../components/shared/List'
+import { ListWrapper, Heading } from '../../components/shared/ListScreenStyles'
 import { fetchUser, fetchPlaylists } from '../../lib/sound-cloud-services'
 import themes from '../../styles/themes'
 

@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { View, TouchableOpacity } from 'react-native'
 import styled from 'styled-components/native'
-import Colors from '../styles/colors'
+import Colors from '../../styles/colors'
 
 const ListWrapper = styled.FlatList`
   padding-bottom: 100px;

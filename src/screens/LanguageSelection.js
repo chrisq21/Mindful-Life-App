@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components/native'
 import Colors from '../styles/colors'
-import ScreenWrapper from '../components/Shared/ScreenWrapper'
+import ScreenWrapper from '../components/shared/ScreenWrapper'
 
 const LanguageButton = styled.TouchableOpacity`
   flex: 1;

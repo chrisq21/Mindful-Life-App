@@ -1,8 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { ThemeProvider } from 'styled-components/native'
-import List from '../../components/List'
-import { ListWrapper, Heading } from '../../components/Shared/ListStyles'
+import List from '../../components/shared/List'
+import { ListWrapper, Heading } from '../../components/shared/ListScreenStyles'
 import themes from '../../styles/themes'
 
 function Tracks({ route, navigation }) {

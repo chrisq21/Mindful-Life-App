@@ -5,7 +5,7 @@ import questionMarkSrc from '../../assets/question-mark.png'
 import anchorImgSrc from '../../assets/anchor.png'
 import smileImgSrc from '../../assets/smile.png'
 import headphoneImgSrc from '../../assets/headphones.png'
-import ScreenWrapper from '../../components/Shared/ScreenWrapper'
+import ScreenWrapper from '../../components/shared/ScreenWrapper'
 import {
   LearnButton,
   LearnButtonText,
