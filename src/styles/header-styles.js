@@ -2,7 +2,7 @@ import Colors from './colors'
 
 const borderBottomStyles = { borderBottomWidth: 0 }
 
-export const LanguageSelection = {
+export const languageSelection = {
   headerStyle: {
     backgroundColor: Colors.black,
     ...borderBottomStyles,
@@ -13,7 +13,7 @@ export const LanguageSelection = {
   },
 }
 
-export const Home = {
+export const home = {
   headerStyle: {
     backgroundColor: Colors.black,
     ...borderBottomStyles,
@@ -24,7 +24,7 @@ export const Home = {
   },
 }
 
-export const CheckIn = {
+export const checkIn = {
   headerStyle: {
     backgroundColor: Colors.red,
     ...borderBottomStyles,
@@ -35,7 +35,7 @@ export const CheckIn = {
   },
 }
 
-export const Learn = {
+export const learn = {
   headerStyle: {
     backgroundColor: Colors.blue,
     ...borderBottomStyles,
@@ -46,7 +46,7 @@ export const Learn = {
   },
 }
 
-export const Sits = {
+export const sits = {
   headerStyle: {
     backgroundColor: Colors.green,
     ...borderBottomStyles,
@@ -57,7 +57,7 @@ export const Sits = {
   },
 }
 
-export const HipHop = {
+export const hipHop = {
   headerStyle: {
     backgroundColor: Colors.orange,
     ...borderBottomStyles,

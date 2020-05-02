@@ -7,7 +7,7 @@ import Tracks from '../screens/Tracks'
 import AudioPlayer from '../components/AudioPlayer'
 import Learn from '../screens/Learn'
 import CheckIn from '../screens/CheckIn'
-import * as HeaderStyles from '../styles/HeaderStyles'
+import * as headerStyles from '../styles/header-styles'
 import DrawerIcon from '../components/DrawerIcon'
 
 const Stack = createStackNavigator()
@@ -20,7 +20,7 @@ function MainNavigator() {
         component={LanguageSelection}
         options={{
           title: 'Language',
-          ...HeaderStyles.LanguageSelection,
+          ...headerStyles.languageSelection,
         }}
       />
       <Stack.Screen
@@ -29,7 +29,7 @@ function MainNavigator() {
         options={({ navigation }) => ({
           title: 'Home',
           headerRight: () => <DrawerIcon navigation={navigation} />,
-          ...HeaderStyles.Home,
+          ...headerStyles.home,
         })}
       />
       <Stack.Screen
@@ -38,7 +38,7 @@ function MainNavigator() {
         options={({ navigation }) => ({
           title: 'Learn',
           headerRight: () => <DrawerIcon navigation={navigation} />,
-          ...HeaderStyles.Learn,
+          ...headerStyles.learn,
         })}
       />
       <Stack.Screen
@@ -47,7 +47,7 @@ function MainNavigator() {
         options={({ navigation }) => ({
           title: 'Check In',
           headerRight: () => <DrawerIcon navigation={navigation} />,
-          ...HeaderStyles.CheckIn,
+          ...headerStyles.checkIn,
         })}
       />
       <Stack.Screen
@@ -56,7 +56,7 @@ function MainNavigator() {
         options={({ route, navigation }) => ({
           title: '',
           headerRight: () => <DrawerIcon navigation={navigation} />,
-          ...(route.params.category === 'hip-hop' ? HeaderStyles.HipHop : HeaderStyles.Sits),
+          ...(route.params.category === 'hip-hop' ? headerStyles.hipHop : headerStyles.sits),
         })}
       />
       <Stack.Screen
@@ -65,7 +65,7 @@ function MainNavigator() {
         options={({ route, navigation }) => ({
           title: '',
           headerRight: () => <DrawerIcon navigation={navigation} />,
-          ...(route.params.category === 'hip-hop' ? HeaderStyles.HipHop : HeaderStyles.Sits),
+          ...(route.params.category === 'hip-hop' ? headerStyles.hipHop : headerStyles.sits),
         })}
       />
       <Stack.Screen
@@ -74,7 +74,7 @@ function MainNavigator() {
         options={({ route, navigation }) => ({
           title: '',
           headerRight: () => <DrawerIcon navigation={navigation} />,
-          ...(route.params.category === 'hip-hop' ? HeaderStyles.HipHop : HeaderStyles.Sits),
+          ...(route.params.category === 'hip-hop' ? headerStyles.hipHop : headerStyles.sits),
         })}
       />
     </Stack.Navigator>
