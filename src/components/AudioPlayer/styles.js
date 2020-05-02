@@ -6,7 +6,7 @@ export const AudioPlayerWrapper = styled.View`
   flex: 1;
   flex-direction: column;
   align-items: center;
-  background-color: ${({ category }) => (category === 'hip-hop' ? Colors.orange : Colors.green)};
+  background-color: ${({ theme }) => theme.mediumColor};
 `
 
 export const AudioPlayerInnerWrapper = styled.View`
@@ -29,7 +29,7 @@ export const DescriptionWrapper = styled.View`
 export const PlaylistTitle = styled.Text`
   font-size: 25px;
   font-weight: bold;
-  color: ${({ category }) => (category === 'hip-hop' ? Colors.darkOrange : Colors.darkGreen)};
+  color: ${({ theme }) => theme.darkColor};
 `
 
 export const TrackTitle = styled.Text`

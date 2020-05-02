@@ -2,10 +2,12 @@ import React, { useState, useEffect, Fragment } from 'react'
 import { AppState } from 'react-native'
 import PropTypes from 'prop-types'
 import { Audio } from 'expo-av'
+import { ThemeProvider } from 'styled-components/native'
 import AudioControls from './AudioControls'
 import CLIENT_ID from '../../constants/sound-cloud-id'
 import { getAudioModeData } from './helpers'
 import LoadingSpinner from '../Shared/LoadingSpinner'
+import themes from '../../styles/themes'
 
 import {
   AudioPlayerWrapper,
@@ -209,29 +211,31 @@ function AudioPlayer({ route }) {
   const { trackTitle, playlistTitle, category } = route.params
 
   return (
-    <AudioPlayerWrapper category={category}>
-      <AudioPlayerInnerWrapper>
-        {isLoading && <LoadingSpinner />}
-        {!isLoading && (
-          <Fragment>
-            <DescriptionWrapper>
-              <PlaylistTitle category={category}>{playlistTitle}</PlaylistTitle>
-              <TrackTitle category={category}>{trackTitle}</TrackTitle>
-            </DescriptionWrapper>
-            <AudioControls
-              play={play}
-              pause={pause}
-              isPlaying={isPlaying}
-              category={category}
-              durationMillis={durationMillis}
-              sliderPositionMillis={sliderPositionMillis}
-              onSliderChange={onSliderChange}
-              onSlidingComplete={onSlidingComplete}
-            />
-          </Fragment>
-        )}
-      </AudioPlayerInnerWrapper>
-    </AudioPlayerWrapper>
+    <ThemeProvider theme={themes[category]}>
+      <AudioPlayerWrapper>
+        <AudioPlayerInnerWrapper>
+          {isLoading && <LoadingSpinner />}
+          {!isLoading && (
+            <Fragment>
+              <DescriptionWrapper>
+                <PlaylistTitle>{playlistTitle}</PlaylistTitle>
+                <TrackTitle>{trackTitle}</TrackTitle>
+              </DescriptionWrapper>
+              <AudioControls
+                play={play}
+                pause={pause}
+                isPlaying={isPlaying}
+                category={category}
+                durationMillis={durationMillis}
+                sliderPositionMillis={sliderPositionMillis}
+                onSliderChange={onSliderChange}
+                onSlidingComplete={onSlidingComplete}
+              />
+            </Fragment>
+          )}
+        </AudioPlayerInnerWrapper>
+      </AudioPlayerWrapper>
+    </ThemeProvider>
   )
 }
 
