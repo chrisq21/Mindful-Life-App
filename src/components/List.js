@@ -2,7 +2,6 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { View, TouchableOpacity } from 'react-native'
 import styled from 'styled-components/native'
-import { getDarkThemeColorByCategory } from '../utils/categoryValues'
 import Colors from '../styles/colors'
 
 const ListWrapper = styled.FlatList`
@@ -17,7 +16,7 @@ const RowWrapper = styled.View`
   justify-content: center;
   padding-bottom: 30px;
   padding-top: 30px;
-  border-color: ${({ category }) => getDarkThemeColorByCategory(category)};
+  border-color: ${({ theme }) => theme.darkColor};
   flex-grow: 1;
   width: 100%;
 `

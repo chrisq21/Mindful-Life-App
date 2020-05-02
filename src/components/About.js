@@ -1,6 +1,5 @@
 import React from 'react'
 import { StyleSheet, View, Text, ScrollView, Image, Linking } from 'react-native'
-import { ScreenContainerStyles } from '../styles/baseStyles'
 import Colors from '../styles/colors'
 import iconImgSrc from '../assets/icon.png'
 
@@ -41,7 +40,7 @@ const styles = StyleSheet.create({
 
 function About() {
   return (
-    <View style={[styles.screenContainer, ScreenContainerStyles]}>
+    <View style={[styles.screenContainer]}>
       <ScrollView>
         <Image resizeMode="contain" source={iconImgSrc} style={styles.logo} />
         <Text style={styles.text}>
