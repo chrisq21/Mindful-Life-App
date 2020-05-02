@@ -3,7 +3,7 @@ import { Slider } from 'react-native'
 import PropTypes from 'prop-types'
 import { getFormattedTime } from './helpers'
 import { AudioSliderWrapper, SliderTimesWrapper, SliderTime } from './styles'
-import Colors from '../../../../styles/colors'
+import Colors from '../../../styles/colors'
 
 function AudioSlider({
   durationMillis,

@@ -3,10 +3,9 @@ import { AppState } from 'react-native'
 import PropTypes from 'prop-types'
 import { Audio } from 'expo-av'
 import { ThemeProvider } from 'styled-components/native'
-import AudioControls from './AudioControls'
+import AudioControls from '../../components/AudioControls'
 import CLIENT_ID from '../../constants/sound-cloud-id'
-import { getAudioModeData } from './helpers'
-import LoadingSpinner from '../shared/LoadingSpinner'
+import LoadingSpinner from '../../components/shared/LoadingSpinner'
 import themes from '../../styles/themes'
 
 import {
@@ -61,12 +60,15 @@ function AudioPlayer({ route }) {
    * Sets audio settings
    */
   const setAudioSettings = async () => {
-    Audio.setAudioModeAsync(
-      getAudioModeData(
-        Audio.INTERRUPTION_MODE_IOS_DO_NOT_MIX,
-        Audio.INTERRUPTION_MODE_ANDROID_DO_NOT_MIX
-      )
-    )
+    Audio.setAudioModeAsync({
+      allowsRecordingIOS: false,
+      playsInSilentModeIOS: true,
+      interruptionModeIOS: Audio.INTERRUPTION_MODE_IOS_DO_NOT_MIX,
+      staysActiveInBackground: true,
+      interruptionModeAndroid: Audio.INTERRUPTION_MODE_ANDROID_DO_NOT_MIX,
+      playThroughEarpieceAndroid: false,
+      shouldDuckAndroid: false,
+    })
   }
 
   /* [start] Playback Status methods  */
