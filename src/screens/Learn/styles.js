@@ -1,6 +1,6 @@
 import styled from 'styled-components/native'
 import ScreenWrapper from '../../components/Shared/ScreenWrapper'
-import Colors from '../../styles/Colors'
+import Colors from '../../styles/colors'
 
 export const LearnScreenWrapper = styled(ScreenWrapper)`
   background-color: ${Colors.blue};

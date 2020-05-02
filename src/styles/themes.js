@@ -1,4 +1,4 @@
-import Colors from './Colors'
+import Colors from './colors'
 
 export default {
   'hip-hop': {

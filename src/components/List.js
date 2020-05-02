@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { View, TouchableOpacity } from 'react-native'
 import styled from 'styled-components/native'
 import { getDarkThemeColorByCategory } from '../utils/categoryValues'
-import Colors from '../constants/colors'
+import Colors from '../styles/colors'
 
 const ListWrapper = styled.FlatList`
   padding-bottom: 100px;

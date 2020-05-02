@@ -1,5 +1,5 @@
 import styled from 'styled-components/native'
-import Colors from '../../constants/colors'
+import Colors from '../../styles/colors'
 
 const SectionButton = styled.TouchableOpacity`
   flex: 1;

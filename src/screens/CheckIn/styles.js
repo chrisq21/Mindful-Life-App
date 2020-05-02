@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import Colors from '../../constants/colors'
+import Colors from '../../styles/colors'
 import ScreenWrapper from '../../components/Shared/ScreenWrapper'
 
 export const CheckinScreenWrapper = styled(ScreenWrapper)`

@@ -1,7 +1,7 @@
 import React from 'react'
 import { StyleSheet, View, Text, ScrollView, Image, Linking } from 'react-native'
 import { ScreenContainerStyles } from '../styles/baseStyles'
-import Colors from '../constants/colors'
+import Colors from '../styles/colors'
 import iconImgSrc from '../assets/icon.png'
 
 const styles = StyleSheet.create({
