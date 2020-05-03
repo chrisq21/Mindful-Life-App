@@ -10,7 +10,7 @@ const DrawerIconWrapper = styled(View)`
   margin-right: 10px;
 `
 
-const DrawerIcon = styled(Image)`
+const DrawerIconImage = styled(Image)`
   width: 25px;
 `
 
@@ -19,7 +19,7 @@ function DrawerIcon(props) {
   return (
     <DrawerIconWrapper>
       <TouchableOpacity onPress={() => navigation.toggleDrawer()}>
-        <ImaDrawerIconge source={menuImgSrc} resizeMode="contain" />
+        <DrawerIconImage source={menuImgSrc} resizeMode="contain" />
       </TouchableOpacity>
     </DrawerIconWrapper>
   )

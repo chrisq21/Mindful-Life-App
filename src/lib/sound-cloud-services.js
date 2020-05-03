@@ -22,15 +22,12 @@ export const fetchUser = async (category, language) => {
     url = userURL[category]
   }
   try {
-    console.log('URL: ', url)
     const response = await fetch(url)
     const userData = await response.json()
     return userData
   } catch (error) {
-    // TODO Add error handling
-    console.log('FETCH DATA ERROR: ', error)
+    throw new Error()
   }
-  return null
 }
 
 /**
@@ -45,8 +42,6 @@ export const fetchPlaylists = async (userID) => {
     const playlistsData = await response.json()
     return playlistsData
   } catch (error) {
-    // TODO Add error handling
-    console.log('fetchPlaylistData ERROR_________: ', error)
+    throw new Error()
   }
-  return null
 }

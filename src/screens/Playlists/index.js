@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { Alert } from 'react-native'
 import PropTypes from 'prop-types'
 import styled, { ThemeProvider } from 'styled-components/native'
 import LoadingSpinner from '../../components/shared/LoadingSpinner'
@@ -44,7 +45,14 @@ function Playlists({ route, navigation }) {
           }
         }
       } catch (error) {
-        console.log('fetchData error')
+        if (error) {
+          Alert.alert(
+            'Error',
+            'Unable to retreive SoundCloud data. Please restart the app and try again.',
+            [{ text: 'OK' }],
+            { cancelable: true }
+          )
+        }
       }
     }
 

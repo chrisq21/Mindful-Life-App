@@ -1,5 +1,5 @@
 import React, { useState, useEffect, Fragment } from 'react'
-import { AppState } from 'react-native'
+import { AppState, Alert } from 'react-native'
 import PropTypes from 'prop-types'
 import { Audio } from 'expo-av'
 import { ThemeProvider } from 'styled-components/native'
@@ -111,17 +111,13 @@ function AudioPlayer({ route }) {
   const loadAudio = async () => {
     setIsLoading(true)
     const { trackUrl } = route.params
-    if (!trackUrl) {
-      // TODO Handle Error
-      return
-    }
     audioInstance = new Audio.Sound()
 
     try {
       const uri = `${trackUrl}?client_id=${CLIENT_ID}`
       const sourceData = { uri }
       const audioStatus = await audioInstance.loadAsync(sourceData)
-      if (!audioStatus.isLoaded) throw new Error('Track could not be loaded')
+      if (!audioStatus.isLoaded) throw new Error()
 
       setIsLoading(false)
       setOnPlaybackStatusUpdate()
@@ -129,7 +125,14 @@ function AudioPlayer({ route }) {
       /* Set the track duration to be used by UI */
       setDurationMillis(audioStatus.durationMillis)
     } catch (error) {
-      console.log('Error load: ', error)
+      if (error) {
+        Alert.alert(
+          'Error',
+          'Unable to retreive SoundCloud data. Please restart the app and try again.',
+          [{ text: 'OK' }],
+          { cancelable: true }
+        )
+      }
     }
   }
 
@@ -176,7 +179,14 @@ function AudioPlayer({ route }) {
         await loadAudio()
         await play()
       } catch (error) {
-        console.log('Mount error: ', error)
+        if (error) {
+          Alert.alert(
+            'Error',
+            'Unable to retreive SoundCloud data. Please restart the app and try again.',
+            [{ text: 'OK' }],
+            { cancelable: true }
+          )
+        }
       }
     }
 
