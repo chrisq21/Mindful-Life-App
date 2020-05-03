@@ -1,32 +1,33 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { StyleSheet, View, TouchableOpacity, Image } from 'react-native'
+import { View, TouchableOpacity, Image } from 'react-native'
 import menuImgSrc from '../assets/menu.png'
 
-const styles = StyleSheet.create({
-  container: {
-    alignItems: 'center',
-    marginRight: 10,
-  },
-  image: {
-    width: 25,
-  },
-})
+import styled from 'styled-components'
+
+const DrawerIconWrapper = styled(View)`
+  align-items: center;
+  margin-right: 10px;
+`
+
+const DrawerIcon = styled(Image)`
+  width: 25px;
+`
 
 function DrawerIcon(props) {
   const { navigation } = props
   return (
-    <View style={styles.container}>
+    <DrawerIconWrapper>
       <TouchableOpacity onPress={() => navigation.toggleDrawer()}>
-        <Image style={styles.image} source={menuImgSrc} resizeMode="contain" />
+        <ImaDrawerIconge source={menuImgSrc} resizeMode="contain" />
       </TouchableOpacity>
-    </View>
+    </DrawerIconWrapper>
   )
 }
 
 DrawerIcon.propTypes = {
   navigation: PropTypes.shape({
-    toggleDrawer: PropTypes.func,
+    toggleDrawer: PropTypes.func.isRequired,
   }).isRequired,
 }
 
