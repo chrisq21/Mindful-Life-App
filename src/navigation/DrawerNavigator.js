@@ -1,7 +1,7 @@
 import React from 'react'
 import { createDrawerNavigator } from '@react-navigation/drawer'
 import MainNavigator from './MainNavigator'
-import About from '../components/About'
+import About from '../screens/About'
 
 const Drawer = createDrawerNavigator()
 
