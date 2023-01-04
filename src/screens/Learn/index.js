@@ -5,10 +5,10 @@ import VideoPlayer from '../../components/VideoPlayer'
 import { spanishCopy, englishCopy } from '../../constants/copy'
 import animatedVideoSrc from './assets/animation.mp4'
 import animatedVideoSpanishSrc from './assets/animation_spanish.mp4'
-import meditationImgSrc from './assets/meditating.png'
-import cloudsImgSrc from './assets/clouds.png'
-import posterImgSrc from './assets/poster.png'
-import togetherImgSrc from './assets/together.png'
+import withoutSrc from './assets/without.png'
+import withSrc from './assets/with.png'
+// import posterImgSrc from './assets/poster.png'
+import villageSrc from './assets/village.png'
 
 import {
   LearnScreenWrapper,
@@ -16,6 +16,7 @@ import {
   SectionHeader,
   SectionBody,
   ImageWrapper,
+  Image,
 } from './styles'
 
 function Learn({ route }) {
@@ -31,19 +32,23 @@ function Learn({ route }) {
           <VideoPlayer source={videoSource} />
           <SectionBody>{copyData.learnScreen.whatIsBody}</SectionBody>
         </SectionWrapper>
-        <ImageWrapper source={meditationImgSrc} />
         <SectionWrapper>
           {/* eslint-disable react-native/no-raw-text */}
           <SectionHeader>Benefits</SectionHeader>
           <SectionBody>{copyData.learnScreen.benefitsBody1}</SectionBody>
           <SectionBody>{copyData.learnScreen.benefitsBody2}</SectionBody>
-          <ImageWrapper source={cloudsImgSrc} />
+          <ImageWrapper>
+            <Image source={withoutSrc} style={{ height: undefined, aspectRatio: 1 }} />
+            <Image source={withSrc} style={{ height: undefined, aspectRatio: 1 }} />
+          </ImageWrapper>
         </SectionWrapper>
         <SectionWrapper>
           {/* eslint-disable react-native/no-raw-text */}
           <SectionHeader>Posters</SectionHeader>
-          <ImageWrapper source={posterImgSrc} />
-          <ImageWrapper source={togetherImgSrc} />
+          <ImageWrapper>
+            {/* <PosterImage source={posterImgSrc} /> */}
+            <Image source={villageSrc} style={{ height: undefined, aspectRatio: 0.833 }} />
+          </ImageWrapper>
         </SectionWrapper>
       </ScrollView>
     </LearnScreenWrapper>

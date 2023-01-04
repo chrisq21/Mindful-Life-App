@@ -12,7 +12,7 @@ export default {
   orange: '#FFA500',
   lightOrange: '#ffe5b2',
   darkOrange: '#d08700',
-  blackHalfOpacity: 'rgba(0, 0, 0, 0.5)',
+  blackHalfOpacity: 'rgba(0, 0, 0, 0.3)',
 
   // rebrand colors
   english: '#98DFDD',

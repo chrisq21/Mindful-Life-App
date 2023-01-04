@@ -18,7 +18,7 @@ export const SectionHeader = styled(BaseTextWrapper)`
   color: ${Colors.black};
   font-size: 40px;
   font-weight: bold;
-  margin: 10px 0;
+  margin: 25px 0;
 `
 
 export const SectionBody = styled(BaseTextWrapper)`
@@ -28,8 +28,14 @@ export const SectionBody = styled(BaseTextWrapper)`
   margin: 15px 0;
 `
 
-export const ImageWrapper = styled.Image`
-  width: 80%;
-  margin: 10px auto;
-  resize-mode: contain;
+export const ImageWrapper = styled.View`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`
+
+export const Image = styled.Image`
+  width: 85%;
+  margin: 20px 0;
+  border-radius: 10px;
 `
