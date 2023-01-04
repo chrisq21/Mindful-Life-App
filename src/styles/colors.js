@@ -1,6 +1,6 @@
 export default {
   white: '#ffffff',
-  black: '#000000',
+  black: '#292929',
   blue: '#49a5f9',
   lightBlue: '#cee7ff',
   red: '#DB5C5C',
@@ -21,5 +21,5 @@ export default {
   checkIn: '#E5F2D5',
   sits: '#E0F6F5',
   hipHop: '#F9EEA9',
-  text: 'black',
+  text: '#292929',
 }
