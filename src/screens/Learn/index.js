@@ -17,6 +17,8 @@ import {
   SectionBody,
   ImageWrapper,
   Image,
+  BodyWrapper,
+  MainHeader,
 } from './styles'
 
 function Learn({ route }) {
@@ -27,29 +29,31 @@ function Learn({ route }) {
   return (
     <LearnScreenWrapper>
       <ScrollView>
-        <SectionWrapper>
-          <SectionHeader>{copyData.learnScreen.whatIsHeader}</SectionHeader>
-          <VideoPlayer source={videoSource} />
-          <SectionBody>{copyData.learnScreen.whatIsBody}</SectionBody>
-        </SectionWrapper>
-        <SectionWrapper>
-          {/* eslint-disable react-native/no-raw-text */}
-          <SectionHeader>Benefits</SectionHeader>
-          <SectionBody>{copyData.learnScreen.benefitsBody1}</SectionBody>
-          <SectionBody>{copyData.learnScreen.benefitsBody2}</SectionBody>
-          <ImageWrapper>
-            <Image source={withoutSrc} style={{ height: undefined, aspectRatio: 1 }} />
-            <Image source={withSrc} style={{ height: undefined, aspectRatio: 1 }} />
-          </ImageWrapper>
-        </SectionWrapper>
-        <SectionWrapper>
-          {/* eslint-disable react-native/no-raw-text */}
-          <SectionHeader>Posters</SectionHeader>
-          <ImageWrapper>
-            {/* <PosterImage source={posterImgSrc} /> */}
-            <Image source={villageSrc} style={{ height: undefined, aspectRatio: 0.833 }} />
-          </ImageWrapper>
-        </SectionWrapper>
+        <MainHeader>{copyData.learnScreen.whatIsHeader}</MainHeader>
+        <VideoPlayer source={videoSource} />
+        <BodyWrapper>
+          <SectionWrapper>
+            <SectionBody>{copyData.learnScreen.whatIsBody}</SectionBody>
+          </SectionWrapper>
+          <SectionWrapper>
+            {/* eslint-disable react-native/no-raw-text */}
+            <SectionHeader>Benefits</SectionHeader>
+            <SectionBody>{copyData.learnScreen.benefitsBody1}</SectionBody>
+            <SectionBody>{copyData.learnScreen.benefitsBody2}</SectionBody>
+            <ImageWrapper>
+              <Image source={withoutSrc} style={{ height: undefined, aspectRatio: 1 }} />
+              <Image source={withSrc} style={{ height: undefined, aspectRatio: 1 }} />
+            </ImageWrapper>
+          </SectionWrapper>
+          <SectionWrapper>
+            {/* eslint-disable react-native/no-raw-text */}
+            <SectionHeader>Posters</SectionHeader>
+            <ImageWrapper>
+              {/* <PosterImage source={posterImgSrc} /> */}
+              <Image source={villageSrc} style={{ height: undefined, aspectRatio: 0.833 }} />
+            </ImageWrapper>
+          </SectionWrapper>
+        </BodyWrapper>
       </ScrollView>
     </LearnScreenWrapper>
   )
