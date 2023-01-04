@@ -3,7 +3,7 @@ import ScreenWrapper from '../../components/shared/ScreenWrapper'
 import Colors from '../../styles/colors'
 
 export const LearnScreenWrapper = styled(ScreenWrapper)`
-  background-color: ${Colors.blue};
+  background-color: ${Colors.learn};
 `
 
 export const SectionWrapper = styled.View`
@@ -15,14 +15,14 @@ const BaseTextWrapper = styled.Text`
 `
 
 export const SectionHeader = styled(BaseTextWrapper)`
-  color: ${Colors.lightBlue};
+  color: ${Colors.black};
   font-size: 40px;
   font-weight: bold;
   margin: 10px 0;
 `
 
 export const SectionBody = styled(BaseTextWrapper)`
-  color: ${Colors.white};
+  color: ${Colors.black};
   font-size: 25px;
   line-height: 40px;
   margin: 15px 0;

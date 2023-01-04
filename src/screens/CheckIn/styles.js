@@ -3,7 +3,7 @@ import Colors from '../../styles/colors'
 import ScreenWrapper from '../../components/shared/ScreenWrapper'
 
 export const CheckinScreenWrapper = styled(ScreenWrapper)`
-  background-color: ${Colors.red};
+  background-color: ${Colors.checkIn};
   padding: 30px;
 `
 
@@ -12,7 +12,7 @@ export const SectionWrapper = styled.View`
 `
 
 export const SectionHeader = styled.Text`
-  color: ${Colors.lightRed};
+  color: ${Colors.text};
   font-size: 25px;
   font-weight: bold;
 `
@@ -24,7 +24,7 @@ export const SectionBodyWrapper = styled.View`
 `
 
 export const SectionBody = styled.Text`
-  color: ${Colors.white};
+  color: ${Colors.black};
   font-size: 22px;
   font-weight: bold;
   margin-bottom: 10px;

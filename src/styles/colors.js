@@ -13,4 +13,13 @@ export default {
   lightOrange: '#ffe5b2',
   darkOrange: '#d08700',
   blackHalfOpacity: 'rgba(0, 0, 0, 0.5)',
+
+  // rebrand colors
+  english: '#98DFDD',
+  spanish: '#E5C7FD',
+  learn: '#FFE0E4',
+  checkIn: '#E5F2D5',
+  sits: '#E0F6F5',
+  hipHop: '#F9EEA9',
+  text: 'black',
 }

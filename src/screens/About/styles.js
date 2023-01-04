@@ -8,7 +8,7 @@ export const AboutScreen = styled(View)`
 `
 
 export const AboutText = styled(Text)`
-  color: ${Colors.white};
+  color: ${Colors.black};
   font-size: 20px;
   line-height: 25px;
 `

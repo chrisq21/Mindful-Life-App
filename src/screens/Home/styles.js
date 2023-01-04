@@ -12,7 +12,7 @@ const SectionButton = styled.TouchableOpacity`
 `
 
 const ButtonText = styled.Text`
-  color: ${Colors.white};
+  color: ${Colors.black};
   flex: 2;
   font-size: 30px;
   font-weight: bold;
@@ -20,35 +20,35 @@ const ButtonText = styled.Text`
 `
 
 export const LearnButton = styled(SectionButton)`
-  background-color: ${Colors.blue};
+  background-color: ${Colors.learn};
 `
 
 export const LearnButtonText = styled(ButtonText)`
-  color: ${Colors.lightBlue};
+  color: ${Colors.black};
 `
 
 export const CheckInButton = styled(SectionButton)`
-  background-color: ${Colors.red};
+  background-color: ${Colors.checkIn};
 `
 
 export const CheckInButtonText = styled(ButtonText)`
-  color: ${Colors.lightRed};
+  color: ${Colors.black};
 `
 
 export const SitsButton = styled(SectionButton)`
-  background-color: ${Colors.green};
+  background-color: ${Colors.sits};
 `
 
 export const SitsButtonText = styled(ButtonText)`
-  color: ${Colors.lightGreen};
+  color: ${Colors.black};
 `
 
 export const HipHopButton = styled(SectionButton)`
-  background-color: ${Colors.orange};
+  background-color: ${Colors.hipHop};
 `
 
 export const HipHopButtonText = styled(ButtonText)`
-  color: ${Colors.lightOrange};
+  color: ${Colors.black};
 `
 export const ImageWrapper = styled.Image`
   align-self: center;

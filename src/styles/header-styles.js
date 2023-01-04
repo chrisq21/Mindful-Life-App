@@ -26,18 +26,18 @@ export const home = {
 
 export const checkIn = {
   headerStyle: {
-    backgroundColor: Colors.red,
+    backgroundColor: Colors.black,
     ...borderBottomStyles,
   },
-  headerTintColor: Colors.lightRed,
+  headerTintColor: Colors.lightBlue,
   headerTitleStyle: {
-    color: Colors.lightRed,
+    color: Colors.lightBlue,
   },
 }
 
 export const learn = {
   headerStyle: {
-    backgroundColor: Colors.blue,
+    backgroundColor: Colors.black,
     ...borderBottomStyles,
   },
   headerTintColor: Colors.lightBlue,
@@ -48,22 +48,22 @@ export const learn = {
 
 export const sits = {
   headerStyle: {
-    backgroundColor: Colors.green,
+    backgroundColor: Colors.black,
     ...borderBottomStyles,
   },
-  headerTintColor: Colors.lightGreen,
+  headerTintColor: Colors.lightBlue,
   headerTitleStyle: {
-    color: Colors.lightGreen,
+    color: Colors.lightBlue,
   },
 }
 
 export const hipHop = {
   headerStyle: {
-    backgroundColor: Colors.orange,
+    backgroundColor: Colors.black,
     ...borderBottomStyles,
   },
-  headerTintColor: Colors.lightOrange,
+  headerTintColor: Colors.lightBlue,
   headerTitleStyle: {
-    color: Colors.lightOrange,
+    color: Colors.lightBlue,
   },
 }

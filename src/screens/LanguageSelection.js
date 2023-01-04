@@ -15,7 +15,7 @@ const LanguageButton = styled.TouchableOpacity`
 `
 
 const ButtonText = styled.Text`
-  color: ${Colors.white};
+  color: ${Colors.black};
   flex: 2;
   font-size: 35px;
   font-weight: bold;
@@ -23,11 +23,11 @@ const ButtonText = styled.Text`
 `
 
 const EnglishButton = styled(LanguageButton)`
-  background-color: ${Colors.blue};
+  background-color: ${Colors.english};
 `
 
 const SpanishButton = styled(LanguageButton)`
-  background-color: ${Colors.red};
+  background-color: ${Colors.spanish};
 `
 
 function LanguageSelection({ navigation }) {
