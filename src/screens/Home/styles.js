@@ -7,16 +7,14 @@ const SectionButton = styled.TouchableOpacity`
   justify-content: space-between;
   align-items: center;
   border-bottom-width: 1px;
-  padding-right: 20px;
-  padding-left: 20px;
 `
 
 const ButtonText = styled.Text`
   color: ${Colors.black};
-  flex: 2;
-  font-size: 30px;
+  flex: 1;
+  font-size: 32px;
   font-weight: bold;
-  margin-left: 20px;
+  margin-left: 25px;
 `
 
 export const LearnButton = styled(SectionButton)`
@@ -53,6 +51,6 @@ export const HipHopButtonText = styled(ButtonText)`
 export const ImageWrapper = styled.Image`
   align-self: center;
   flex: 1;
-  height: 50%;
+  height: 55%;
   resize-mode: contain;
 `

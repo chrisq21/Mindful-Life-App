@@ -1,10 +1,10 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { spanishCopy, englishCopy } from '../../constants/copy'
-import questionMarkSrc from '../../assets/question-mark.png'
-import anchorImgSrc from '../../assets/anchor.png'
-import smileImgSrc from '../../assets/smile.png'
-import headphoneImgSrc from '../../assets/headphones.png'
+import joySrc from '../../assets/home/joy.png'
+import mehSrc from '../../assets/home/meh.png'
+import contentSrc from '../../assets/home/content.png'
+import crazy from '../../assets/home/crazy.png'
 import ScreenWrapper from '../../components/shared/ScreenWrapper'
 import {
   LearnButton,
@@ -26,21 +26,21 @@ function Home({ navigation, route }) {
     <ScreenWrapper>
       <LearnButton onPress={() => navigation.navigate('Learn', { language })}>
         <LearnButtonText>{copyData.homeScreen.learn}</LearnButtonText>
-        <ImageWrapper source={questionMarkSrc} />
+        <ImageWrapper source={joySrc} />
       </LearnButton>
       <CheckInButton onPress={() => navigation.navigate('CheckIn', { language })}>
         <CheckInButtonText>{copyData.homeScreen.checkIn}</CheckInButtonText>
-        <ImageWrapper source={anchorImgSrc} />
+        <ImageWrapper source={mehSrc} />
       </CheckInButton>
       <SitsButton onPress={() => navigation.navigate('Playlists', { category: 'sits', language })}>
         <SitsButtonText>{copyData.homeScreen.sits}</SitsButtonText>
-        <ImageWrapper source={smileImgSrc} />
+        <ImageWrapper source={contentSrc} />
       </SitsButton>
       <HipHopButton
         onPress={() => navigation.navigate('Playlists', { category: 'hip-hop', language })}
       >
         <HipHopButtonText>{copyData.homeScreen.hipHop}</HipHopButtonText>
-        <ImageWrapper source={headphoneImgSrc} />
+        <ImageWrapper source={crazy} />
       </HipHopButton>
     </ScreenWrapper>
   )
