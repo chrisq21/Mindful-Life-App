@@ -3,8 +3,6 @@ import { createStackNavigator } from '@react-navigation/stack'
 import HomeScreen from '../screens/Home'
 import LanguageSelection from '../screens/LanguageSelection'
 import Playlists from '../screens/Playlists'
-import Tracks from '../screens/Tracks'
-import AudioPlayer from '../screens/AudioPlayer'
 import Learn from '../screens/Learn'
 import CheckIn from '../screens/CheckIn'
 import * as headerStyles from '../styles/header-styles'
@@ -53,24 +51,6 @@ function MainNavigator() {
       <Stack.Screen
         name="Playlists"
         component={Playlists}
-        options={({ route, navigation }) => ({
-          title: '',
-          headerRight: () => <DrawerIcon navigation={navigation} />,
-          ...(route.params.category === 'hip-hop' ? headerStyles.hipHop : headerStyles.sits),
-        })}
-      />
-      <Stack.Screen
-        name="Tracks"
-        component={Tracks}
-        options={({ route, navigation }) => ({
-          title: '',
-          headerRight: () => <DrawerIcon navigation={navigation} />,
-          ...(route.params.category === 'hip-hop' ? headerStyles.hipHop : headerStyles.sits),
-        })}
-      />
-      <Stack.Screen
-        name="AudioPlayer"
-        component={AudioPlayer}
         options={({ route, navigation }) => ({
           title: '',
           headerRight: () => <DrawerIcon navigation={navigation} />,
