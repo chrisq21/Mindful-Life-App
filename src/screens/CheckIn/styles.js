@@ -4,35 +4,35 @@ import ScreenWrapper from '../../components/shared/ScreenWrapper'
 
 export const CheckinScreenWrapper = styled(ScreenWrapper)`
   background-color: ${Colors.checkIn};
+`
+
+export const BodyWrapper = styled.View`
   padding: 30px;
 `
 
 export const SectionWrapper = styled.View`
-  margin: 30px 0;
+  margin-bottom: 30px;
 `
 
 export const SectionHeader = styled.Text`
   color: ${Colors.text};
-  font-size: 25px;
+  font-size: 30px;
   font-weight: bold;
 `
 
 export const SectionBodyWrapper = styled.View`
-  line-height: 30px;
-  margin-bottom: 15px;
-  margin-top: 25px;
+  margin: 40px 0;
 `
 
 export const SectionBody = styled.Text`
   color: ${Colors.black};
   font-size: 22px;
-  font-weight: bold;
-  margin-bottom: 10px;
-  margin-top: 10px;
+  font-weight: 600;
+  margin: 12px 0;
 `
 
-export const ImageWrapper = styled.Image`
+export const HeaderImage = styled.Image`
   resize-mode: contain;
-  margin: 10px auto;
+  margin-bottom: 10px;
   width: 100%;
 `
