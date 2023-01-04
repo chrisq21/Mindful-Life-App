@@ -7,7 +7,13 @@ const Drawer = createDrawerNavigator()
 
 function DrawerNavigator() {
   return (
-    <Drawer.Navigator drawerContent={About} drawerPosition="right">
+    <Drawer.Navigator
+      drawerContent={About}
+      screenOptions={{
+        drawerPosition: 'right',
+        headerShown: false,
+      }}
+    >
       <Drawer.Screen name="Main" component={MainNavigator} />
     </Drawer.Navigator>
   )
