@@ -16,7 +16,7 @@ export const SectionWrapper = styled.View`
 
 export const SectionHeader = styled.Text`
   color: ${Colors.text};
-  font-size: 30px;
+  font-size: 32px;
   font-weight: bold;
 `
 
