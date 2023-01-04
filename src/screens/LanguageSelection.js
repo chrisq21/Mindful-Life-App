@@ -17,9 +17,9 @@ const LanguageButton = styled.TouchableOpacity`
 const ButtonText = styled.Text`
   color: ${Colors.black};
   flex: 2;
-  font-size: 35px;
+  font-size: 45px;
   font-weight: bold;
-  margin-left: 2px;
+  margin-left: 20px;
 `
 
 const EnglishButton = styled(LanguageButton)`
