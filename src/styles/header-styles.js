@@ -7,9 +7,9 @@ export const languageSelection = {
     backgroundColor: Colors.black,
     ...borderBottomStyles,
   },
-  headerTintColor: Colors.lightBlue,
+  headerTintColor: Colors.white,
   headerTitleStyle: {
-    color: Colors.lightBlue,
+    color: Colors.white,
   },
 }
 
@@ -18,9 +18,9 @@ export const home = {
     backgroundColor: Colors.black,
     ...borderBottomStyles,
   },
-  headerTintColor: Colors.lightBlue,
+  headerTintColor: Colors.white,
   headerTitleStyle: {
-    color: Colors.lightBlue,
+    color: Colors.white,
   },
 }
 
@@ -29,9 +29,9 @@ export const checkIn = {
     backgroundColor: Colors.black,
     ...borderBottomStyles,
   },
-  headerTintColor: Colors.lightBlue,
+  headerTintColor: Colors.white,
   headerTitleStyle: {
-    color: Colors.lightBlue,
+    color: Colors.white,
   },
 }
 
@@ -40,9 +40,9 @@ export const learn = {
     backgroundColor: Colors.black,
     ...borderBottomStyles,
   },
-  headerTintColor: Colors.lightBlue,
+  headerTintColor: Colors.white,
   headerTitleStyle: {
-    color: Colors.lightBlue,
+    color: Colors.white,
   },
 }
 
@@ -51,9 +51,9 @@ export const sits = {
     backgroundColor: Colors.black,
     ...borderBottomStyles,
   },
-  headerTintColor: Colors.lightBlue,
+  headerTintColor: Colors.white,
   headerTitleStyle: {
-    color: Colors.lightBlue,
+    color: Colors.white,
   },
 }
 
@@ -62,8 +62,8 @@ export const hipHop = {
     backgroundColor: Colors.black,
     ...borderBottomStyles,
   },
-  headerTintColor: Colors.lightBlue,
+  headerTintColor: Colors.white,
   headerTitleStyle: {
-    color: Colors.lightBlue,
+    color: Colors.white,
   },
 }
