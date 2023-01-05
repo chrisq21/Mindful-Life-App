@@ -6,12 +6,11 @@ const SectionButton = styled.TouchableOpacity`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  border-bottom-width: 1px;
 `
 
 const ButtonText = styled.Text`
-  color: ${Colors.black};
   flex: 1;
+  color: ${Colors.black};
   font-size: 32px;
   font-weight: bold;
   margin-left: 25px;
@@ -49,7 +48,7 @@ export const HipHopButtonText = styled(ButtonText)`
   color: ${Colors.black};
 `
 export const ImageWrapper = styled.Image`
-  align-self: center;
+  justify-self: flex-end;
   flex: 1;
   height: 55%;
   resize-mode: contain;
