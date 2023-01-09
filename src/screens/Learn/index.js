@@ -7,7 +7,7 @@ import animatedVideoSrc from './assets/animation.mp4'
 import animatedVideoSpanishSrc from './assets/animation_spanish.mp4'
 import withoutSrc from './assets/without.png'
 import withSrc from './assets/with.png'
-// import posterImgSrc from './assets/poster.png'
+import skillsSrc from './assets/skills.png'
 import villageSrc from './assets/village.png'
 
 import {
@@ -34,12 +34,6 @@ function Learn({ route }) {
         <BodyWrapper>
           <SectionWrapper>
             <SectionBody>{copyData.learnScreen.whatIsBody}</SectionBody>
-          </SectionWrapper>
-          <SectionWrapper>
-            {/* eslint-disable react-native/no-raw-text */}
-            <SectionHeader>Benefits</SectionHeader>
-            <SectionBody>{copyData.learnScreen.benefitsBody1}</SectionBody>
-            <SectionBody>{copyData.learnScreen.benefitsBody2}</SectionBody>
             <ImageWrapper>
               <Image source={withoutSrc} style={{ height: undefined, aspectRatio: 1 }} />
               <Image source={withSrc} style={{ height: undefined, aspectRatio: 1 }} />
@@ -47,9 +41,15 @@ function Learn({ route }) {
           </SectionWrapper>
           <SectionWrapper>
             {/* eslint-disable react-native/no-raw-text */}
+            <SectionHeader>Benefits</SectionHeader>
+            <SectionBody>{copyData.learnScreen.benefitsBody1}</SectionBody>
+            <SectionBody>{copyData.learnScreen.benefitsBody2}</SectionBody>
+          </SectionWrapper>
+          <SectionWrapper>
+            {/* eslint-disable react-native/no-raw-text */}
             <SectionHeader>Posters</SectionHeader>
             <ImageWrapper>
-              {/* <PosterImage source={posterImgSrc} /> */}
+              <Image source={skillsSrc} style={{ height: undefined, aspectRatio: 0.833 }} />
               <Image source={villageSrc} style={{ height: undefined, aspectRatio: 0.833 }} />
             </ImageWrapper>
           </SectionWrapper>

@@ -30,8 +30,8 @@ function About() {
           and resilience, leading to lifelong success.
         </AboutText>
         <LinksWrapper>
-          <Link onPress={() => Linking.openURL('http://mindfullifeproject.org/our-team/')}>
-            Our Team
+          <Link onPress={() => Linking.openURL('https://mindfullifeproject.org/programs/')}>
+            Our Work
           </Link>
           <Link
             onPress={() =>
