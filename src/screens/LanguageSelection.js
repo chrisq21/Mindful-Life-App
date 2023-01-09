@@ -5,6 +5,7 @@ import Colors from '../styles/colors'
 import ScreenWrapper from '../components/shared/ScreenWrapper'
 
 const LanguageButton = styled.TouchableOpacity`
+  font-family: 'Inter-Black';
   flex: 1;
   flex-direction: row;
   justify-content: space-between;
@@ -15,6 +16,7 @@ const LanguageButton = styled.TouchableOpacity`
 `
 
 const ButtonText = styled.Text`
+  font-family: 'Inter-Black';
   color: ${Colors.black};
   flex: 2;
   font-size: 45px;

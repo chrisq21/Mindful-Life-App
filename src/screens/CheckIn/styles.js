@@ -15,6 +15,7 @@ export const SectionWrapper = styled.View`
 `
 
 export const SectionHeader = styled.Text`
+  font-family: 'Inter-Black';
   color: ${Colors.text};
   font-size: 32px;
   font-weight: bold;
@@ -25,6 +26,7 @@ export const SectionBodyWrapper = styled.View`
 `
 
 export const SectionBody = styled.Text`
+  font-family: 'Inter-Black';
   color: ${Colors.black};
   font-size: 22px;
   font-weight: 600;

@@ -2,6 +2,7 @@ import styled from 'styled-components/native'
 import Colors from '../../styles/colors'
 
 const SectionButton = styled.TouchableOpacity`
+  font-family: 'Inter-Black';
   flex: 1;
   flex-direction: row;
   justify-content: space-between;
@@ -9,6 +10,7 @@ const SectionButton = styled.TouchableOpacity`
 `
 
 const ButtonText = styled.Text`
+  font-family: 'Inter-Black';
   flex: 1;
   color: ${Colors.black};
   font-size: 32px;
