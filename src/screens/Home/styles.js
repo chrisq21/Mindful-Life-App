@@ -50,6 +50,6 @@ export const HipHopButtonText = styled(ButtonText)`
 export const ImageWrapper = styled.Image`
   justify-self: flex-end;
   flex: 1;
-  height: 55%;
+  height: 56%;
   resize-mode: contain;
 `
