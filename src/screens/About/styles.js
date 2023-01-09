@@ -8,6 +8,7 @@ export const AboutScreen = styled(View)`
 `
 
 export const AboutText = styled(Text)`
+  font-family: 'Inter-Black';
   color: ${Colors.black};
   font-size: 20px;
   line-height: 25px;
